@@ -91,7 +91,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html> 
 <head>
     <meta charset="UTF-8">
-    <title>Tenant System</title>
+    <title>Tenant System Management</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="bootstrap-4.2.1-dist/css/bootstrap.min.css">
     <!-- Bootstrap CSS -->
