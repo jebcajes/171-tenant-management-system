@@ -46,7 +46,7 @@
                     <label>Last Name</label>
                     <input type="text" name="lname" class="form-control col-md-4" required>
                     <label>Email Address</label>
-                    <input type="text" name="email" class="form-control col-md-4" required>
+                    <input type="email" name="email" class="form-control col-md-4" required>
                     <label>Contact Number</label>
                     <input type="text" name="contact" class="form-control col-md-4" required>
                     <label>Address</label>

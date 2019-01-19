@@ -148,7 +148,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
         </div>
         <div class="float-left">
-            <br /><br /><br /><br /><br />
+            <h3>Welcome to Robinson's Tenant Management System!</h3>
+            <br /><br /><br />
             <img src="img/robinsons-place-e1513574103535.png" class="img-fluid" alt="Responsive image">
         </div>
     </div>
