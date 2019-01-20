@@ -100,8 +100,9 @@
                                     echo "<td>
                                         <a href='admin-update-stall.php?stall_id=$stall_id' class='btn btn-sm btn-primary' style='font-size: 11px; margin: 1px;'>Update</a>
                                         <a href='admin-view-price-history.php?stall_id=$stall_id' class='btn btn-sm btn-info' style='font-size: 11px; margin: 1px;'>Log</a>
-                                        <a href='admin-remove-stall.php?stall_id=$stall_id' class='btn btn-sm btn-danger' style='font-size: 11px; margin: 1px;'>Remove</a>
+                                        
                                     </td>";
+                                    // <a href='admin-remove-stall.php?stall_id=$stall_id' class='btn btn-sm btn-danger' style='font-size: 11px; margin: 1px;'>Remove</a>
                                 echo "</tr>";
                             }
                         }

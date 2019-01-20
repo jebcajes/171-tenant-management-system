@@ -49,7 +49,7 @@
     <div class="container">
         <p>Are you sure you want to delete?</p>
         <p>
-            <a href="api/admin-delete-stall.php" class="btn btn-danger btn-sm" style="margin: 3px;">Yes</a>
+            <a href="api/admin-delete-stall.php?stall_id=<?php echo $_GET['stall_id'];?>" class="btn btn-danger btn-sm" style="margin: 3px;">Yes</a>
             <a href="admin-stalls.php" class="btn btn-primary btn-sm" style="margin: 3px;">No</a>
         </p>
     </div>
