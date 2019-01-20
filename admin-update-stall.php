@@ -57,7 +57,7 @@
                 <a href="admin-create-stall.php" class="btn btn-success btn-sm float-right">Add Stall</a>
                 <br /><br />
                 <table class="table table-bordered table-sm table-striped">
-                    <tr align="center">
+                    <tr align="center" style="font-size: 13px;">
                         <th>#</th>
                         <th>Floor</th>
                         <th>Block</th>
@@ -87,22 +87,42 @@
                                 $stall_price = $row_stalls['stall_price'];
                                 $price_date_effectivity = $row_stalls['price_date_effectivity'];
                                 $stall_id = $row_stalls['stall_id'];
-
-                                echo "<tr align='center' style='font-size: 15px;'>";
-                                    echo "<td>" . $stall_id . "</td>";
-                                    echo "<td>" . $floor_no . "</td>";
-                                    echo "<td>" . $block_no . "</td>";
-                                    echo "<td>" . $block_dimension . "</td>";
-                                    echo "<td>Php " . number_format($stall_price,2) . "</td>";
-                                    $old_price_date = strtotime($price_date_effectivity);
-                                    $new_price_date = date('Y-m-d', $old_price_date);
-                                    echo "<td>" . $new_price_date . "</td>";
-                                    echo "<td>
-                                        <a href='admin-update-stall.php?stall_id=$stall_id' class='btn btn-sm btn-primary' style='font-size: 11px; margin: 1px;'>Update</a>
-                                        <a href='admin-view-price-history.php?stall_id=$stall_id' class='btn btn-sm btn-info' style='font-size: 11px; margin: 1px;'>Log</a>
-                                        <a href='admin-remove-stall.php?stall_id=$stall_id' class='btn btn-sm btn-danger' style='font-size: 11px; margin: 1px;'>Remove</a>
-                                    </td>";
-                                echo "</tr>";
+                                
+                                if($stall_id == $_GET['stall_id']){
+                                    echo "<tr align='center' style='font-size: 15px;'>";
+                                        echo "<td>" . $stall_id . "</td>";
+                                        echo "<td>" . $floor_no . "</td>";
+                                        echo "<td>" . $block_no . "</td>";
+                                        echo "<td>" . $block_dimension . "</td>";
+                                        echo "<form action='admin-update-stall.php?stall_id=$stall_id' method='POST'>";
+                                            echo "<td><input type='number' step='0.01' name='stall_price' class='form-control form-control-sm col-md-6' value='$stall_price' required></td>";
+                                            $old_price_date = strtotime($price_date_effectivity);
+                                            $new_price_date = date('Y-m-d', $old_price_date);
+                                            echo "<td>" . $new_price_date . "</td>";
+                                            echo "<td>
+                                                <input type='submit' value='Confirm' class='btn btn-sm btn-primary' style='font-size: 11px; margin: 1px;'>
+                                                <a href='admin-stalls.php' class='btn btn-sm btn-danger' style='font-size: 11px; margin: 1px;'>Cancel</a>
+                                            </td>";
+                                        echo "</form>";
+                                    echo "</tr>";
+                                }else{
+                                    echo "<tr align='center' style='font-size: 15px;'>";
+                                        echo "<td>" . $stall_id . "</td>";
+                                        echo "<td>" . $floor_no . "</td>";
+                                        echo "<td>" . $block_no . "</td>";
+                                        echo "<td>" . $block_dimension . "</td>";
+                                        echo "<td>Php " . number_format($stall_price,2) . "</td>";
+                                        $old_price_date = strtotime($price_date_effectivity);
+                                        $new_price_date = date('Y-m-d', $old_price_date);
+                                        echo "<td>" . $new_price_date . "</td>";
+                                        echo "<td>
+                                            <a href='admin-update-stall.php?stall_id=$stall_id' class='btn btn-sm btn-primary' style='font-size: 11px; margin: 1px;'>Update</a>
+                                            <a href='admin-view-price-history.php?stall_id=$stall_id' class='btn btn-sm btn-info' style='font-size: 11px; margin: 1px;'>Log</a>
+                                            <a href='admin-remove-stall.php?stall_id=$stall_id' class='btn btn-sm btn-danger' style='font-size: 11px; margin: 1px;'>Remove</a>
+                                        </td>";
+                                    echo "</tr>";
+                                }
+                                
                             }
                         }
                     ?>

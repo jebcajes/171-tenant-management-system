@@ -110,7 +110,9 @@
                                 echo "</tr>";
                                 echo "<tr>";
                                     echo "<td>Date Applied:</td>";
-                                    echo "<td style='font-style: italic'>" . $date_applied . "</td>";
+                                    $old_date_applied = strtotime($date_applied);
+                                    $new_date_applied = date('Y-m-d', $old_date_applied);
+                                    echo "<td style='font-style: italic'>" . $new_date_applied . "</td>";
                                 echo "</tr>";
                                 echo "<tr>";
                                     echo "<td>Application Status:</td>";
