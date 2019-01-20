@@ -123,6 +123,8 @@
                                             echo "<td style='color: green; font-weight: 800; font-style: italic;'>" . $row_contracts['remark'] . "</td>";
                                         }elseif($row_contracts['remark'] == 'Cancelled'){
                                             echo "<td style='color: red; font-weight: 800; font-style: italic;'>" . $row_contracts['remark'] . "</td>";
+                                        }elseif($row_contracts['remark'] == 'Lapsed'){
+                                            echo "<td style='color: red; font-weight: 800; font-style: italic;'>" . $row_contracts['remark'] . "</td>";
                                         }
                                         
                                         echo "<td ><input type='submit' value='Confirm' class='btn btn-success btn-sm' style='margin: 1px; font-size: 9px;'>
@@ -179,6 +181,8 @@
                                             echo "<a href='admin-set-contract.php?contract_id=$contract_id' class='btn btn-info btn-sm disabled' style='margin: 1px; font-size: 13px;'>Set</a>";
                                         }elseif($row_contracts['remark'] == 'Cancelled'){
                                             echo "<a href='admin-set-contract.php?contract_id=$contract_id' class='btn btn-info btn-sm disabled' style='margin: 1px; font-size: 13px;'>Set</a>";
+                                        }elseif($row_contracts['remark'] == 'Lapsed'){
+                                            echo "<a href='admin-set-contract.php?contract_id=$contract_id' class='btn btn-info btn-sm' style='margin: 1px; font-size: 13px;'>Set</a>";
                                         }else{
                                             echo "<a href='admin-set-contract.php?contract_id=$contract_id' class='btn btn-info btn-sm' style='margin: 1px; font-size: 13px;'>Set</a>";
                                         }

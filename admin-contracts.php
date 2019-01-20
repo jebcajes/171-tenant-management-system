@@ -97,43 +97,43 @@
                                     $new_date_approved = date('Y-m-d', $old_date_approved);
                                     echo "<td>" . $new_date_approved . "</td>";
 
-                                    // Start Date
-                                    if($row_contracts['start_date']){
+                                    // Converting datetime to date format
                                         $old_start_date = strtotime($row_contracts['start_date']);
                                         $new_start_date = date('Y-m-d', $old_start_date);
-                                        echo "<td>" . $new_start_date . "</td>";
-                                    }else{
-                                        echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
-                                    }
 
-                                    // End Date
-                                    if($row_contracts['end_date']){
                                         $old_end_date = strtotime($row_contracts['end_date']);
                                         $new_end_date = date('Y-m-d', $old_end_date);
-                                        echo "<td>" . $new_end_date . "</td>";
-                                    }else{
-                                        echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
-                                    }
 
-                                    // Expiration algorithm
-                                    $date1 = date_create("2019-01-21");
-                                    $date2 = date_create("2019-05-21");
-                                    $diff = date_diff($date1,$date2);
-                                    $difference = $diff->format("%a");
-                                    if($difference < 0){
-                                        $sql_lapsed_contract = "UPDATE contract SET start_date = NULL, 
-                                        end_date = NULL WHERE contract_id = $contract_id";
-
-                                        mysqli_query($link, $sql_lapsed_contract){
-                                            
+                                    // Start Date
+                                        if($row_contracts['start_date'] && $row_contracts['end_date']){
+                                            echo "<td>" . $new_start_date . "</td>";
+                                            echo "<td>" . $new_end_date . "</td>";
+                                        }else{
+                                            echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
+                                            echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
                                         }
-                                    }
+
+                                    // Expiration algorithm BETA   
+                                        $date1 = date_create($new_start_date);
+                                        $date2 = date_create($new_end_date);
+                                        $diff = date_diff($date1,$date2);
+                                        $difference = $diff->format("%a");
+                                        if($difference == 0){
+                                            $sql_lapsed_contract = "UPDATE contract SET start_date = NULL, 
+                                            end_date = NULL WHERE contract_id = $contract_id";
+                                            if(mysqli_query($link, $sql_lapsed_contract)){
+                                                $sql_lapsed_remark = "UPDATE contract SET remark = 'Lapsed' WHERE contract_id = $contract_id";
+                                                mysqli_query($link, $sql_lapsed_remark);
+                                            }
+                                        }
 
                                     if($row_contracts['remark'] == 'Pending'){
                                         echo "<td style='color: orange; font-weight: 800; font-style: italic;'>" . $row_contracts['remark'] . "</td>";
                                     }elseif($row_contracts['remark'] == 'Confirmed'){
                                         echo "<td style='color: green; font-weight: 800; font-style: italic;'>" . $row_contracts['remark'] . "</td>";
                                     }elseif($row_contracts['remark'] == 'Cancelled'){
+                                        echo "<td style='color: red; font-weight: 800; font-style: italic;'>" . $row_contracts['remark'] . "</td>";
+                                    }elseif($row_contracts['remark'] == 'Lapsed'){
                                         echo "<td style='color: red; font-weight: 800; font-style: italic;'>" . $row_contracts['remark'] . "</td>";
                                     }
                                     
@@ -145,6 +145,8 @@
                                             echo "<a href='admin-set-contract.php?contract_id=$contract_id' class='btn btn-info btn-sm disabled' style='margin: 1px; font-size: 13px;'>Set</a>";
                                         }elseif($row_contracts['remark'] == 'Cancelled'){
                                             echo "<a href='admin-set-contract.php?contract_id=$contract_id' class='btn btn-info btn-sm disabled' style='margin: 1px; font-size: 13px;'>Set</a>";
+                                        }elseif($row_contracts['remark'] == 'Lapsed'){
+                                            echo "<a href='admin-set-contract.php?contract_id=$contract_id' class='btn btn-info btn-sm' style='margin: 1px; font-size: 13px;'>Set</a>";
                                         }else{
                                             echo "<a href='admin-set-contract.php?contract_id=$contract_id' class='btn btn-info btn-sm' style='margin: 1px; font-size: 13px;'>Set</a>";
                                         }
