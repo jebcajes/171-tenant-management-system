@@ -73,11 +73,13 @@
                                 $renewal_id = $row_renewal['renewal_id'];
                                 echo "<td>" . $row_renewal['renewal_id'] . "</td>";
                                 echo "<td>" . $row_renewal['contract_id'] . "</td>";
+                                $contract_id = $row_renewal['contract_id']; 
                                 echo "<td>" . $row_renewal['fname'] . " " . $row_renewal['lname'] . "</td>";
                                 $old_date = strtotime($row_renewal['date_applied_renewal']);
                                 $new_date = date('Y-m-d', $old_date);
                                 echo "<td>" . $new_date . "</td>";
                                 echo "<td>" . $row_renewal['renewal_term'] . "</td>";
+                                $renewal_term = $row_renewal['renewal_term'];
                                 if($row_renewal['renewal_status'] == 'Approved'){
                                     echo "<td style='color: green; font-weight: 800; font-style: italic;'>" . $row_renewal['renewal_status'] . "</td>";
                                 }else{
@@ -85,7 +87,7 @@
                                 }
                                 echo "<td>";
                                     echo "<a href='admin-view-renewal-details.php?renewal_id=$renewal_id' class='btn btn-primary btn-sm' style='font-size: 11px; margin: 1px;'>View</a>";
-                                    echo "<a href='api/admin-approve-renewal.php?renewal_id=$renewal_id' class='btn btn-success btn-sm' style='font-size: 11px; margin: 1px;'>Approve</a>";
+                                    echo "<a href='api/admin-approve-renewal.php?renewal_id=$renewal_id&renewal_term=$renewal_term&contract_id=$contract_id' class='btn btn-success btn-sm' style='font-size: 11px; margin: 1px;'>Approve</a>";
                                 echo "</td>";
                             echo "</tr>";
                         }

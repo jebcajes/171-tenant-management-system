@@ -20,6 +20,9 @@
                     <li class="nav-item ">
                         <a class="nav-link" href="client-contracts.php?client_id=<?php echo $_GET['client_id'];?>">My Contracts</a>
                     </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="client-application.php?client_id=<?php echo $_GET['client_id'];?>">My Applications</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="client-renewal.php?client_id=<?php echo $_GET['client_id'];?>">Renewal</a>
                     </li>
