@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Stall Price History</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap-4.2.1-dist/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <a class="navbar-brand" href="index.php">
+            <img src="img/rob.png" width="30" height="30" alt="">
+        </a>
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="index.php">Home</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="admin-contracts.php">Contracts</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="admin-applied-stalls.php">Applications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin-renewal-requests.php">Renewal Requests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin-rental-requests.php">Rental Payments</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="admin-stalls.php">Stalls</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar -->
+</head>
+<body>
+    <div class="container">
+        <br />
+        
+        <div class="row">
+            <div class="col">
+                sex
+            </div>
+            <div class="col">
+                yea
+            </div>
+        </div>
+    </div>
+</body>
+</html>

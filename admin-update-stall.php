@@ -57,7 +57,7 @@
                 <a href="admin-create-stall.php" class="btn btn-success btn-sm float-right">Add Stall</a>
                 <br /><br />
                 <table class="table table-bordered table-sm table-striped">
-                    <tr align="center" style="font-size: 13px;">
+                    <tr align="center" style="font-size: 11px;">
                         <th>#</th>
                         <th>Floor</th>
                         <th>Block</th>
@@ -94,11 +94,12 @@
                                         echo "<td>" . $floor_no . "</td>";
                                         echo "<td>" . $block_no . "</td>";
                                         echo "<td>" . $block_dimension . "</td>";
-                                        echo "<form action='admin-update-stall.php?stall_id=$stall_id' method='POST'>";
-                                            echo "<td><input type='number' step='0.01' name='stall_price' class='form-control form-control-sm col-md-6' value='$stall_price' required></td>";
+                                        echo "<form action='api/admin-update-stall.php?stall_id=$stall_id' method='POST'>";
+                                            echo "<td><input type='number' step='0.01' name='stall_price' class='form-control form-control-sm' value='$stall_price' required></td>";
                                             $old_price_date = strtotime($price_date_effectivity);
                                             $new_price_date = date('Y-m-d', $old_price_date);
-                                            echo "<td>" . $new_price_date . "</td>";
+                                            // echo "<td>" . $new_price_date . "</td>";
+                                            echo "<td><input type='date' name='price_date_effectivity' class='form-control form-control-sm' value='$new_price_date' required></td>";
                                             echo "<td>
                                                 <input type='submit' value='Confirm' class='btn btn-sm btn-primary' style='font-size: 11px; margin: 1px;'>
                                                 <a href='admin-stalls.php' class='btn btn-sm btn-danger' style='font-size: 11px; margin: 1px;'>Cancel</a>
