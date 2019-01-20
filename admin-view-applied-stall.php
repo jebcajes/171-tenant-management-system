@@ -40,16 +40,85 @@
 </head>
 <body>
     <div class="container">
+        <br />
         <div class="row">
             <div class="col">
-                <div class="float-left">
-                    <br />
-                    <h1>List of Stalls Applied</h1>
-                    <br />
-                </div>
+                <h1 class="float-left">List of Stalls Applied</h1>
+            </div>
+            <div class="col">
+                <br/>
+                <a href="admin-applied-stalls.php" class="btn btn-danger btn-sm float-right">Back</a>
+            </div>
+        </div>
+        <br /> 
+        <div class="row">
+            <div class="col-md-6">
+            <table class="table table-bordered table-sm">
+                <tr class="bg-secondary">
+                    <td colspan="2" align="center" style="color: white;"><strong>Application Information</strong></td>
+                </tr>
+                    <?php
+                        require_once "api/config.php";
+                        $app_id = $_GET['app_id'];
+                        $status_for_button = "";
+
+                        $sql_applied_stalls = "SELECT a.app_id AS 'app_id', a.client_id AS 'client_id',
+                        bc.category_name AS 'category_name', a.business_name AS 'business_name', a.date_applied AS 'date_applied',
+                        a.application_status AS 'application_status', a.applied_term AS 'applied_term',
+                        c.fname AS 'fname', c.lname AS 'lname'
+                        FROM applied_stall a
+                        INNER JOIN business_classification bc ON a.category_id = bc.category_id
+                        INNER JOIN client c ON a.client_id = c.client_id
+                        WHERE app_id = $app_id
+                        ";
+
+                        // Declaring the variables to fetch data from the while loop
+                        $fname = $lname = $business_name = $category_name = $applied_term = $date_applied = $application_status = "";
+
+                        $result_applied_stalls = mysqli_query($link, $sql_applied_stalls);
+                        if(mysqli_num_rows($result_applied_stalls) > 0){
+                            while($row_applied_stalls = mysqli_fetch_assoc($result_applied_stalls)){
+                                $fname = $row_applied_stalls['fname'];
+                                $lname = $row_applied_stalls['lname'];
+                                $business_name = $row_applied_stalls['business_name'];
+                                $category_name = $row_applied_stalls['category_name'];
+                                $applied_term = $row_applied_stalls['applied_term'];
+                                $date_applied = $row_applied_stalls['date_applied'];
+                                $application_status = $row_applied_stalls['application_status'];
+
+                                echo "<tr>";
+                                    echo "<td>Client:</td>";
+                                    echo "<td style='font-style: italic'>" . $fname . " " . $lname . "</td>";
+                                echo "</tr>";
+                                echo "<tr>";
+                                    echo "<td>Business Name:</td>";
+                                    echo "<td style='font-style: italic'>" . $business_name . "</td>";
+                                echo "</tr>";
+                                echo "<tr>";
+                                    echo "<td>Category:</td>";
+                                    echo "<td style='font-style: italic'>" . $category_name . "</td>";
+                                echo "</tr>";
+                                echo "<tr>";
+                                    echo "<td>Applied Term:</td>";
+                                    echo "<td style='font-style: italic'>" . $applied_term . "</td>";
+                                echo "</tr>";
+                                echo "<tr>";
+                                    echo "<td>Date Applied:</td>";
+                                    echo "<td style='font-style: italic'>" . $date_applied . "</td>";
+                                echo "</tr>";
+                                echo "<tr>";
+                                    echo "<td>Application Status:</td>";
+                                    echo "<td style='font-style: italic'>" . $application_status . "</td>";
+                                echo "</tr>";
+                            }
+                        }
+                    ?>  
+                </table>
+            </div>
+            <div class="col-md-6">            
                 <form action="api/admin-verdict-applied-stall-details.php?app_id=<?php echo $_GET['app_id'];?>" method="POST">
                     <table class="table table-bordered table-striped table-sm"> 
-                        <tr align="center">
+                        <tr align="center" style="font-size: 14px;">
                             <td><strong>Stall ID</strong></td>
                             <td><strong>Floor No.</strong></td>
                             <td><strong>Block No.</strong></td>
@@ -59,20 +128,6 @@
                             <td><strong>Select</strong></td>
                         </tr>
                         <?php
-                            require_once "api/config.php";
-                            $app_id = $_GET['app_id'];
-                            $status_for_button = "";
-
-                            $sql_applied_stalls = "SELECT a.app_id AS 'app_id', a.client_id AS 'client_id',
-                            bc.category_name AS 'category_name', a.business_name AS 'business_name', a.date_applied AS 'date_applied',
-                            a.application_status AS 'application_status', a.applied_term AS 'applied_term',
-                            c.fname AS 'fname', c.lname AS 'lname'
-                            FROM applied_stall a
-                            INNER JOIN business_classification bc ON a.category_id = bc.category_id
-                            INNER JOIN client c ON a.client_id = c.client_id
-                            ORDER BY a.app_id ASC
-                            ";
-
                             $sql_applied_stall_details = "SELECT ad.app_id AS 'app_id', ad.stall_id AS 'stall_id', 
                             ad.stall_application_status AS 'stall_application_status', s.floor_no AS 'floor_no',
                             s.block_no AS 'block_no', s.block_dimension AS 'block_dimension', s.stall_price AS 'stall_price'
@@ -86,12 +141,12 @@
                                 $status_for_button = 1;
                                 while($row_applied_stall_details = mysqli_fetch_assoc($result_applied_stall_details)){
                                     echo "<tr align='center'>";
-                                        echo "<td>" . $row_applied_stall_details['stall_id'] . "</td>";
-                                        echo "<td>" . $row_applied_stall_details['floor_no'] . "</td>";
-                                        echo "<td>" . $row_applied_stall_details['block_no'] . "</td>";
-                                        echo "<td>" . $row_applied_stall_details['block_dimension'] . "</td>";
-                                        echo "<td>Php " . number_format($row_applied_stall_details['stall_price'],2) . "</td>";
-                                        echo "<td>" . $row_applied_stall_details['stall_application_status'] . "</td>";
+                                        echo "<td><small>" . $row_applied_stall_details['stall_id'] . "</small></td>";
+                                        echo "<td><small>" . $row_applied_stall_details['floor_no'] . "</small></td>";
+                                        echo "<td><small>" . $row_applied_stall_details['block_no'] . "</small></td>";
+                                        echo "<td><small>" . $row_applied_stall_details['block_dimension'] . "</small></td>";
+                                        echo "<td><small>Php " . number_format($row_applied_stall_details['stall_price'],2) . "</small></td>";
+                                        echo "<td><small>" . $row_applied_stall_details['stall_application_status'] . "</small></td>";
                                         echo "<td><input type='checkbox' name='stall_id[]' value=".$row_applied_stall_details['stall_id']."></td>"; 
                                     echo "</tr>";
                                 }
