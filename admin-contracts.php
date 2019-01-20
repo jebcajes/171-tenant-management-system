@@ -92,10 +92,12 @@
                                     }else{
                                         echo "<td>" . $row_contracts['contract_term'] . "</td>";
                                     }
+
                                     $old_date_approved = strtotime($row_contracts['date_approved']);
                                     $new_date_approved = date('Y-m-d', $old_date_approved);
                                     echo "<td>" . $new_date_approved . "</td>";
 
+                                    // Start Date
                                     if($row_contracts['start_date']){
                                         $old_start_date = strtotime($row_contracts['start_date']);
                                         $new_start_date = date('Y-m-d', $old_start_date);
@@ -104,12 +106,27 @@
                                         echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
                                     }
 
+                                    // End Date
                                     if($row_contracts['end_date']){
                                         $old_end_date = strtotime($row_contracts['end_date']);
                                         $new_end_date = date('Y-m-d', $old_end_date);
                                         echo "<td>" . $new_end_date . "</td>";
                                     }else{
                                         echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
+                                    }
+
+                                    // Expiration algorithm
+                                    $date1 = date_create("2019-01-21");
+                                    $date2 = date_create("2019-05-21");
+                                    $diff = date_diff($date1,$date2);
+                                    $difference = $diff->format("%a");
+                                    if($difference < 0){
+                                        $sql_lapsed_contract = "UPDATE contract SET start_date = NULL, 
+                                        end_date = NULL WHERE contract_id = $contract_id";
+
+                                        mysqli_query($link, $sql_lapsed_contract){
+                                            
+                                        }
                                     }
 
                                     if($row_contracts['remark'] == 'Pending'){

@@ -105,7 +105,7 @@
                                             $new_start_date = date('Y-m-d', $old_start_date);
                                             echo "<td>" . $new_start_date . "</td>";
                                         }else{
-                                            echo "<td><input type='date' name='start_date' class='form-control'></td>";
+                                            echo "<td><input type='date' name='start_date' class='form-control' required></td>";
                                         }
                                         
                                         if($row_contracts['end_date']){
@@ -113,7 +113,7 @@
                                             $new_end_date = date('Y-m-d', $old_end_date);
                                             echo "<td>" . $new_end_date . "</td>";
                                         }else{
-                                            echo "<td><input type='date' name='end_date' class='form-control'></td>";
+                                            echo "<td><input type='date' name='end_date' class='form-control' required></td>";
                                         }
 
                                         // Remark hehe
