@@ -143,7 +143,7 @@
                         }elseif($remark == 'Cancelled'){
                             echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right disabled'>Set Start & End Date</a>";
                         }elseif($remark == 'Pending'){
-                            echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right'>Set Start & End Date</a>";
+                            echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right disabled'>Set Start & End Date</a>";
                         }elseif($remark == 'Lapsed'){
                             echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right'>Set Start & End Date</a>";
                         }

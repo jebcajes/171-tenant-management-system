@@ -92,39 +92,47 @@
                                         echo "<td align='right'>Term:</td><td align='center'>" . $row_contract['contract_term'] . "</td>"; 
                                     }
                                 echo "</tr>";
-                                echo "<tr>";
-                                    if($row_contract['start_date']){
-                                        $old_start_date = strtotime($row_contract['start_date']);
-                                        $new_start_date = date('Y-m-d', $old_start_date);
-                                        echo "<td align='right'>Start Date:</td><td align='center'>" . $new_start_date . "</td>";
-                                    }else{
-                                        echo "<td align='right'>Start Date:</td><td align='center' style='color: grey; font-weight: 800; font-style: italic;'>N/A</td>";
-                                    }
-                                echo "</tr>";
-                                echo "<tr>";
-                                    if($row_contract['end_date']){
-                                        $old_end_date = strtotime($row_contract['end_date']);
-                                        $new_end_date = date('Y-m-d', $old_end_date);
-                                        echo "<td align='right'>End Date:</td><td align='center'>" . $new_end_date . "</td>"; 
-                                    }else{
-                                        echo "<td align='right'>End Date:</td><td align='center' style='color: grey; font-weight: 800; font-style: italic;'>N/A</td>";
-                                    }
-                                echo "</tr>";
-                                echo "<tr>";
-                                    if($row_contract['remark'] == 'Confirmed'){
-                                        echo "<td align='right'>Remark:</td><td align='center' style='color: green; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>";
-                                    }elseif($row_contract['remark'] == 'Cancelled'){
-                                        echo "<td align='right'>Remark:</td><td align='center' style='color: red; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>";
-                                    }elseif($row_contract['remark'] == 'Pending'){
-                                        echo "<td align='right'>Remark:</td><td align='center' style='color: orange; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>";
-                                    }elseif($row_contract['remark'] == 'Lapsed'){
-                                        echo "<td align='right'>Remark:</td><td align='center' style='color: red; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>";
-                                    }
-                                echo "</tr>";
+                                echo "<form action='api/admin-set-contract.php?contract_id=$contract_id' method='POST'>";
+                                    echo "<tr>";
+                                        if($row_contract['start_date']){
+                                            $old_start_date = strtotime($row_contract['start_date']);
+                                            $new_start_date = date('Y-m-d', $old_start_date);
+                                            echo "<td align='right'>Start Date:</td><td align='center'>" . $new_start_date . "</td>";
+                                            echo "<td><input type='date'></td>";
+                                        }else{
+                                            // echo "<td align='right'>Start Date:</td><td align='center' style='color: grey; font-weight: 800; font-style: italic;'>N/A</td>";
+                                            echo "<td align='right'>Start Date:</td>";
+                                            echo "<td><input type='date' name='start_date' class='form-control' required></td>";                                    
+                                        }
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                        if($row_contract['end_date']){
+                                            $old_end_date = strtotime($row_contract['end_date']);
+                                            $new_end_date = date('Y-m-d', $old_end_date);
+                                            echo "<td align='right'>End Date:</td><td align='center'>" . $new_end_date . "</td>"; 
+                                        }else{
+                                            echo "<td align='right'>End Date:</td>";
+                                            echo "<td><input type='date' name='end_date' class='form-control' required></td>";  
+                                        }
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                        if($row_contract['remark'] == 'Confirmed'){
+                                            echo "<td align='right'>Remark:</td><td align='center' style='color: green; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>";
+                                        }elseif($row_contract['remark'] == 'Cancelled'){
+                                            echo "<td align='right'>Remark:</td><td align='center' style='color: red; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>";
+                                        }elseif($row_contract['remark'] == 'Pending'){
+                                            echo "<td align='right'>Remark:</td><td align='center' style='color: orange; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>";
+                                        }elseif($row_contract['remark'] == 'Lapsed'){
+                                            echo "<td align='right'>Remark:</td><td align='center' style='color: red; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>";
+                                        }
+                                    echo "</tr>";
                             }
                         }
                     ?>
                 </table>
+                        <a href="admin-view-contract-details.php?contract_id=<?php echo $contract_id;?>" class="btn btn-danger btn-sm float-right" style="margin: 1px;">Cancel</a>
+                        <input type="submit" value="Set" class="btn btn-success btn-sm float-right" style="margin: 1px;">
+                    </form>
             </div>
             <div class="col">
                 <h4>Occupied Stall Spaces</h4>
