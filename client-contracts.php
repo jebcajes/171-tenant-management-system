@@ -43,7 +43,7 @@
         <br /><br />
         <table class="table table-bordered table-striped table-sm">
             <tr align="center">
-                <td><strong>Contract ID</strong></td>
+                <td><strong>#</strong></td>
                 <td><strong>Business Name</strong></td>
                 <td><strong>Category</strong></td>
                 <td><strong>Start Date</strong></td>
@@ -78,8 +78,34 @@
                             $new_end_date = date('Y-m-d', $old_end_date); 
                             echo "<td>" . $new_end_date . "</td>";
                             echo "<td>" . $row_contract['contract_term'] . "</td>"; 
+                            if($row_contract['remark'] == 'Confirmed'){
+
+                            }elseif($row_contract['remark'] == 'Pending'){
+
+                            }elseif($row_contract['remark'] == 'Cancelled'){
+
+                            }
+                            
                             echo "<td>" . $row_contract['remark'] . "</td>";
-                            echo "<td><a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-danger'>View</a></td>";
+                            if($row_contract['remark'] == 'Pending'){
+                                echo "<td>
+                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-primary'>View</a>
+                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-success'>Confirm</a>
+                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-danger'>Cancel</a>
+                                </td>";
+                            }elseif($row_contract['remark'] == 'Cancelled'){
+                                echo "<td>
+                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-primary'>View</a>
+                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-success disabled'>Confirm</a>
+                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-danger disabled'>Cancel</a>
+                                </td>";
+                            }else{
+                                echo "<td>
+                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-primary'>View</a>
+                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-success disabled'>Confirm</a>
+                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-danger'>Cancel</a>
+                                </td>";
+                            }
                         echo "</tr>";
                     }
                 }
