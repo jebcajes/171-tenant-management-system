@@ -140,14 +140,14 @@
                                     echo "<td>" . $row_contracts['fname'] . " " . $row_contracts['lname'] . "</td>";
                                     echo "<td>" . $row_contracts['business_name'] . "</td>";
                                     echo "<td>" . $row_contracts['category_name'] . "</td>";
+                                    $old_date_approved = strtotime($row_contracts['date_approved']);
+                                    $new_date_approved = date('Y-m-d', $old_date_approved);
+                                    echo "<td>" . $new_date_approved . "</td>";
                                     if($row_contracts['contract_term'] == 'Pending'){
                                         echo "<td style='color: orange; font-weight: 800; font-style: italic;'>" . $row_contracts['contract_term'] . "</td>";
                                     }else{
                                         echo "<td>" . $row_contracts['contract_term'] . "</td>";
                                     }
-                                    $old_date_approved = strtotime($row_contracts['date_approved']);
-                                    $new_date_approved = date('Y-m-d', $old_date_approved);
-                                    echo "<td>" . $new_date_approved . "</td>";
 
                                     if($row_contracts['start_date']){
                                         $old_start_date = strtotime($row_contracts['start_date']);
@@ -170,6 +170,8 @@
                                     }elseif($row_contracts['remark'] == 'Confirmed'){
                                         echo "<td style='color: green; font-weight: 800; font-style: italic;'>" . $row_contracts['remark'] . "</td>";
                                     }elseif($row_contracts['remark'] == 'Cancelled'){
+                                        echo "<td style='color: red; font-weight: 800; font-style: italic;'>" . $row_contracts['remark'] . "</td>";
+                                    }elseif($row_contracts['remark'] == 'Lapsed'){
                                         echo "<td style='color: red; font-weight: 800; font-style: italic;'>" . $row_contracts['remark'] . "</td>";
                                     }
                                     

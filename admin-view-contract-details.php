@@ -117,6 +117,8 @@
                                         echo "<td align='right'>Remark:</td><td align='center' style='color: red; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>";
                                     }elseif($row_contract['remark'] == 'Pending'){
                                         echo "<td align='right'>Remark:</td><td align='center' style='color: orange; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>";
+                                    }elseif($row_contract['remark'] == 'Lapsed'){
+                                        echo "<td align='right'>Remark:</td><td align='center' style='color: red; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>";
                                     }
                                 echo "</tr>";
                             }

@@ -87,15 +87,14 @@
                                     echo "<td>" . $row_contracts['fname'] . " " . $row_contracts['lname'] . "</td>";
                                     echo "<td>" . $row_contracts['business_name'] . "</td>";
                                     echo "<td>" . $row_contracts['category_name'] . "</td>";
+                                    $old_date_approved = strtotime($row_contracts['date_approved']);
+                                    $new_date_approved = date('Y-m-d', $old_date_approved);
+                                    echo "<td>" . $new_date_approved . "</td>";
                                     if($row_contracts['contract_term'] == 'Pending'){
                                         echo "<td style='color: orange; font-weight: 800; font-style: italic;'>" . $row_contracts['contract_term'] . "</td>";
                                     }else{
                                         echo "<td>" . $row_contracts['contract_term'] . "</td>";
                                     }
-
-                                    $old_date_approved = strtotime($row_contracts['date_approved']);
-                                    $new_date_approved = date('Y-m-d', $old_date_approved);
-                                    echo "<td>" . $new_date_approved . "</td>";
 
                                     // Converting datetime to date format
                                         $old_start_date = strtotime($row_contracts['start_date']);
@@ -119,11 +118,13 @@
                                         $diff = date_diff($date1,$date2);
                                         $difference = $diff->format("%a");
                                         if($difference == 0){
-                                            $sql_lapsed_contract = "UPDATE contract SET start_date = NULL, 
-                                            end_date = NULL WHERE contract_id = $contract_id";
-                                            if(mysqli_query($link, $sql_lapsed_contract)){
-                                                $sql_lapsed_remark = "UPDATE contract SET remark = 'Lapsed' WHERE contract_id = $contract_id";
-                                                mysqli_query($link, $sql_lapsed_remark);
+                                            if(!empty($row_contracts['start_date']) && !empty($row_contracts['end_date']) && $row_contracts['remark'] == 'Confirmed'){
+                                                $sql_lapsed_contract = "UPDATE contract SET start_date = NULL, 
+                                                end_date = NULL WHERE contract_id = $contract_id";
+                                                if(mysqli_query($link, $sql_lapsed_contract)){
+                                                    $sql_lapsed_remark = "UPDATE contract SET remark = 'Lapsed' WHERE contract_id = $contract_id";
+                                                    mysqli_query($link, $sql_lapsed_remark);
+                                                }
                                             }
                                         }
 
