@@ -82,6 +82,7 @@
                         if(mysqli_num_rows($result_contracts) > 0){
                             while($row_contracts = mysqli_fetch_assoc($result_contracts)){
                                 echo "<tr align='center' style='font-size: 15px;'>";
+                                    $contract_id = $row_contracts['contract_id'];
                                     echo "<td>" . $row_contracts['contract_id'] . "</td>";
                                     echo "<td>" . $row_contracts['fname'] . " " . $row_contracts['lname'] . "</td>";
                                     echo "<td>" . $row_contracts['business_name'] . "</td>";
@@ -120,8 +121,8 @@
                                     }
                                     
                                     echo "<td>";
-                                        echo "<a href='#' class='btn btn-primary btn-sm' style='margin: 1px; font-size: 13px;'>View</a>";
-                                        echo "<a href='#' class='btn btn-info btn-sm' style='margin: 1px; font-size: 13px;'>Set</a>";
+                                        echo "<a href='admin-view-contract-details.php?contract_id=$contract_id' class='btn btn-primary btn-sm' style='margin: 1px; font-size: 13px;'>View</a>";
+                                        echo "<a href='admin-set-contract.php?contract_id=$contract_id' class='btn btn-info btn-sm' style='margin: 1px; font-size: 13px;'>Set</a>";
                                     echo "</td>";
                                 echo "</tr>";
                             }
