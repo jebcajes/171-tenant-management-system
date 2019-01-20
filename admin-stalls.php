@@ -54,7 +54,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h4 class="float-left">All Stall Spaces</h4>
-                <a href="admin-create-stall.php" class="btn btn-success btn-sm float-right">Add Stall</a>
+                <a href="admin-create-stall.php" class="btn btn-success btn-sm float-right">Add New Stall</a>
                 <br /><br />
                 <table class="table table-bordered table-sm table-striped">
                     <tr align="center">
