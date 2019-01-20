@@ -36,6 +36,8 @@
                         WHERE stall_id = $stall_id_1 AND contract_id IS NULL";
                         mysqli_query($link, $sql_occupy_stall_1);
                     }
+            }else{
+                echo "It failed. Error Message: " . mysqli_error($link) . "<br />";
             }
             
 
@@ -54,6 +56,8 @@
                         WHERE stall_id = $stall_id_2 AND contract_id IS NULL";
                         mysqli_query($link, $sql_occupy_stall_2);
                     }
+            }else{
+                echo "It failed. Error Message: " . mysqli_error($link) . "<br />";
             } 
             
             // Automation to occupy only Approved stall; 3
@@ -71,6 +75,8 @@
                         WHERE stall_id = $stall_id_3 AND contract_id IS NULL";
                         mysqli_query($link, $sql_occupy_stall_3);
                     }
+            }else{
+                echo "It failed. Error Message: " . mysqli_error($link) . "<br />";
             }
 
             // Automation to occupy only Approved stall; 4
@@ -88,6 +94,8 @@
                         WHERE stall_id = $stall_id_4 AND contract_id IS NULL";
                         mysqli_query($link, $sql_occupy_stall_4);
                     }
+            }else{
+                echo "It failed. Error Message: " . mysqli_error($link) . "<br />";
             }
 
             // Automation to occupy only Approved stall; 5
@@ -105,6 +113,8 @@
                         WHERE stall_id = $stall_id_5 AND contract_id IS NULL";
                         mysqli_query($link, $sql_occupy_stall_5);
                     }
+            }else{
+                echo "It failed. Error Message: " . mysqli_error($link) . "<br />";
             }
 
         // Notification if it was successful
@@ -117,7 +127,7 @@
         }
 
         // Redirect
-        header("Refresh: 2; url = ../admin-view-contract-details.php?contract_id=$contract_id");
+        // header("Refresh: 2; url = ../admin-view-contract-details.php?contract_id=$contract_id");
     }else{
         echo "Date set attempt failed. <br />Error Message: " . mysqli_error($link) . "<br />";
     }
