@@ -98,7 +98,7 @@
                                         $new_start_date = date('Y-m-d', $old_start_date);
                                         echo "<td align='right'>Start Date:</td><td align='center'>" . $new_start_date . "</td>";
                                     }else{
-                                        echo "<td align='right'>Start Date:</td><td align='center' style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
+                                        echo "<td align='right'>Start Date:</td><td align='center' style='color: grey; font-weight: 800; font-style: italic;'>N/A</td>";
                                     }
                                 echo "</tr>";
                                 echo "<tr>";
@@ -107,7 +107,7 @@
                                         $new_end_date = date('Y-m-d', $old_end_date);
                                         echo "<td align='right'>End Date:</td><td align='center'>" . $new_end_date . "</td>"; 
                                     }else{
-                                        echo "<td align='right'>End Date:</td><td align='center' style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
+                                        echo "<td align='right'>End Date:</td><td align='center' style='color: grey; font-weight: 800; font-style: italic;'>N/A</td>";
                                     }
                                 echo "</tr>";
                                 echo "<tr>";

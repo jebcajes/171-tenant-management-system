@@ -58,8 +58,8 @@
                         <th>Client</th>
                         <th>Business Name</th>
                         <th>Category</th>
-                        <th>Term</th>
                         <th>Date Approved</th>
+                        <th>Term</th>
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Remark</th>
@@ -107,10 +107,20 @@
                                         if($row_contracts['start_date'] && $row_contracts['end_date']){
                                             echo "<td>" . $new_start_date . "</td>";
                                             echo "<td>" . $new_end_date . "</td>";
-                                        }else{
+                                        }elseif($row_contracts['remark'] == 'Lapsed'){
+                                            echo "<td style='color: red; font-weight: 800; font-style: italic;'>Lapsed</td>";
+                                            echo "<td style='color: red; font-weight: 800; font-style: italic;'>Lapsed</td>";
+                                        }elseif($row_contracts['remark'] == 'Pending'){
+                                            echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
+                                            echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
+                                        }elseif($row_contracts['remark'] == 'Cancelled'){
+                                            echo "<td style='color: red; font-weight: 800; font-style: italic;'>Cancelled</td>";
+                                            echo "<td style='color: red; font-weight: 800; font-style: italic;'>Cancelled</td>";
+                                        }elseif($row_contracts['remark'] == 'Confirmed'){
                                             echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
                                             echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
                                         }
+                                        
 
                                     // Expiration algorithm BETA   
                                         $date1 = date_create($new_start_date);
