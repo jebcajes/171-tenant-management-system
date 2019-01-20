@@ -47,7 +47,7 @@
 <body>
     <div class="container">
         <br />
-
+        <h1>Price History</h1><br />
         <div class="row">
             <div class="col">
                 <h3 class="float-left">Previous</h3>

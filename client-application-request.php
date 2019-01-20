@@ -78,6 +78,7 @@
                 <h4>Available Stall Spaces</h4>
                 <table class="table table-striped table-bordered table-sm">
                     <tr align="center">
+                        <th>#</th>
                         <th>Floor Number</th>
                         <th>Block Number</th>
                         <th>Block Dimension (Meter)</th>
@@ -95,6 +96,7 @@
                     if (mysqli_num_rows($result_stalls) > 0) {
                         while($row_stalls = mysqli_fetch_assoc($result_stalls)) {
                             echo "<tr align='center'>";
+                                echo "<td>" . $row_stalls['stall_id'] . "</td>";
                                 echo "<td>" . $row_stalls['floor_no'] . "</td>";
                                 echo "<td>" . $row_stalls['block_no'] . "</td>";
                                 echo "<td>" . $row_stalls['block_dimension'] . "</td>";
