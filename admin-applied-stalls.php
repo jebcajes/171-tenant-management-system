@@ -89,7 +89,13 @@
                                     $old_date_applied = strtotime($row_applied_stalls['date_applied']);
                                     $new_date_applied = date('Y-m-d', $old_date_applied);
                                     echo "<td>" . $new_date_applied . "</td>";
-                                    echo "<td>" . $row_applied_stalls['application_status'] . "</td>";
+                                    if($status == 'Approved'){
+                                        echo "<td style='color: green; font-weight: 800; font-style: italic;'>" . $status . "</td>";
+                                    }elseif($status == 'Disapproved'){
+                                        echo "<td style='color: red; font-weight: 800; font-style: italic;'>" . $status . "</td>";
+                                    }elseif($status == 'Unapproved'){
+                                        echo "<td style='color: orange; font-weight: 800; font-style: italic;'>" . $status . "</td>";
+                                    }
                                     echo "<td>";
                                     if($status == 'Approved'){
                                         echo "<a href='admin-view-applied-stall.php?app_id=$app_id' class='btn btn-primary btn-sm' style='margin: 1px; font-size: 13px;'>View</a>

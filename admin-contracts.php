@@ -86,17 +86,39 @@
                                     echo "<td>" . $row_contracts['fname'] . " " . $row_contracts['lname'] . "</td>";
                                     echo "<td>" . $row_contracts['business_name'] . "</td>";
                                     echo "<td>" . $row_contracts['category_name'] . "</td>";
-                                    echo "<td>" . $row_contracts['contract_term'] . "</td>";
+                                    if($row_contracts['contract_term'] == 'Pending'){
+                                        echo "<td style='color: orange; font-weight: 800; font-style: italic;'>" . $row_contracts['contract_term'] . "</td>";
+                                    }else{
+                                        echo "<td>" . $row_contracts['contract_term'] . "</td>";
+                                    }
                                     $old_date_approved = strtotime($row_contracts['date_approved']);
                                     $new_date_approved = date('Y-m-d', $old_date_approved);
                                     echo "<td>" . $new_date_approved . "</td>";
-                                    $old_start_date = strtotime($row_contracts['start_date']);
-                                    $new_start_date = date('Y-m-d', $old_start_date);
-                                    echo "<td>" . $new_start_date . "</td>";
-                                    $old_end_date = strtotime($row_contracts['end_date']);
-                                    $new_end_date = date('Y-m-d', $old_end_date);
-                                    echo "<td>" . $new_end_date . "</td>";
-                                    echo "<td>" . $row_contracts['remark'] . "</td>";
+
+                                    if($row_contracts['start_date']){
+                                        $old_start_date = strtotime($row_contracts['start_date']);
+                                        $new_start_date = date('Y-m-d', $old_start_date);
+                                        echo "<td>" . $new_start_date . "</td>";
+                                    }else{
+                                        echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
+                                    }
+
+                                    if($row_contracts['end_date']){
+                                        $old_end_date = strtotime($row_contracts['end_date']);
+                                        $new_end_date = date('Y-m-d', $old_end_date);
+                                        echo "<td>" . $new_end_date . "</td>";
+                                    }else{
+                                        echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
+                                    }
+
+                                    if($row_contracts['remark'] == 'Pending'){
+                                        echo "<td style='color: orange; font-weight: 800; font-style: italic;'>" . $row_contracts['remark'] . "</td>";
+                                    }elseif($row_contracts['remark'] == 'Confirmed'){
+                                        echo "<td style='color: green; font-weight: 800; font-style: italic;'>" . $row_contracts['remark'] . "</td>";
+                                    }elseif($row_contracts['remark'] == 'Cancelled'){
+                                        echo "<td style='color: red; font-weight: 800; font-style: italic;'>" . $row_contracts['remark'] . "</td>";
+                                    }
+                                    
                                     echo "<td>";
                                         echo "<a href='#' class='btn btn-primary btn-sm' style='margin: 1px; font-size: 13px;'>View</a>";
                                         echo "<a href='#' class='btn btn-info btn-sm' style='margin: 1px; font-size: 13px;'>Set</a>";
