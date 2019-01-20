@@ -44,7 +44,8 @@
 </head>
 <body>
     <div class="container">
-        <br><h1>Renewal Details</h1><br>
+        <br><h1 class="float-left">Renewal Details</h1><br>
+        <a href='admin-renewal-requests.php' class='btn btn-danger btn-sm float-right' style='margin: 1px;'>Back</a><br /><br>
         <div class="row">
             <div class="col-md-8">
                 <table class="table table-bordered table-striped table-sm">
