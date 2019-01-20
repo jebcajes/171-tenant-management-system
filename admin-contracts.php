@@ -81,7 +81,7 @@
                         $result_contracts = mysqli_query($link, $sql_contracts);
                         if(mysqli_num_rows($result_contracts) > 0){
                             while($row_contracts = mysqli_fetch_assoc($result_contracts)){
-                                echo "<tr align='center'>";
+                                echo "<tr align='center' style='font-size: 13px;'>";
                                     echo "<td>" . $row_contracts['contract_id'] . "</td>";
                                     echo "<td>" . $row_contracts['fname'] . " " . $row_contracts['lname'] . "</td>";
                                     echo "<td>" . $row_contracts['business_name'] . "</td>";
@@ -98,7 +98,8 @@
                                     echo "<td>" . $new_end_date . "</td>";
                                     echo "<td>" . $row_contracts['remark'] . "</td>";
                                     echo "<td>";
-                                        echo "<a href='#' class='btn btn-primary btn-sm' style='margin: 1px;'>View</a>";
+                                        echo "<a href='#' class='btn btn-primary btn-sm' style='margin: 1px; font-size: 13px;'>View</a>";
+                                        echo "<a href='#' class='btn btn-info btn-sm' style='margin: 1px; font-size: 13px;'>Set</a>";
                                     echo "</td>";
                                 echo "</tr>";
                             }

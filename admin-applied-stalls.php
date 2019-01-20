@@ -79,7 +79,7 @@
                         $result_applied_stalls = (mysqli_query($link, $sql_applied_stalls));
                         if(mysqli_num_rows($result_applied_stalls) > 0){
                             while($row_applied_stalls = mysqli_fetch_assoc($result_applied_stalls)){
-                                echo "<tr align='center'>";
+                                echo "<tr align='center' style='font-size: 13px;'>";
                                     $app_id = $row_applied_stalls['app_id'];
                                     echo "<td>" . $row_applied_stalls['app_id'] . "</td>";
                                     echo "<td>" . $row_applied_stalls['fname'] . " " . $row_applied_stalls['lname'] . "</td>";
@@ -88,9 +88,9 @@
                                     echo "<td>" . $row_applied_stalls['date_applied'] . "</td>";
                                     echo "<td>" . $row_applied_stalls['application_status'] . "</td>";
                                     echo "<td>
-                                        <a href='admin-view-applied-stall.php?app_id=$app_id' class='btn btn-primary btn-sm' style='margin: 5px;'>View</a>
-                                        <a href='api/api-admin-approve-applied-stall.php?app_id=$app_id' class='btn btn-success btn-sm' style='margin: 5px;'>Approve</a>
-                                        <a href='api/api-admin-disapprove-applied-stall.php?app_id=$app_id' class='btn btn-danger btn-sm' style='margin: 5px;'>Disapprove</a>
+                                        <a href='admin-view-applied-stall.php?app_id=$app_id' class='btn btn-primary btn-sm' style='margin: 1px; font-size: 13px;'>View</a>
+                                        <a href='api/api-admin-approve-applied-stall.php?app_id=$app_id' class='btn btn-success btn-sm' style='margin: 1px; font-size: 13px;'>Approve</a>
+                                        <a href='api/api-admin-disapprove-applied-stall.php?app_id=$app_id' class='btn btn-danger btn-sm' style='margin: 1px; font-size: 13px;'>Disapprove</a>
                                     </td>";
                                 echo "</tr>";
                             }
