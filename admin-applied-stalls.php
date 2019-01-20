@@ -23,10 +23,10 @@
                     <li class="nav-item ">
                         <a class="nav-link" href="index.php">Home</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item ">
                         <a class="nav-link" href="admin-contracts.php">Contracts</a>
                     </li>
-                    <li class="nav-item ">
+                    <li class="nav-item active">
                         <a class="nav-link" href="admin-applied-stalls.php">Applications</a>
                     </li>
                     <li class="nav-item">

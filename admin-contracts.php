@@ -83,11 +83,13 @@
                             while($row_contracts = mysqli_fetch_assoc($result_contracts)){
                                 echo "<tr align='center'>";
                                     echo "<td>" . $row_contracts['contract_id'] . "</td>";
-                                    echo "<td>" . $row_contracts['fname'] . "</td>";
+                                    echo "<td>" . $row_contracts['fname'] . " " . $row_contracts['lname'] . "</td>";
                                     echo "<td>" . $row_contracts['business_name'] . "</td>";
                                     echo "<td>" . $row_contracts['category_name'] . "</td>";
                                     echo "<td>" . $row_contracts['contract_term'] . "</td>";
-                                    echo "<td>" . $row_contracts['date_approved'] . "</td>";
+                                    $old_date_approved = strtotime($row_contracts['date_approved']);
+                                    $new_date_approved = date('Y-m-d', $old_date_approved);
+                                    echo "<td>" . $new_date_approved . "</td>";
                                     $old_start_date = strtotime($row_contracts['start_date']);
                                     $new_start_date = date('Y-m-d', $old_start_date);
                                     echo "<td>" . $new_start_date . "</td>";
