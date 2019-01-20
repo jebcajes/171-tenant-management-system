@@ -123,7 +123,15 @@
                                             $new_end_date = date('Y-m-d', $old_end_date); 
                                             echo "<td>" . $new_end_date . "</td>";
                                             echo "<td>" . $row_contract['contract_term'] . "</td>"; 
-                                            echo "<td>" . $row_contract['remark'] . "</td>";
+                                            if($row_contract['remark'] == 'Confirmed'){
+                                                echo "<td style='color: green; font-style: italic; font-weight: 800;'>" . $row_contract['remark'] . "</td>";
+                                            }elseif($row_contract['remark'] == 'Cancelled'){
+                                                echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_contract['remark'] . "</td>";
+                                            }elseif($row_contract['remark'] == 'Lapsed'){
+                                                echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_contract['remark'] . "</td>";
+                                            }elseif($row_contract['remark'] == 'Pending'){
+                                                echo "<td style='color: orange; font-style: italic; font-weight: 800;'>" . $row_contract['remark'] . "</td>";
+                                            }
                                         echo "</tr>";
                                     }
                                 }
