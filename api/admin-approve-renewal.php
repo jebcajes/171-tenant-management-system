@@ -9,7 +9,7 @@
     if(mysqli_query($link, $sql_approve)){
         echo "Renewal has been approved! <br />";
 
-        $sql_update_term = "UPDATE contract SET contract_term = '$renewal_term', remark = 'Confirmed' WHERE contract_id = $contract_id";
+        $sql_update_term = "UPDATE contract SET contract_term = '$renewal_term', remark = 'Confirmed', renewal_status = 'Pending' WHERE contract_id = $contract_id";
         mysqli_query($link, $sql_update_term);
 
         header("Refresh: 2; url= ../admin-renewal-requests.php");
