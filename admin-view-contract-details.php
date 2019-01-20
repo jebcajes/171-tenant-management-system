@@ -89,14 +89,22 @@
                                     echo "<td align='right'>Date Approved:</td><td align='center'>" . $new_date_approved . "</td>"; 
                                 echo "</tr>";
                                 echo "<tr>";
-                                    $old_start_date = strtotime($row_contract['start_date']);
-                                    $new_start_date = date('Y-m-d', $old_start_date);
-                                    echo "<td align='right'>Start Date:</td><td align='center'>" . $new_start_date . "</td>"; 
+                                    if($row_contract['start_date']){
+                                        $old_start_date = strtotime($row_contract['start_date']);
+                                        $new_start_date = date('Y-m-d', $old_start_date);
+                                        echo "<td align='right'>Start Date:</td><td align='center'>" . $new_start_date . "</td>";
+                                    }else{
+                                        echo "<td align='right'>Start Date:</td><td align='center' style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
+                                    }
                                 echo "</tr>";
                                 echo "<tr>";
-                                    $old_end_date = strtotime($row_contract['end_date']);
-                                    $new_end_date = date('Y-m-d', $old_end_date);
-                                    echo "<td align='right'>End Date:</td><td align='center'>" . $new_end_date . "</td>"; 
+                                    if($row_contract['end_date']){
+                                        $old_end_date = strtotime($row_contract['end_date']);
+                                        $new_end_date = date('Y-m-d', $old_end_date);
+                                        echo "<td align='right'>End Date:</td><td align='center'>" . $new_end_date . "</td>"; 
+                                    }else{
+                                        echo "<td align='right'>End Date:</td><td align='center' style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
+                                    }
                                 echo "</tr>";
                                 echo "<tr>";
                                     if($row_contract['remark'] == 'Confirmed'){
@@ -115,9 +123,31 @@
             <div class="col">
                 <h4>Occupied Stall Spaces</h4>
                 <table class="table table-bordered table-striped table-sm">
-                    <tr>
-                        <th></th>
+                    <tr align="center">
+                        <th>#</th>
+                        <th>Floor</th>
+                        <th>Block</th>
+                        <th>Block Dimensions</th>
                     </tr>
+                    <?php 
+                        $sql_occupied_stalls = "SELECT * FROM occupied_stalls os INNER JOIN stalls s ON os.stall_id = s.stall_id WHERE contract_id = $contract_id";
+
+                        $result_occupied_stalls = mysqli_query($link, $sql_occupied_stalls);
+                        if(mysqli_num_rows($result_occupied_stalls) > 0){
+                            while($row_occupied_stalls = mysqli_fetch_assoc($result_occupied_stalls)){
+                                echo "<tr align='center'>";
+                                    echo "<td>" . $row_occupied_stalls['stall_id'] . "</td>";
+                                    echo "<td>" . $row_occupied_stalls['floor_no'] . "</td>";
+                                    echo "<td>" . $row_occupied_stalls['block_no'] . "</td>";
+                                    echo "<td>" . $row_occupied_stalls['block_dimension'] . "</td>";
+                                echo "</tr>";
+                            }
+                        }else{
+                            echo "<tr>";
+                                echo "<td colspan='4' align='center' style='font-style: italic;'>No records found.</td>";
+                            echo "</tr>";
+                        }
+                    ?>
                 </table>
             </div>
         </div>
