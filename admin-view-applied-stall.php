@@ -21,16 +21,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item ">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Applications</a>
+                        <a class="nav-link" href="admin-contracts.php">Contracts</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="admin-applied-stalls.php">Applications</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Renewal Requests</a>
+                        <a class="nav-link" href="admin-renewal-requests.php">Renewal Requests</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Rental Payments</a>
+                        <a class="nav-link" href="admin-rental-requests.php">Rental Payments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin-stalls.php">Stalls</a>
                     </li>
                 </ul>
             </div>
