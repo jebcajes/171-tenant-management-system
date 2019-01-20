@@ -34,4 +34,6 @@
 
     header("location: ../old-user.php?client_id=$client_id");
 
+    mysqli_close($link);
+
     

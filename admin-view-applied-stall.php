@@ -108,7 +108,13 @@
                                 echo "</tr>";
                                 echo "<tr>";
                                     echo "<td>Application Status:</td>";
-                                    echo "<td style='font-style: italic'>" . $application_status . "</td>";
+                                    if($application_status == 'Approved'){
+                                        echo "<td style='font-style: italic; font-weight: bold; color: green;'>" . $application_status . "</td>";
+                                    }elseif($application_status == 'Disapproved'){
+                                        echo "<td style='font-style: italic; font-weight: bold; color: red; font-size: 15px;'>" . $application_status . "</td>";
+                                    }elseif($application_status == 'Unapproved'){
+                                        echo "<td style='font-style: italic; font-weight: bold; color: orange; font-size: 15px;'>" . $application_status . "</td>";
+                                    }
                                 echo "</tr>";
                             }
                         }

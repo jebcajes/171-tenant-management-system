@@ -54,5 +54,6 @@
         }
     }
     
+    mysqli_close($link);
 
     

@@ -31,4 +31,5 @@
     // Just to check if the client id was fetched from the while loop
     echo $fetched_client_id;
 
+    mysqli_close($link);
     

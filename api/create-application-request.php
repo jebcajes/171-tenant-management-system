@@ -45,4 +45,4 @@
     echo "<h1>Application Sent!</h1>";
     header("Refresh:2; url=../index.php");
 
-    
+    mysqli_close($link);

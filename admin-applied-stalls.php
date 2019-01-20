@@ -23,6 +23,9 @@
                     <li class="nav-item ">
                         <a class="nav-link" href="#">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contracts</a>
+                    </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Applications</a>
                     </li>
@@ -31,6 +34,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Rental Payments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Stalls</a>
                     </li>
                 </ul>
             </div>
@@ -54,7 +60,7 @@
                         <td><strong>Business Name</strong></td>
                         <td><strong>Applied Term</strong></td>
                         <td><strong>Date Applied</strong></td>
-                        <td><strong>Application Status</strong></td>
+                        <td><strong>Remark</strong></td>
                         <td><strong>Action</strong></td>
                     </tr>
                     <?php
@@ -83,8 +89,8 @@
                                     echo "<td>" . $row_applied_stalls['application_status'] . "</td>";
                                     echo "<td>
                                         <a href='admin-view-applied-stall.php?app_id=$app_id' class='btn btn-primary btn-sm' style='margin: 5px;'>View</a>
-                                        <a href='api-admin-approve-applied-stall.php?app_id=$app_id' class='btn btn-success btn-sm' style='margin: 5px;'>Approve</a>
-                                        <a href='api-admin-disapprove-applied-stall.php?app_id=$app_id' class='btn btn-danger btn-sm' style='margin: 5px;'>Disapprove</a>
+                                        <a href='api/api-admin-approve-applied-stall.php?app_id=$app_id' class='btn btn-success btn-sm' style='margin: 5px;'>Approve</a>
+                                        <a href='api/api-admin-disapprove-applied-stall.php?app_id=$app_id' class='btn btn-danger btn-sm' style='margin: 5px;'>Disapprove</a>
                                     </td>";
                                 echo "</tr>";
                             }

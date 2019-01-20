@@ -22,5 +22,6 @@
         echo "It failed.<br>" . mysqli_error($link);
     }
 
+    mysqli_close($link);
     
     
