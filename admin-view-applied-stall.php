@@ -115,7 +115,7 @@
                                     echo "<td style='font-style: italic'>" . $new_date_applied . "</td>";
                                 echo "</tr>";
                                 echo "<tr>";
-                                    echo "<td>Application Status:</td>";
+                                    echo "<td>Remark:</td>";
                                     if($application_status == 'Approved'){
                                         echo "<td style='font-style: italic; font-weight: bold; color: green;'>" . $application_status . "</td>";
                                     }elseif($application_status == 'Disapproved'){
