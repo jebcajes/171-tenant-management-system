@@ -127,7 +127,7 @@
         }
 
         // Redirect
-        // header("Refresh: 2; url = ../admin-view-contract-details.php?contract_id=$contract_id");
+        header("Refresh: 2; url = ../admin-view-contract-details.php?contract_id=$contract_id");
     }else{
         echo "Date set attempt failed. <br />Error Message: " . mysqli_error($link) . "<br />";
     }

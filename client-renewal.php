@@ -60,7 +60,7 @@
                 c.renewal_status AS 'renewal_status'
                 FROM contract c
                 INNER JOIN business_classification bc ON c.category_id = bc.category_id 
-                WHERE client_id = $client_id AND renewal_status != 'Pending'
+                WHERE client_id = $client_id
                 ";
 
                 $result_contract = mysqli_query($link,$sql_contract);
