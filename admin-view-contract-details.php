@@ -81,12 +81,16 @@
                                     echo "<td align='right'>Category:</td><td align='center'>" . $row_contract['category_name'] . "</td>"; 
                                 echo "</tr>";
                                 echo "<tr>";
-                                    echo "<td align='right'>Term:</td><td align='center'>" . $row_contract['contract_term'] . "</td>"; 
-                                echo "</tr>";
-                                echo "<tr>";
                                     $old_date_approved = strtotime($row_contract['date_approved']);
                                     $new_date_approved = date('Y-m-d', $old_date_approved);
                                     echo "<td align='right'>Date Approved:</td><td align='center'>" . $new_date_approved . "</td>"; 
+                                echo "</tr>";
+                                echo "<tr>";
+                                    if($row_contract['contract_term'] == 'Pending'){
+                                        echo "<td align='right'>Term:</td><td align='center' style='color: orange; font-weight: 800; font-style: italic;'>" . $row_contract['contract_term'] . "</td>"; 
+                                    }else{
+                                        echo "<td align='right'>Term:</td><td align='center'>" . $row_contract['contract_term'] . "</td>"; 
+                                    }
                                 echo "</tr>";
                                 echo "<tr>";
                                     if($row_contract['start_date']){
