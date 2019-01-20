@@ -48,10 +48,12 @@
             <br /><br />
             <div class="row">
                 <div class="col-4">
+                    <h4>Occupied Stall Spaces</h4><br>
                     <table class="table table-bordered table-striped table-sm">
-                        <tr align="center">
-                            <td><strong>Floor No.</strong></td>
-                            <td><strong>Block No.</strong></td>
+                        <tr align="center" style="font-size: 14px;">
+                            <td><strong>#</strong></td>
+                            <td><strong>Floor</strong></td>
+                            <td><strong>Block</strong></td>
                             <td><strong>Block Dimensions</strong></td>
                             <td><strong>Stall Price</strong></td>
                         </tr>
@@ -69,20 +71,26 @@
                             if (mysqli_num_rows($result_stalls) > 0) {
                                 while($row_stalls = mysqli_fetch_assoc($result_stalls)) {
                                     echo "<tr align='center'>";
+                                        echo "<td>" . $row_stalls['stall_id'] . "</td>";
                                         echo "<td>" . $row_stalls['floor_no'] . "</td>";
                                         echo "<td>" . $row_stalls['block_no'] . "</td>";
                                          echo "<td>" . $row_stalls['block_dimension'] . "</td>";
-                                        echo "<td>" . $row_stalls['stall_price'] . "</td>";
+                                        echo "<td>Php " . number_format($row_stalls['stall_price'],2) . "</td>";
                                     echo "</tr>";
                                 }
+                             }else{
+                                echo "<tr align='center'>";
+                                    echo "<td colspan='5' style='font-style: italic;'>No records found.</td>";
+                                echo "</tr>";
                              }
                         ?>
                     </table>
                 </div>
                 <div class="col-8">
+                    <h4>Contract Information</h4><br>
                     <table class="table table-bordered table-striped table-sm">
                         <tr align="center">
-                                <td><strong>Contract ID</strong></td>
+                                <td><strong>#</strong></td>
                                 <td><strong>Business Name</strong></td>
                                 <td><strong>Category</strong></td>
                                 <td><strong>Start Date</strong></td>

@@ -57,9 +57,9 @@
                 c.renewal_status AS 'renewal_status'
                 FROM contract c
                 INNER JOIN business_classification bc ON c.category_id = bc.category_id 
-                WHERE client_id = $client_id
-                AND remark = 'Confirmed' 
-                AND remark != 'Cancelled'";
+                WHERE client_id = $client_id AND renewal_status != 'Pending'
+                ";
+
                 $result_contract = mysqli_query($link,$sql_contract);
                 if (mysqli_num_rows($result_contract) > 0) {
                     while($row_contract = mysqli_fetch_assoc($result_contract)) {

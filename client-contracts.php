@@ -77,33 +77,42 @@
                             $old_end_date = strtotime($row_contract['end_date']);
                             $new_end_date = date('Y-m-d', $old_end_date); 
                             echo "<td>" . $new_end_date . "</td>";
-                            echo "<td>" . $row_contract['contract_term'] . "</td>"; 
+
+                            echo "<td>" . $row_contract['contract_term'] . "</td>";
+
                             if($row_contract['remark'] == 'Confirmed'){
-
+                                echo "<td style='color: green; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>"; 
                             }elseif($row_contract['remark'] == 'Pending'){
-
+                                echo "<td style='color: orange; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>";
                             }elseif($row_contract['remark'] == 'Cancelled'){
-
+                                echo "<td style='color: red; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>";
+                            }elseif($row_contract['remark'] == 'Lapsed'){
+                                echo "<td style='color: red; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>";
                             }
-                            
-                            echo "<td>" . $row_contract['remark'] . "</td>";
+
                             if($row_contract['remark'] == 'Pending'){
                                 echo "<td>
                                     <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-primary'>View</a>
-                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-success'>Confirm</a>
-                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-danger'>Cancel</a>
+                                    <a href='api/client-confirm-contract.php?contract_id=$contract_id' class='btn btn-sm btn-success'>Confirm</a>
+                                    <a href='api/client-cancel-contract.php?contract_id=$contract_id' class='btn btn-sm btn-danger'>Cancel</a>
                                 </td>";
                             }elseif($row_contract['remark'] == 'Cancelled'){
                                 echo "<td>
                                     <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-primary'>View</a>
-                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-success disabled'>Confirm</a>
-                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-danger disabled'>Cancel</a>
+                                    <a href='api/client-confirm-contract.php?contract_id=$contract_id' class='btn btn-sm btn-success disabled'>Confirm</a>
+                                    <a href='api/client-cancel-contract.php?contract_id=$contract_id' class='btn btn-sm btn-danger disabled'>Cancel</a>
+                                </td>";
+                            }elseif($row_contract['remark'] == 'Lapsed'){
+                                echo "<td>
+                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-primary'>View</a>
+                                    <a href='api/client-confirm-contract.php?contract_id=$contract_id' class='btn btn-sm btn-success disabled'>Confirm</a>
+                                    <a href='api/client-cancel-contract.php?contract_id=$contract_id' class='btn btn-sm btn-danger disabled'>Cancel</a>
                                 </td>";
                             }else{
                                 echo "<td>
                                     <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-primary'>View</a>
-                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-success disabled'>Confirm</a>
-                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-danger'>Cancel</a>
+                                    <a href='api/client-confirm-contract.php?contract_id=$contract_id' class='btn btn-sm btn-success disabled'>Confirm</a>
+                                    <a href='api/client-cancel-contract.php?contract_id=$contract_id' class='btn btn-sm btn-danger'>Cancel</a>
                                 </td>";
                             }
                         echo "</tr>";
