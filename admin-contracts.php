@@ -54,7 +54,7 @@
             <div class="row">
                 <table class="table table-bordered table-striped table-sm">
                     <tr align="center">
-                        <th>Contract ID</th>
+                        <th>#</th>
                         <th>Client</th>
                         <th>Business Name</th>
                         <th>Category</th>
@@ -81,7 +81,7 @@
                         $result_contracts = mysqli_query($link, $sql_contracts);
                         if(mysqli_num_rows($result_contracts) > 0){
                             while($row_contracts = mysqli_fetch_assoc($result_contracts)){
-                                echo "<tr align='center' style='font-size: 13px;'>";
+                                echo "<tr align='center' style='font-size: 15px;'>";
                                     echo "<td>" . $row_contracts['contract_id'] . "</td>";
                                     echo "<td>" . $row_contracts['fname'] . " " . $row_contracts['lname'] . "</td>";
                                     echo "<td>" . $row_contracts['business_name'] . "</td>";

@@ -23,7 +23,7 @@
                     <li class="nav-item ">
                         <a class="nav-link" href="index.php">Home</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item ">
                         <a class="nav-link" href="admin-contracts.php">Contracts</a>
                     </li>
                     <li class="nav-item ">
@@ -35,7 +35,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="admin-rental-requests.php">Rental Payments</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="admin-stalls.php">Stalls</a>
                     </li>
                 </ul>
@@ -57,13 +57,13 @@
                 <a href="admin-create-stall.php" class="btn btn-success btn-sm float-right">Add Stall</a>
                 <br /><br />
                 <table class="table table-bordered table-sm table-striped">
-                    <tr align="center" style='font-size: 13px;'>
-                        <th>Stall ID</th>
-                        <th>Floor No.</th>
-                        <th>Block No.</th>
+                    <tr align="center">
+                        <th>#</th>
+                        <th>Floor</th>
+                        <th>Block</th>
                         <th>Block Dimension</th>
-                        <th>Stall Price</th>
-                        <th>Price Date Effectivity</th>
+                        <th>Price</th>
+                        <th>Price Effectivity</th>
                         <th>Action</th>
                     </tr>
                     <?php
@@ -88,7 +88,7 @@
                                 $price_date_effectivity = $row_stalls['price_date_effectivity'];
                                 $stall_id = $row_stalls['stall_id'];
 
-                                echo "<tr align='center' style='font-size: 13px;'>";
+                                echo "<tr align='center' style='font-size: 15px;'>";
                                     echo "<td>" . $stall_id . "</td>";
                                     echo "<td>" . $floor_no . "</td>";
                                     echo "<td>" . $block_no . "</td>";
@@ -111,16 +111,15 @@
                 <h4 class="float-left">Occupied Stall Spaces</h4>
                 <br /><br />
                 <table class="table table-bordered table-sm table-striped">
-                        <tr align="center" style="font-size: 13px;">
-                            <th>Stall ID</th>
+                        <tr align="center">
+                            <th>#</th>
                             <th>Owned by</th>
+                            <th>Contract ID</th>
                         </tr>
                         <?php
-                            $sql_occupied_stalls = "SELECT st.floor_no AS 'floor_no', st.block_no AS 'block_no', st.block_dimension AS 'block_dimension',
-                            st.stall_price AS 'stall_price', st.price_date_effectivity AS 'price_date_effectivity', os.stall_id AS 'stall_id',
+                            $sql_occupied_stalls = "SELECT os.stall_id AS 'stall_id', os.contract_id AS 'contract_id',
                             c.client_id AS 'client_id', cl.fname AS 'fname', cl.lname AS 'lname'
                             FROM occupied_stalls os
-                            INNER JOIN stalls st ON os.stall_id = st.stall_id
                             INNER JOIN contract c ON os.contract_id = c.contract_id
                             INNER JOIN client cl ON c.client_id = cl.client_id
                             ";
@@ -128,9 +127,13 @@
                             $result_occupied_stalls = mysqli_query($link, $sql_occupied_stalls);
                             if(mysqli_num_rows($result_occupied_stalls) > 0 ){
                                 while($row_occupied_stalls = mysqli_fetch_assoc($result_occupied_stalls)){
-                                    echo "<tr>";
-                                        echo "<td>";
-                                    echo "</tr>";
+                                    if($row_occupied_stalls['contract_id']){
+                                        echo "<tr align='center' style='font-size: 15px;'>";
+                                            echo "<td>" . $row_occupied_stalls['stall_id'] . "</td>";
+                                            echo "<td>" . $row_occupied_stalls['fname'] . " " . $row_occupied_stalls['lname'] . "</td>";
+                                            echo "<td>" . $row_occupied_stalls['contract_id'] . "</td>";
+                                            echo "</tr>";
+                                    }
                                 }
                             }
                         ?>

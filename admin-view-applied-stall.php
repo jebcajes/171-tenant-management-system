@@ -130,12 +130,12 @@
             <div class="col-md-6">            
                 <form action="api/admin-verdict-applied-stall-details.php?app_id=<?php echo $_GET['app_id'];?>" method="POST">
                     <table class="table table-bordered table-striped table-sm"> 
-                        <tr align="center" style="font-size: 14px;">
-                            <td><strong>Stall ID</strong></td>
-                            <td><strong>Floor No.</strong></td>
-                            <td><strong>Block No.</strong></td>
+                        <tr align="center">
+                            <td><strong>#</strong></td>
+                            <td><strong>Floor</strong></td>
+                            <td><strong>Block</strong></td>
                             <td><strong>Block Dimensions</strong></td>
-                            <td><strong>Stall Price</strong></td>
+                            <td><strong>Price</strong></td>
                             <td><strong>Remark</strong></td>
                             <td><strong>Select</strong></td>
                         </tr>
