@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>List of Applications</title>
+    <title>Application Details</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="bootstrap-4.2.1-dist/css/bootstrap.min.css">
@@ -43,50 +43,93 @@
     <div class="container">
         <br><h1>List of Applications</h1><br>
         <div class="row">
-            <table class="table table-sm table-bordered table-striped">
-                <tr align="center">
-                    <th>#</th>
-                    <th>Business Name</th>
-                    <th>Category</th>
-                    <th>Applied Term</th>
-                    <th>Date Applied</th>
-                    <th>Remark</th>
-                    <th>Action</th>
-                </tr>
-                <?php
-                    require_once "api/config.php";
+            <div class="col">
+                <h4 class="float-left">Application Information</h4><br><br>
+                <table class="table table-sm table-bordered table-striped">
+                    <tr align="center" style="font-size: 14px;">
+                        <th>#</th>
+                        <th>Business Name</th>
+                        <th>Category</th>
+                        <th>Applied Term</th>
+                        <th>Date Applied</th>
+                        <th>Remark</th>
+                    </tr>
+                    <?php
+                        require_once "api/config.php";
 
-                    $client_id = $_GET['client_id'];
+                        $app_id = $_GET['app_id'];
+                        $client_id = $_GET['client_id'];
 
-                    $sql_applied_stall = "SELECT * FROM applied_stall ap 
-                    INNER JOIN business_classification bc ON ap.category_id = bc.category_id WHERE client_id = $client_id";
+                        $sql_applied_stall = "SELECT * FROM applied_stall ap 
+                        INNER JOIN business_classification bc ON ap.category_id = bc.category_id WHERE app_id = $app_id";
 
-                    $result_applied_stall = mysqli_query($link, $sql_applied_stall);
-                    if(mysqli_num_rows($result_applied_stall) > 0 ){
-                        while($row_applied_stall = mysqli_fetch_assoc($result_applied_stall)){
-                            echo "<tr align='center'>";
-                                echo "<td>" . $row_applied_stall['app_id'] . "</td>";
-                                echo "<td>" . $row_applied_stall['business_name'] . "</td>";
-                                echo "<td>" . $row_applied_stall['category_name'] . "</td>";
-                                echo "<td>" . $row_applied_stall['applied_term'] . "</td>";
-                                $old_date_applied = strtotime($row_applied_stall['date_applied']);
-                                $new_date_applied = date('Y-m-d', $old_date_applied);
-                                echo "<td>" . $new_date_applied . "</td>";
-                                    if($row_applied_stall['application_status'] == 'Approved'){
-                                        echo "<td style='color: green; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
-                                    }elseif($row_applied_stall['application_status'] == 'Unapproved'){
-                                        echo "<td style='color: orange; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
-                                    }elseif($row_applied_stall['application_status'] == 'Disapproved'){
-                                        echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
-                                    }
-                                echo "<td>";
-                                    echo "<a href='client-view-application-details.php' class='btn btn-primary btn-sm'>View</a>";
-                                echo "</td>";
-                            echo "</tr>";
+                        $result_applied_stall = mysqli_query($link, $sql_applied_stall);
+                        if(mysqli_num_rows($result_applied_stall) > 0 ){
+                            while($row_applied_stall = mysqli_fetch_assoc($result_applied_stall)){
+                                echo "<tr align='center'>";
+                                    echo "<td>" . $row_applied_stall['app_id'] . "</td>";
+                                    echo "<td>" . $row_applied_stall['business_name'] . "</td>";
+                                    echo "<td>" . $row_applied_stall['category_name'] . "</td>";
+                                    echo "<td>" . $row_applied_stall['applied_term'] . "</td>";
+                                    $old_date_applied = strtotime($row_applied_stall['date_applied']);
+                                    $new_date_applied = date('Y-m-d', $old_date_applied);
+                                    echo "<td>" . $new_date_applied . "</td>";
+                                        if($row_applied_stall['application_status'] == 'Approved'){
+                                            echo "<td style='color: green; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
+                                        }elseif($row_applied_stall['application_status'] == 'Unapproved'){
+                                            echo "<td style='color: orange; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
+                                        }elseif($row_applied_stall['application_status'] == 'Disapproved'){
+                                            echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
+                                        }
+                                echo "</tr>";
+                            }
                         }
-                    }
-                ?>
-            </table> 
+                    ?>
+                </table> 
+            </div>
+            <div class="col">
+            <h4 class="float-left">Applied Stall Spaces</h4>
+            <a href="client-application.php?client_id=<?php echo $client_id;?>" class="btn btn-danger btn-sm float-right">Back</a>
+            <br /><br />
+                <table class="table table-sm table-bordered table-striped">
+                    <tr align="center" style="font-size: 14px;">
+                        <th>Stall ID</th>
+                        <th>Floor</th>
+                        <th>Block</th>
+                        <th>Block Dimensions</th>
+                        <th>Remark</th>
+                    </tr>
+                <?php
+                        require_once "api/config.php";
+
+                        $app_id = $_GET['app_id'];
+
+                        $sql_applied_stall = "SELECT * FROM applied_stall_details ad 
+                        INNER JOIN stalls s ON ad.stall_id = s.stall_id
+                        WHERE app_id = $app_id";
+
+                        $result_applied_stall = mysqli_query($link, $sql_applied_stall);
+                        if(mysqli_num_rows($result_applied_stall) > 0 ){
+                            while($row_applied_stall = mysqli_fetch_assoc($result_applied_stall)){
+                                echo "<tr align='center'>";
+                                    echo "<td>" . $row_applied_stall['stall_id'] . "</td>";
+                                    echo "<td>" . $row_applied_stall['floor_no'] . "</td>";
+                                    echo "<td>" . $row_applied_stall['block_no'] . "</td>";
+                                    echo "<td>" . $row_applied_stall['block_dimension'] . "</td>";
+                                    if($row_applied_stall['stall_application_status'] == 'Approved'){
+                                        echo "<td style='color: green; font-style: italic; font-weight: 800;'>" . $row_applied_stall['stall_application_status'] . "</td>";
+                                    }elseif($row_applied_stall['stall_application_status'] == 'Unapproved'){
+                                        echo "<td style='color: orange; font-style: italic; font-weight: 800;'>" . $row_applied_stall['stall_application_status'] . "</td>";
+                                    }elseif($row_applied_stall['stall_application_status'] == 'Disapproved'){
+                                        echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_applied_stall['stall_application_status'] . "</td>";
+                                    }
+                                        
+                                echo "</tr>";
+                            }
+                        }
+                    ?>
+                </table> 
+            </div>
         </div>
     </div>
 </body>

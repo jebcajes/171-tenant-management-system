@@ -7,10 +7,11 @@
     // Stall Application
     $business_name = $_POST['business_name'];
     $category_id = $_POST['category_id'];
+    $applied_term = $_POST['applied_term'];
 
     if(!empty($_POST)){
-        $sql_appstall = "INSERT INTO applied_stall (client_id, business_name, category_id)
-         VALUES ($client_id, '$business_name', $category_id)";
+        $sql_appstall = "INSERT INTO applied_stall (client_id, business_name, category_id, applied_term)
+         VALUES ($client_id, '$business_name', $category_id, '$applied_term')";
         if(mysqli_query($link,$sql_appstall)){
             $new_appstall_id = mysqli_insert_id($link);
 

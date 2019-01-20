@@ -80,9 +80,9 @@
                                     }elseif($row_applied_stall['application_status'] == 'Disapproved'){
                                         echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
                                     }
-                                    
+
                                 echo "<td>";
-                                    echo "<a href='client-view-application-details.php?app_id=$app_id' class='btn btn-primary btn-sm'>View</a>";
+                                    echo "<a href='client-view-application-details.php?app_id=$app_id&client_id=$client_id' class='btn btn-primary btn-sm'>View</a>";
                                 echo "</td>";
                             echo "</tr>";
                         }

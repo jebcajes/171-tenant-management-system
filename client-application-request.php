@@ -66,7 +66,7 @@
                         </optgroup>
                     </select>
                     <label>Term</label>
-                    <select type="text" name="renewal_term" class="form-control col-md-4" required>
+                    <select type="text" name="applied_term" class="form-control col-md-4" required>
                         <optgroup label="Terms">
                             <option></option>
                             <option>1 year</option>
