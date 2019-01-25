@@ -170,7 +170,7 @@
                                 }
                             ?>
                         </table>
-                    <h4>Approved & Disapproved Stall Spaces</h4><br>
+                    <h4>Approved & Disapproved Stall Spaces</h4>
                         <table class="table table-bordered table-striped table-hover table-sm">
                             <thead align="center" style="font-size: 14px;">
                                 <th>#</th>
