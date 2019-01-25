@@ -7,6 +7,7 @@
     $email = $_POST['email'];
     $address = $_POST['address'];
     $contact = $_POST['contact'];
+    $applied_term = $_POST['applied_term'];
 
     if(!empty($_POST)){
         $sql_client = "INSERT INTO client (fname, lname, email, address, contact)
@@ -23,8 +24,8 @@
     $category_id = $_POST['category_id'];
 
     if(!empty($_POST)){
-        $sql_appstall = "INSERT INTO applied_stall (client_id, business_name, category_id)
-         VALUES ($new_client_id, '$business_name', $category_id)";
+        $sql_appstall = "INSERT INTO applied_stall (client_id, business_name, category_id, applied_term)
+         VALUES ($new_client_id, '$business_name', $category_id, '$applied_term')";
         if(mysqli_query($link,$sql_appstall)){
             $new_appstall_id = mysqli_insert_id($link);
         }else{

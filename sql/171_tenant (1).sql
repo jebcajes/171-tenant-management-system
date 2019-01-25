@@ -577,56 +577,56 @@ ALTER TABLE `users`
 -- Constraints for table `applied_stall`
 --
 ALTER TABLE `applied_stall`
-  ADD CONSTRAINT `fk_app_category_id` FOREIGN KEY (`category_id`) REFERENCES `business_classification` (`category_id`),
-  ADD CONSTRAINT `fk_app_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`);
+  ADD CONSTRAINT `fk_app_category_id` FOREIGN KEY (`category_id`) REFERENCES `business_classification` (`category_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_app_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `applied_stall_details`
 --
 ALTER TABLE `applied_stall_details`
-  ADD CONSTRAINT `fk_appd_app_id` FOREIGN KEY (`app_id`) REFERENCES `applied_stall` (`app_id`),
-  ADD CONSTRAINT `fk_appd_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`);
+  ADD CONSTRAINT `fk_appd_app_id` FOREIGN KEY (`app_id`) REFERENCES `applied_stall` (`app_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_appd_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `contract`
 --
 ALTER TABLE `contract`
-  ADD CONSTRAINT `fk_cont_app_id` FOREIGN KEY (`app_id`) REFERENCES `applied_stall` (`app_id`),
-  ADD CONSTRAINT `fk_cont_category_id` FOREIGN KEY (`category_id`) REFERENCES `business_classification` (`category_id`),
-  ADD CONSTRAINT `fk_cont_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`);
+  ADD CONSTRAINT `fk_cont_app_id` FOREIGN KEY (`app_id`) REFERENCES `applied_stall` (`app_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_cont_category_id` FOREIGN KEY (`category_id`) REFERENCES `business_classification` (`category_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_cont_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `occupied_stalls`
 --
 ALTER TABLE `occupied_stalls`
-  ADD CONSTRAINT `fk_occ_contract_id` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`contract_id`),
-  ADD CONSTRAINT `fk_occ_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`);
+  ADD CONSTRAINT `fk_occ_contract_id` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`contract_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_occ_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `renewal`
 --
 ALTER TABLE `renewal`
-  ADD CONSTRAINT `fk_renewal_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`),
-  ADD CONSTRAINT `fk_renewal_contract_id` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`contract_id`);
+  ADD CONSTRAINT `fk_renewal_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_renewal_contract_id` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`contract_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `renewal_details`
 --
 ALTER TABLE `renewal_details`
-  ADD CONSTRAINT `fk_rend_renewal_id` FOREIGN KEY (`renewal_id`) REFERENCES `renewal` (`renewal_id`),
-  ADD CONSTRAINT `fk_rend_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`);
+  ADD CONSTRAINT `fk_rend_renewal_id` FOREIGN KEY (`renewal_id`) REFERENCES `renewal` (`renewal_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_rend_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `rental_payment`
 --
 ALTER TABLE `rental_payment`
-  ADD CONSTRAINT `fk_rent_contract_id` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`contract_id`);
+  ADD CONSTRAINT `fk_rent_contract_id` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`contract_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `stall_pricehistory`
 --
 ALTER TABLE `stall_pricehistory`
-  ADD CONSTRAINT `fk_priceh_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`);
+  ADD CONSTRAINT `fk_priceh_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

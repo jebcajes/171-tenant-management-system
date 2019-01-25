@@ -40,8 +40,10 @@
     <!-- Navbar -->
 </head>
 <body>
-    <div class="container">
-        <br><h1>List of Applications</h1><br>
+    <div class="container-fluid">
+        <div class="container">
+            <br><h1>List of Applications</h1><br>
+        </div>
         <div class="row">
             <div class="col">
                 <h4 class="float-left">Application Information</h4><br><br>

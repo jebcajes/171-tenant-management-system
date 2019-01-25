@@ -141,6 +141,10 @@
                         echo "</tr>";
                         echo "</form>";
                     }
+                }else{
+                    echo '<tr>';
+                        echo '<td colspan="8" style="font-style: italic;" align="center">No records found.</td>';
+                    echo '</tr>';
                 }
             ?>
         </table>
