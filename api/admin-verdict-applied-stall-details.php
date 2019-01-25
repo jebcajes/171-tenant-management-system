@@ -27,9 +27,9 @@
                 WHERE app_id = $app_id AND stall_id = $sid";
                 mysqli_query($link,$sql_selected_stalls);
     
-                header("Refresh:2; url=../admin-view-applied-stall.php?app_id=$app_id");
+                header("Refresh:0; url=../admin-view-applied-stall.php?app_id=$app_id");
             }
-            echo "<h1>Feedback Sent!</h1><br /><h3>The number of approved stall(s): $count";
+            // echo "<h1>Feedback Sent!</h1><br /><h3>The number of approved stall(s): $count";
         }else{
             echo "Select at least one.";
     
@@ -44,9 +44,9 @@
                 WHERE app_id = $app_id AND stall_id = $sid";
                 mysqli_query($link,$sql_selected_stalls);
     
-                header("Refresh:2; ../admin-view-applied-stall.php?app_id=$app_id");
+                header("Refresh:0; ../admin-view-applied-stall.php?app_id=$app_id");
             }
-            echo "<h1>Feedback Sent!</h1><h3>The number of disapproved stall(s): $count";
+            // echo "<h1>Feedback Sent!</h1><h3>The number of disapproved stall(s): $count";
         }else{
             echo "Select at least one.";
     
