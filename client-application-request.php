@@ -81,14 +81,14 @@
                 <div class="col-md-8">
                     <h4>Available Stall Spaces</h4>
                     <table class="table table-striped table-bordered table-sm">
-                        <tr align="center">
+                        <thead align="center">
                             <th>#</th>
                             <th>Floor</th>
                             <th>Block</th>
                             <th>Block Dimension</th>
                             <th>Price</th>
                             <th>Action</th>
-                        </tr>
+                        </thead>
                         <?php
                         $sql_stalls = "SELECT s.floor_no AS 'floor_no', s.block_no AS 'block_no',
                         s.block_dimension AS 'block_dimension', s.stall_price AS 'stall_price',

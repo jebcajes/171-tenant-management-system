@@ -53,7 +53,7 @@
         <br />
             <div class="row">
                 <table class="table table-bordered table-striped table-sm">
-                    <tr align="center">
+                    <thead align="center">
                         <th>#</th>
                         <th>Client</th>
                         <th>Business Name</th>
@@ -64,7 +64,7 @@
                         <th>End Date</th>
                         <th>Remark</th>
                         <th>Action</th>
-                    </tr>
+                    </thead>
                     <?php
                         require_once "api/config.php";
 

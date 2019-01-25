@@ -138,13 +138,13 @@
                 <div class="col-8">
                     <h4>Occupied Stall Spaces</h4>
                         <table class="table table-bordered table-striped table-hover table-sm">
-                            <tr align="center" style="font-size: 14px;">
+                            <thead align="center" style="font-size: 14px;">
                                 <th>#</th>
                                 <th>Floor</th>
                                 <th>Block</th>
                                 <th>Block Dimension</th>
                                 <th>Price</th>
-                            </tr>
+                            </thead>
                             <?php 
                                 $sql_stalls = "SELECT s.floor_no AS 'floor_no', s.block_no AS 'block_no', s.block_dimension AS 'block_dimension', 
                                 os.stall_id AS 'stall_id', s.stall_price AS 'stall_price' 
@@ -172,14 +172,14 @@
                         </table>
                     <h4>Approved & Disapproved Stall Spaces</h4><br>
                         <table class="table table-bordered table-striped table-hover table-sm">
-                            <tr align="center" style="font-size: 14px;">
+                            <thead align="center" style="font-size: 14px;">
                                 <th>#</th>
                                 <th>Floor</th>
                                 <th>Block</th>
                                 <th>Block Dimension</th>
                                 <th>Price</th>
                                 <th>Remark</th>
-                            </tr>
+                            </thead>
                             <?php 
                                 $sql_stalls = "SELECT s.floor_no AS 'floor_no', s.block_no AS 'block_no', s.block_dimension AS 'block_dimension', 
                                 os.stall_id AS 'stall_id', s.stall_price AS 'stall_price', os.stall_application_status AS 'remark' 

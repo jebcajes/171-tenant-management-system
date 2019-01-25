@@ -45,7 +45,7 @@
 
         <br /><br />
         <table class="table table-bordered table-striped table-sm">
-            <tr align="center">
+            <thead align="center">
                 <td><strong>#</strong></td>
                 <td><strong>Business Name</strong></td>
                 <td><strong>Category</strong></td>
@@ -54,7 +54,7 @@
                 <td><strong>Term</strong></td>
                 <td><strong>Remark</strong></td>
                 <td><strong>Action</strong></td>
-            </tr>
+            </thead>
             <?php
                 require_once "api/config.php";
                 $client_id = $_GET['client_id'];
@@ -85,25 +85,6 @@
                             $new_end_date = date('Y-m-d', $old_end_date); 
                             echo "<td>" . $new_end_date . "</td>";
                             echo "<td>" . $row_contract['contract_term'] . "</td>";
-
-                            // if($row_contract['remark'] == 'Pending'){
-                            //     echo "<td>";
-                            //         echo "<select type='text' name='contract_term' class='form-control form-control-sm' required>";
-                            //             echo "<optgroup label='Terms'>";
-                            //                 echo "<option>1 year</option>";
-                            //                 echo "<option>2 years</option>";
-                            //                 echo "<option>3 years</option>";
-                            //                 echo "<option>4 years</option>";
-                            //             echo "</optgroup>";
-                            //         echo "</select>";
-                            //     echo "</td>";
-                            // }elseif($row_contract['remark'] == 'Cancelled'){
-                            //     echo "<td>";
-                            //         echo "<input type='text' name='contract_term' value='$contract_term' class='form-control form-control-sm' disabled>";
-                            //     echo "</td>";
-                            // }else{
-                            //     echo "<td>" . $row_contract['contract_term'] . "</td>";
-                            // }
 
                             if($row_contract['remark'] == 'Confirmed'){
                                 echo "<td style='color: green; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>"; 
@@ -137,7 +118,7 @@
                                 echo "<td>
                                     <a href='client-view-stalls.php?contract_id=$contract_id&app_id=$app_id&client_id=$client_id' class='btn btn-sm btn-primary'>View</a>
                                     <input type='submit' value='Confirm' class='btn btn-sm btn-success' disabled>
-                                    <a href='api/client-cancel-contract.php?contract_id=$contract_id' class='btn btn-sm btn-danger'>Cancel</a>
+                                    <a href='api/client-cancel-contract.php?contract_id=$contract_id' class='btn btn-sm btn-danger disabled'>Cancel</a>
                                 </td>";
                             }
                         echo "</tr>";

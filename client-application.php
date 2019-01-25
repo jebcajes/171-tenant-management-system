@@ -44,7 +44,7 @@
         <br><h1>List of Applications</h1><br>
         <div class="row">
             <table class="table table-sm table-bordered table-striped">
-                <tr align="center">
+                <thead align="center">
                     <th>#</th>
                     <th>Business Name</th>
                     <th>Category</th>
@@ -52,7 +52,7 @@
                     <th>Date Applied</th>
                     <th>Remark</th>
                     <th>Action</th>
-                </tr>
+                </thead>
                 <?php
                     require_once "api/config.php";
 

@@ -54,7 +54,7 @@
                     <br />
                 </div>
                 <table class="table table-bordered table-striped table-sm"> 
-                    <tr align="center">
+                    <thead align="center">
                         <td><strong>#</strong></td>
                         <td><strong>Client</strong></td>
                         <td><strong>Business Name</strong></td>
@@ -62,7 +62,7 @@
                         <td><strong>Date Applied</strong></td>
                         <td><strong>Remark</strong></td>
                         <td><strong>Action</strong></td>
-                    </tr>
+                    </thead>
                     <?php
                         require_once "api/config.php";
 
@@ -94,16 +94,16 @@
                                     }elseif($status == 'Disapproved'){
                                         echo "<td style='color: red; font-weight: 800; font-style: italic;'>" . $status . "</td>";
                                     }elseif($status == 'Unapproved'){
-                                        echo "<td style='color: orange; font-weight: 800; font-style: italic;'>" . $status . "</td>";
+                                        echo "<td style='color: gray; font-weight: 800; font-style: italic;'>" . $status . "</td>";
                                     }
                                     echo "<td>";
                                     if($status == 'Approved'){
                                         echo "<a href='admin-view-applied-stall.php?app_id=$app_id' class='btn btn-primary btn-sm' style='margin: 1px; font-size: 13px;'>View</a>
                                         <a href='api/api-admin-approve-applied-stall.php?app_id=$app_id' class='btn btn-success btn-sm disabled' style='margin: 1px; font-size: 13px;' >Approve</a>
-                                        <a href='api/api-admin-disapprove-applied-stall.php?app_id=$app_id' class='btn btn-danger btn-sm' style='margin: 1px; font-size: 13px;'>Disapprove</a>";
+                                        <a href='api/api-admin-disapprove-applied-stall.php?app_id=$app_id' class='btn btn-danger btn-sm disabled' style='margin: 1px; font-size: 13px;'>Disapprove</a>";
                                     }elseif($status == 'Disapproved'){
                                         echo "<a href='admin-view-applied-stall.php?app_id=$app_id' class='btn btn-primary btn-sm' style='margin: 1px; font-size: 13px;'>View</a>
-                                        <a href='api/api-admin-approve-applied-stall.php?app_id=$app_id' class='btn btn-success btn-sm' style='margin: 1px; font-size: 13px;' >Approve</a>
+                                        <a href='api/api-admin-approve-applied-stall.php?app_id=$app_id' class='btn btn-success btn-sm disabled' style='margin: 1px; font-size: 13px;' >Approve</a>
                                         <a href='api/api-admin-disapprove-applied-stall.php?app_id=$app_id' class='btn btn-danger btn-sm disabled' style='margin: 1px; font-size: 13px;'>Disapprove</a>";
                                     }else{
                                         echo "<a href='admin-view-applied-stall.php?app_id=$app_id' class='btn btn-primary btn-sm' style='margin: 1px; font-size: 13px;'>View</a>

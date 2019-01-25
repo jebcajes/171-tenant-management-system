@@ -52,9 +52,9 @@
             <div class="col">
                 <h4>Information</h4>
                 <table class="table table-bordered table-sm">
-                    <tr align="center">
+                    <thead align="center">
                         <th colspan="2">Contract</th>
-                    </tr>
+                    </thead>
                     <?php 
                         require_once "api/config.php";
                         $contract_id = $_GET['contract_id'];
@@ -153,12 +153,12 @@
             <div class="col">
                 <h4>Occupied Stall Spaces</h4>
                 <table class="table table-bordered table-striped table-sm">
-                    <tr align="center">
+                    <thead align="center">
                         <th>#</th>
                         <th>Floor</th>
                         <th>Block</th>
                         <th>Block Dimensions</th>
-                    </tr>
+                    </thead>
                     <?php 
                         $sql_occupied_stalls = "SELECT * FROM occupied_stalls os INNER JOIN stalls s ON os.stall_id = s.stall_id WHERE contract_id = $contract_id";
 

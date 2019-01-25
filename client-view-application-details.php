@@ -100,13 +100,13 @@
             <a href="client-application.php?client_id=<?php echo $client_id;?>" class="btn btn-danger btn-sm float-right">Back</a>
             <br /><br />
                 <table class="table table-sm table-bordered table-striped">
-                    <tr align="center" style="font-size: 14px;">
+                    <thead align="center" style="font-size: 14px;">
                         <th>Stall ID</th>
                         <th>Floor</th>
                         <th>Block</th>
                         <th>Block Dimensions</th>
                         <th>Remark</th>
-                    </tr>
+                    </thead>
                 <?php
                         require_once "api/config.php";
 

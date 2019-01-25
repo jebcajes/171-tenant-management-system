@@ -47,7 +47,7 @@
         <br><h1>Renewal Requests</h1><br>
         <div class="row">
             <table class="table table-bordered table-striped table-sm">
-                <tr align="center">
+                <thead align="center">
                     <th>#</th>
                     <th>Contract ID</th>
                     <th>Client</th>
@@ -55,7 +55,7 @@
                     <th>Renewal Term</th>
                     <th>Remark</th>
                     <th>Action</th>
-                </tr>
+                </thead>
                 <?php
                     require_once "api/config.php";
 

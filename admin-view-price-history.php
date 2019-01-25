@@ -52,11 +52,11 @@
             <div class="col">
                 <h3 class="float-left">Previous</h3>
                 <table class="table table-sm table-bordered table-striped">
-                    <tr align="center">
+                    <thead align="center">
                         <th>Old Price</th>
                         <th>Date End</th>
                         <th>Date Effectivity</th>
-                    </tr>
+                    </thead>
                     <?php 
                         require_once "api/config.php";
                         $stall_id = $_GET['stall_id'];
@@ -88,15 +88,15 @@
                 <a href="admin-stalls.php" class="btn btn-danger btn-sm float-right">Back</a>
                 
                 <table class="table table-sm table-bordered table-striped">
-                    <tr>
+                    <thead>
                         <th>#</th>
                         <th>Floor</th>
                         <th>Block</th>
                         <th>Block Dimension</th>
                         <th>Current Price</th>
                         <th>Date Effectivity</th>
+                    </thead>
                         <?php
-
                         $sql_stalls = "SELECT * FROM stalls WHERE stall_id = $stall_id";
 
                         $result_stalls = mysqli_query($link, $sql_stalls);
@@ -122,7 +122,6 @@
                             }
                         }
                         ?>
-                    </tr>
                 </table>
             </div>
         </div>

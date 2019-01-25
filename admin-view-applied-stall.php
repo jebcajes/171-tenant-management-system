@@ -60,9 +60,10 @@
         <div class="row">
             <div class="col-md-6">
             <table class="table table-bordered table-sm">
-                <tr class="bg-secondary">
-                    <td colspan="2" align="center" style="color: white;"><strong>Application Information</strong></td>
-                </tr>
+                <thead align="center">
+                    <th colspan="2">Application Information</th>
+                </thead>
+                <tbody>
                     <?php
                         require_once "api/config.php";
                         $app_id = $_GET['app_id'];
@@ -121,26 +122,28 @@
                                     }elseif($application_status == 'Disapproved'){
                                         echo "<td style='font-style: italic; font-weight: bold; color: red; font-size: 15px;'>" . $application_status . "</td>";
                                     }elseif($application_status == 'Unapproved'){
-                                        echo "<td style='font-style: italic; font-weight: bold; color: orange; font-size: 15px;'>" . $application_status . "</td>";
+                                        echo "<td style='font-style: italic; font-weight: bold; color: gray; font-size: 15px;'>" . $application_status . "</td>";
                                     }
                                 echo "</tr>";
                             }
                         }
                     ?>  
+                    </tbody>
                 </table>
             </div>
             <div class="col-md-6">            
                 <form action="api/admin-verdict-applied-stall-details.php?app_id=<?php echo $_GET['app_id'];?>" method="POST">
                     <table class="table table-bordered table-striped table-sm"> 
-                        <tr align="center">
-                            <td><strong>#</strong></td>
-                            <td><strong>Floor</strong></td>
-                            <td><strong>Block</strong></td>
-                            <td><strong>Block Dimensions</strong></td>
-                            <td><strong>Price</strong></td>
-                            <td><strong>Remark</strong></td>
-                            <td><strong>Select</strong></td>
-                        </tr>
+                        <thead align="center">
+                            <th>#</th>
+                            <th>Floor</th>
+                            <th>Block</th>
+                            <th>Block Dimension</th>
+                            <th>Price</th>
+                            <th>Remark</th>
+                            <th>Select</th>
+                        </thead>
+                        <tbody>
                         <?php
                             $sql_applied_stall_details = "SELECT ad.app_id AS 'app_id', ad.stall_id AS 'stall_id', 
                             ad.stall_application_status AS 'stall_application_status', s.floor_no AS 'floor_no',
@@ -153,15 +156,37 @@
                             $result_applied_stall_details = (mysqli_query($link, $sql_applied_stall_details));
                             if(mysqli_num_rows($result_applied_stall_details) > 0){
                                 while($row_applied_stall_details = mysqli_fetch_assoc($result_applied_stall_details)){
-                                    echo "<tr align='center'>";
-                                        echo "<td><small>" . $row_applied_stall_details['stall_id'] . "</small></td>";
-                                        echo "<td><small>" . $row_applied_stall_details['floor_no'] . "</small></td>";
-                                        echo "<td><small>" . $row_applied_stall_details['block_no'] . "</small></td>";
-                                        echo "<td><small>" . $row_applied_stall_details['block_dimension'] . "</small></td>";
-                                        echo "<td><small>Php " . number_format($row_applied_stall_details['stall_price'],2) . "</small></td>";
-                                        echo "<td><small>" . $row_applied_stall_details['stall_application_status'] . "</small></td>";
-                                        echo "<td><input type='checkbox' name='stall_id[]' value=".$row_applied_stall_details['stall_id']."></td>"; 
-                                    echo "</tr>";
+                                    if($application_status == 'Approved'){
+                                        echo "<tr align='center'>";
+                                            echo "<td><small>" . $row_applied_stall_details['stall_id'] . "</small></td>";
+                                            echo "<td><small>" . $row_applied_stall_details['floor_no'] . "</small></td>";
+                                            echo "<td><small>" . $row_applied_stall_details['block_no'] . "</small></td>";
+                                            echo "<td><small>" . $row_applied_stall_details['block_dimension'] . "</small></td>";
+                                            echo "<td><small>Php " . number_format($row_applied_stall_details['stall_price'],2) . "</small></td>";
+                                            echo "<td><small>" . $row_applied_stall_details['stall_application_status'] . "</small></td>";
+                                            echo "<td><input type='checkbox' name='stall_id[]' value=".$row_applied_stall_details['stall_id']." disabled></td>"; 
+                                        echo "</tr>";
+                                    }elseif($application_status == 'Unapproved'){
+                                        echo "<tr align='center'>";
+                                            echo "<td><small>" . $row_applied_stall_details['stall_id'] . "</small></td>";
+                                            echo "<td><small>" . $row_applied_stall_details['floor_no'] . "</small></td>";
+                                            echo "<td><small>" . $row_applied_stall_details['block_no'] . "</small></td>";
+                                            echo "<td><small>" . $row_applied_stall_details['block_dimension'] . "</small></td>";
+                                            echo "<td><small>Php " . number_format($row_applied_stall_details['stall_price'],2) . "</small></td>";
+                                            echo "<td><small>" . $row_applied_stall_details['stall_application_status'] . "</small></td>";
+                                            echo "<td><input type='checkbox' name='stall_id[]' value=".$row_applied_stall_details['stall_id']."></td>"; 
+                                        echo "</tr>";
+                                    }elseif($application_status == 'Disapproved'){
+                                        echo "<tr align='center'>";
+                                            echo "<td><small>" . $row_applied_stall_details['stall_id'] . "</small></td>";
+                                            echo "<td><small>" . $row_applied_stall_details['floor_no'] . "</small></td>";
+                                            echo "<td><small>" . $row_applied_stall_details['block_no'] . "</small></td>";
+                                            echo "<td><small>" . $row_applied_stall_details['block_dimension'] . "</small></td>";
+                                            echo "<td><small>Php " . number_format($row_applied_stall_details['stall_price'],2) . "</small></td>";
+                                            echo "<td><small>" . $row_applied_stall_details['stall_application_status'] . "</small></td>";
+                                            echo "<td><input type='checkbox' name='stall_id[]' value=".$row_applied_stall_details['stall_id']." disabled></td>"; 
+                                        echo "</tr>";
+                                    }
                                 }
                             }else{
                                 echo "<tr>";
@@ -169,14 +194,15 @@
                                 echo "</tr>";
                             }
                         ?>
+                        </tbody>
                     </table>
                     <?php
                         if($application_status == 'Approved'){
-                            echo "<input type='submit' name='approved' value='Approve Stall(s)' class='btn btn-primary btn-sm float-right disabled' style='margin: 5px;'>";
-                            echo "<input type='submit' name='disapproved' value='Disapprove Stall(s)' class='btn btn-danger btn-sm float-right disabled' style='margin: 5px;'>";
+                            echo "<a href='#' class='btn btn-primary btn-sm float-right disabled' style='margin: 5px;'>Approve Stall(s)</a>";
+                            echo "<a href='#' class='btn btn-danger btn-sm float-right disabled' style='margin: 5px;'>Disapprove Stall(s)</a>";
                         }elseif($application_status == 'Disapproved'){
-                            echo "<input type='submit' name='approved' value='Approve Stall(s)' class='btn btn-primary btn-sm float-right' style='margin: 5px;'>";
-                            echo "<input type='submit' name='disapproved' value='Disapprove Stall(s)' class='btn btn-danger btn-sm float-right' style='margin: 5px;'>";
+                            echo "<a href='#' class='btn btn-primary btn-sm float-right disabled' style='margin: 5px;'>Approve Stall(s)</a>";
+                            echo "<a href='#' class='btn btn-danger btn-sm float-right disabled' style='margin: 5px;'>Disapprove Stall(s)</a>";
                         }elseif($application_status == 'Unapproved'){
                             echo "<input type='submit' name='approved' value='Approve Stall(s)' class='btn btn-primary btn-sm float-right' style='margin: 5px;'>";
                             echo "<input type='submit' name='disapproved' value='Disapprove Stall(s)' class='btn btn-danger btn-sm float-right' style='margin: 5px;'>";

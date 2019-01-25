@@ -40,7 +40,7 @@
     <div class="container">
         <br /><h1>List of Contracts for Renewal</h1><br/>
         <table class="table table-bordered table-striped table-sm">
-            <tr align="center">
+            <thead align="center">
                 <td><strong>Contract ID</strong></td>
                 <td><strong>Business Name</strong></td>
                 <td><strong>Category</strong></td>
@@ -49,7 +49,7 @@
                 <td><strong>Term</strong></td>
                 <td><strong>Renewal Remark</strong></td>
                 <td><strong>Action</strong></td>
-            </tr>
+            </thead>
             <?php
                 require_once "api/config.php";
                 $client_id = $_GET['client_id'];

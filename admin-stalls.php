@@ -57,7 +57,7 @@
                 <a href="admin-create-stall.php" class="btn btn-success btn-sm float-right">Add New Stall</a>
                 <br /><br />
                 <table class="table table-bordered table-sm table-striped">
-                    <tr align="center">
+                    <thead align="center">
                         <th>#</th>
                         <th>Floor</th>
                         <th>Block</th>
@@ -65,7 +65,7 @@
                         <th>Price</th>
                         <th>Price Effectivity</th>
                         <th>Action</th>
-                    </tr>
+                    </thead>
                     <?php
                         require_once "api/config.php";
 
@@ -117,11 +117,11 @@
                 <h4 class="float-left">Occupied Stall Spaces</h4>
                 <br /><br />
                 <table class="table table-bordered table-sm table-striped">
-                        <tr align="center">
+                        <thead align="center">
                             <th>#</th>
                             <th>Owned by</th>
                             <th>Contract ID</th>
-                        </tr>
+                        </thead>
                         <?php
                             $sql_occupied_stalls = "SELECT os.stall_id AS 'stall_id', os.contract_id AS 'contract_id',
                             c.client_id AS 'client_id', cl.fname AS 'fname', cl.lname AS 'lname'
