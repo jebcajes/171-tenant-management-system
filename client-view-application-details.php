@@ -40,22 +40,10 @@
     <!-- Navbar -->
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="container">
-            <br><h1>List of Applications</h1><br>
-        </div>
+    <div class="container">
+            <br><h1>Application Details</h1><br>
         <div class="row">
-            <div class="col">
-                <h4 class="float-left">Application Information</h4><br><br>
-                <table class="table table-sm table-bordered table-striped">
-                    <tr align="center" style="font-size: 14px;">
-                        <th>#</th>
-                        <th>Business Name</th>
-                        <th>Category</th>
-                        <th>Applied Term</th>
-                        <th>Date Applied</th>
-                        <th>Remark</th>
-                    </tr>
+            <div class="col-md-5">
                     <?php
                         require_once "api/config.php";
 
@@ -68,28 +56,46 @@
                         $result_applied_stall = mysqli_query($link, $sql_applied_stall);
                         if(mysqli_num_rows($result_applied_stall) > 0 ){
                             while($row_applied_stall = mysqli_fetch_assoc($result_applied_stall)){
-                                echo "<tr align='center'>";
-                                    echo "<td>" . $row_applied_stall['app_id'] . "</td>";
-                                    echo "<td>" . $row_applied_stall['business_name'] . "</td>";
-                                    echo "<td>" . $row_applied_stall['category_name'] . "</td>";
-                                    echo "<td>" . $row_applied_stall['applied_term'] . "</td>";
-                                    $old_date_applied = strtotime($row_applied_stall['date_applied']);
-                                    $new_date_applied = date('Y-m-d', $old_date_applied);
-                                    echo "<td>" . $new_date_applied . "</td>";
-                                        if($row_applied_stall['application_status'] == 'Approved'){
-                                            echo "<td style='color: green; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
-                                        }elseif($row_applied_stall['application_status'] == 'Unapproved'){
-                                            echo "<td style='color: orange; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
-                                        }elseif($row_applied_stall['application_status'] == 'Disapproved'){
-                                            echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
-                                        }
-                                echo "</tr>";
+                                echo '<table class="table table-bordered table-sm">';
+                                    echo '<tr align="center">';
+                                        echo '<th colspan="2">Information</th>';
+                                    echo '</tr>';
+                                    echo '<tbody>';
+                                        echo '<tr>';
+                                            echo '<td align="right">Application ID:</td>';
+                                            echo '<td>' . $row_applied_stall['app_id'] . '</td>';
+                                        echo '</tr>';
+                                        echo '<tr>';
+                                            echo '<td align="right">Business Name:</td>';
+                                            echo '<td>' . $row_applied_stall['business_name'] . '</td>';
+                                        echo '</tr>';
+                                        echo '<tr>';
+                                            echo '<td align="right">Category:</td>';
+                                            echo '<td>' . $row_applied_stall['category_name'] . '</td>';
+                                        echo '</tr>';
+                                        echo '<tr>';
+                                            echo '<td align="right">Date Applied:</td>';
+                                            $old_date_applied = strtotime($row_applied_stall['date_applied']);
+                                            $new_date_applied = date('Y-m-d', $old_date_applied);
+                                            echo '<td>' . $new_date_applied . '</td>';
+                                        echo '</tr>';
+                                        echo '<tr>';
+                                            echo '<td align="right">Remark:</td>';
+                                                if($row_applied_stall['application_status'] == 'Approved'){
+                                                    echo "<td style='color: green; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
+                                                }elseif($row_applied_stall['application_status'] == 'Unapproved'){
+                                                    echo "<td style='color: orange; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
+                                                }elseif($row_applied_stall['application_status'] == 'Disapproved'){
+                                                    echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
+                                                }
+                                        echo '</tr>';
+                                    echo '</tbody>';
+                                echo '</table>';
                             }
                         }
                     ?>
-                </table> 
             </div>
-            <div class="col">
+            <div class="col-md-7">
             <h4 class="float-left">Applied Stall Spaces</h4>
             <a href="client-application.php?client_id=<?php echo $client_id;?>" class="btn btn-danger btn-sm float-right">Back</a>
             <br /><br />
