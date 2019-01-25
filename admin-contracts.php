@@ -83,6 +83,8 @@
                             while($row_contracts = mysqli_fetch_assoc($result_contracts)){
                                 echo "<tr align='center' style='font-size: 15px;'>";
                                     $contract_id = $row_contracts['contract_id'];
+                                    $contract_term = $row_contracts['contract_term'];
+                                    $remark = $row_contracts['remark'];
                                     echo "<td>" . $row_contracts['contract_id'] . "</td>";
                                     echo "<td>" . $row_contracts['fname'] . " " . $row_contracts['lname'] . "</td>";
                                     echo "<td>" . $row_contracts['business_name'] . "</td>";
@@ -90,10 +92,11 @@
                                     $old_date_approved = strtotime($row_contracts['date_approved']);
                                     $new_date_approved = date('Y-m-d', $old_date_approved);
                                     echo "<td>" . $new_date_approved . "</td>";
-                                    if($row_contracts['contract_term'] == 'Pending'){
-                                        echo "<td style='color: orange; font-weight: 800; font-style: italic;'>" . $row_contracts['contract_term'] . "</td>";
-                                    }else{
+
+                                    if($contract_term && ($remark == 'Confirmed' || $remark == 'Pending')){
                                         echo "<td>" . $row_contracts['contract_term'] . "</td>";
+                                    }elseif($remark == 'Lapsed' || $remark == 'Cancelled'){
+                                        echo '<td style="color: gray; font-style: italic; font-weight: 800;">N/A</td>';
                                     }
 
                                     // Converting datetime to date format
@@ -136,6 +139,7 @@
                                                     mysqli_query($link, $sql_lapsed_remark);
                                                 }
                                             }
+
                                         }
 
                                     if($row_contracts['remark'] == 'Pending'){
@@ -158,6 +162,8 @@
                                             echo "<a href='admin-set-contract.php?contract_id=$contract_id' class='btn btn-info btn-sm disabled' style='margin: 1px; font-size: 13px;'>Set</a>";
                                         }elseif($row_contracts['remark'] == 'Lapsed'){
                                             echo "<a href='admin-set-contract.php?contract_id=$contract_id' class='btn btn-info btn-sm' style='margin: 1px; font-size: 13px;'>Set</a>";
+                                            $sql_lapsed_stall = "UPDATE occupied_stalls SET contract_id = NULL WHERE contract_id = $contract_id";
+                                            mysqli_query($link, $sql_lapsed_stall);
                                         }else{
                                             echo "<a href='admin-set-contract.php?contract_id=$contract_id' class='btn btn-info btn-sm' style='margin: 1px; font-size: 13px;'>Set</a>";
                                         }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2019 at 11:30 AM
+-- Generation Time: Jan 25, 2019 at 01:34 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -44,19 +44,9 @@ CREATE TABLE `applied_stall` (
 --
 
 INSERT INTO `applied_stall` (`app_id`, `client_id`, `category_id`, `business_name`, `date_applied`, `date_approved`, `application_status`, `applied_term`) VALUES
-(1, 1, 1, 'Chowking', '2019-01-18 21:44:53', NULL, 'Disapproved', '1 year'),
-(2, 2, 2, 'Dyckies', '2019-01-18 21:44:53', NULL, 'Approved', '2 year'),
-(3, 3, 5, 'Pornhub', '2019-01-18 23:43:29', NULL, 'Approved', '1 year'),
-(4, 5, 1, 'Lubot', '2019-01-18 23:45:26', NULL, 'Approved', '1 year'),
-(5, 7, 1, 'Balay', '2019-01-18 23:48:39', NULL, 'Approved', '1 year'),
-(6, 9, 4, 'Cabido Busters', '2019-01-18 23:49:54', NULL, 'Approved', '1 year'),
-(7, 1, 4, 'Pussy Factory', '2019-01-19 00:48:42', NULL, 'Unapproved', '1 year'),
-(8, 11, 1, 'dsddsds', '2019-01-19 01:54:48', NULL, 'Unapproved', '1 year'),
-(9, 12, 2, 'Software Engineering', '2019-01-19 03:41:29', NULL, 'Disapproved', '1 year'),
-(10, 16, 2, 'Pussy', '2019-01-19 03:43:13', NULL, 'Approved', '1 year'),
-(11, 22, 1, 'Uranus', '2019-01-19 03:46:10', NULL, 'Disapproved', '1 year'),
-(12, 24, 1, 'Uranus', '2019-01-19 03:47:03', NULL, 'Approved', '1 year'),
-(13, 26, 1, 'Uranus', '2019-01-19 03:47:23', NULL, 'Approved', '1 year');
+(21, 29, 18, 'Calisthenics Philippines', '2019-01-25 19:12:22', NULL, 'Approved', '4 years'),
+(22, 29, 8, 'Oxygen', '2019-01-25 19:23:21', NULL, 'Disapproved', '2 years'),
+(23, 29, 8, 'Bench', '2019-01-25 19:48:45', NULL, 'Approved', '2 years');
 
 --
 -- Triggers `applied_stall`
@@ -64,7 +54,7 @@ INSERT INTO `applied_stall` (`app_id`, `client_id`, `category_id`, `business_nam
 DELIMITER $$
 CREATE TRIGGER `application_automation` AFTER UPDATE ON `applied_stall` FOR EACH ROW BEGIN
  IF (new.application_status = 'Approved') THEN
-	INSERT INTO contract (client_id, app_id, category_id, business_name) VALUES (new.client_id, new.app_id, new.category_id, new.business_name);
+	INSERT INTO contract (client_id, app_id, category_id, business_name, contract_term) VALUES (new.client_id, new.app_id, new.category_id, new.business_name, new.applied_term);
  END IF;
 END
 $$
@@ -88,20 +78,15 @@ CREATE TABLE `applied_stall_details` (
 --
 
 INSERT INTO `applied_stall_details` (`id`, `app_id`, `stall_id`, `stall_application_status`) VALUES
-(1, 1, 4, 'Approved'),
-(2, 1, 5, 'Approved'),
-(3, 2, 6, 'Approved'),
-(4, 6, 10, 'Approved'),
-(5, 6, 11, 'Approved'),
-(6, 6, 12, 'Disapproved'),
-(7, 7, 8, 'Approved'),
-(8, 8, 8, 'Unapproved'),
-(9, 9, 8, 'Unapproved'),
-(10, 9, 9, 'Unapproved'),
-(11, 10, 7, 'Unapproved'),
-(12, 11, 8, 'Unapproved'),
-(13, 12, 8, 'Unapproved'),
-(14, 13, 8, 'Unapproved');
+(27, 21, 13, 'Approved'),
+(28, 21, 14, 'Unapproved'),
+(29, 21, 15, 'Approved'),
+(30, 21, 16, 'Approved'),
+(31, 21, 17, 'Unapproved'),
+(32, 22, 14, 'Disapproved'),
+(33, 22, 17, 'Disapproved'),
+(34, 23, 18, 'Approved'),
+(35, 23, 19, 'Approved');
 
 -- --------------------------------------------------------
 
@@ -119,11 +104,24 @@ CREATE TABLE `business_classification` (
 --
 
 INSERT INTO `business_classification` (`category_id`, `category_name`) VALUES
-(1, 'Restaurant'),
-(2, 'Clothing Shop'),
-(3, 'Barber Shop'),
-(4, 'Arcade'),
-(5, 'Adult');
+(6, 'Arts, Crafts and Collectibles'),
+(7, 'Books ang Magazines'),
+(8, 'Clothing, Shoes and Accessories'),
+(9, 'Computers, Accessories and Services'),
+(10, 'Electronics and Telecom'),
+(11, 'Entertainment and Media'),
+(12, 'Financial Services and Products'),
+(13, 'Food Retail and Service'),
+(14, 'Gifts and Flowers'),
+(15, 'Government'),
+(16, 'Health and Personal Care'),
+(17, 'Pets and Animals'),
+(18, 'Sports'),
+(19, 'Travel'),
+(20, 'Vehicle Sales'),
+(21, 'Vehicle Service and Accessories'),
+(22, 'Toys and Hobbies'),
+(23, 'Arcade');
 
 -- --------------------------------------------------------
 
@@ -145,18 +143,7 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`client_id`, `fname`, `lname`, `email`, `address`, `contact`) VALUES
-(1, 'Jeb ', 'Cajes', 'jeb.cajes@gmail.com', 'Luinab', '09352296969'),
-(2, 'Carlo Miguel', 'Dy', 'carlomigueldy@gmail.com', 'Maigo', '09146696969'),
-(3, 'Carlo', 'Dy', 'carlody@gmail.com', 'Maigo', '09359213126'),
-(5, 'Tae', 'Ho', 'tae.ho@gmail.com', 'Igit ni Cabido', '09172254487'),
-(7, 'Jeb', 'XD', 'jeb.xd@gmail.com', 'Luinabskie', '0492394832'),
-(9, 'Galpin', 'Dotados', 'galpin.dotados@gmail.com', 'Black Market', '0987443132'),
-(11, 'dasdasd', 'sdsdasd', 'asdasdasd', 'dsdsds', 'sdsdsd'),
-(12, 'Manny', 'Cabido', 'manny.cabido@yahoo.com', 'Iligan', '09258879784'),
-(16, 'Mother', 'Fucker', 'mother.fucker@pornhub.com', 'Vagina', '09846996969'),
-(22, 'Butt', 'Hole', 'butt.hole@gmail.com', 'Anus', '09884758777'),
-(24, 'Butt', 'Hole', 'butt.hole@gmail.comm', 'Anus', '09884758777'),
-(26, 'Butt', 'Hole', 'butt.hole@gmail.commd', 'Anus', '098847587772');
+(29, 'Carlo Miguel', 'Dy', 'carlomigueldy@gmail.com', 'Maigo', '09167764350');
 
 -- --------------------------------------------------------
 
@@ -183,21 +170,8 @@ CREATE TABLE `contract` (
 --
 
 INSERT INTO `contract` (`contract_id`, `app_id`, `client_id`, `category_id`, `business_name`, `start_date`, `end_date`, `date_approved`, `remark`, `contract_term`, `renewal_status`) VALUES
-(1, 1, 1, 1, 'Chowking', '2019-01-20 00:00:00', '2019-01-21 00:00:00', '2019-01-18 21:47:03', 'Confirmed', '2 years', 'Sent'),
-(2, 2, 2, 2, 'Dyckies', '2019-01-09 00:00:00', '2019-01-23 00:00:00', '2019-01-18 21:48:58', 'Confirmed', '1 year', 'Sent'),
-(3, 1, 1, 1, 'Chowking', '2019-01-20 00:00:00', '2019-01-21 00:00:00', '2019-01-19 01:36:38', 'Confirmed', '1 year', 'Sent'),
-(4, 2, 2, 2, 'Dyckies', NULL, NULL, '2019-01-19 01:39:07', 'Cancelled', '1 year', 'Sent'),
-(5, 3, 3, 5, 'Pornhub', NULL, NULL, '2019-01-20 10:15:26', 'Cancelled', '3 years', 'Pending'),
-(6, 4, 5, 1, 'Lubot', '2019-01-20 00:00:00', '2019-02-20 00:00:00', '2019-01-20 10:16:30', 'Confirmed', '2 years', 'Pending'),
-(7, 5, 7, 1, 'Balay', '2019-01-20 00:00:00', '2019-02-24 00:00:00', '2019-01-20 10:18:35', 'Confirmed', '2 years', 'Pending'),
-(8, 1, 1, 1, 'Chowking', '2019-01-27 00:00:00', '2019-03-28 00:00:00', '2019-01-20 10:57:01', 'Confirmed', 'Pending', 'Pending'),
-(9, 13, 26, 1, 'Uranus', NULL, NULL, '2019-01-20 10:58:23', 'Lapsed', '1 year', 'Pending'),
-(10, 1, 1, 1, 'Chowking', NULL, NULL, '2019-01-20 11:52:25', 'Pending', 'Pending', 'Pending'),
-(11, 2, 2, 2, 'Dyckies', NULL, NULL, '2019-01-20 11:52:27', 'Pending', 'Pending', 'Pending'),
-(12, 2, 2, 2, 'Dyckies', NULL, NULL, '2019-01-20 11:56:57', 'Cancelled', 'Pending', 'Pending'),
-(13, 12, 24, 1, 'Uranus', NULL, NULL, '2019-01-20 11:58:26', 'Confirmed', '2 years', 'Pending'),
-(14, 10, 16, 2, 'Pussy', NULL, NULL, '2019-01-20 11:58:42', 'Confirmed', '3 years', 'Pending'),
-(15, 6, 9, 4, 'Cabido Busters', '2019-01-20 00:00:00', '2019-01-27 00:00:00', '2019-01-20 13:48:23', 'Confirmed', '4 years', 'Pending');
+(18, 21, 29, 18, 'Calisthenics Philippines', '2019-01-25 00:00:00', '2019-01-28 00:00:00', '2019-01-25 19:13:49', 'Confirmed', '4 years', 'Pending'),
+(20, 23, 29, 8, 'Bench', '2019-01-25 00:00:00', '2019-01-26 00:00:00', '2019-01-25 19:49:22', 'Confirmed', '4 years', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -216,15 +190,16 @@ CREATE TABLE `occupied_stalls` (
 --
 
 INSERT INTO `occupied_stalls` (`id`, `contract_id`, `stall_id`) VALUES
-(1, 1, 4),
-(2, 1, 5),
-(3, 2, 6),
-(4, 2, 7),
-(5, 8, 8),
-(6, 7, 9),
-(7, 15, 10),
-(8, 15, 11),
-(9, NULL, 12);
+(10, 18, 13),
+(11, NULL, 14),
+(12, 18, 15),
+(13, 18, 16),
+(14, NULL, 17),
+(15, 20, 18),
+(16, 20, 19),
+(17, NULL, 20),
+(18, NULL, 21),
+(19, NULL, 22);
 
 -- --------------------------------------------------------
 
@@ -246,17 +221,7 @@ CREATE TABLE `renewal` (
 --
 
 INSERT INTO `renewal` (`renewal_id`, `client_id`, `contract_id`, `date_applied_renewal`, `renewal_status`, `renewal_term`) VALUES
-(1, 1, 1, '2019-01-18 21:55:51', 'Approved', '1 year'),
-(2, 1, 1, '2019-01-19 02:03:43', 'Unapproved', '1 year'),
-(3, 1, 1, '2019-01-19 02:08:32', 'Unapproved', '1 year'),
-(4, 1, 1, '2019-01-19 02:13:07', 'Unapproved', '2 years'),
-(5, 1, 1, '2019-01-19 02:21:38', 'Unapproved', '3 years'),
-(6, 1, 3, '2019-01-19 02:27:57', 'Unapproved', '4 years'),
-(7, 1, 3, '2019-01-19 02:28:00', 'Unapproved', '4 years'),
-(8, 1, 3, '2019-01-19 02:29:02', 'Unapproved', '4 years'),
-(9, 1, 3, '2019-01-19 02:29:31', 'Unapproved', '4 years'),
-(10, 2, 2, '2019-01-19 02:30:13', 'Unapproved', '2 years'),
-(11, 2, 4, '2019-01-19 03:24:43', 'Unapproved', '1 year');
+(21, 29, 20, '2019-01-25 20:22:26', 'Approved', '4 years');
 
 -- --------------------------------------------------------
 
@@ -275,8 +240,8 @@ CREATE TABLE `renewal_details` (
 --
 
 INSERT INTO `renewal_details` (`id`, `renewal_id`, `stall_id`) VALUES
-(1, 1, 4),
-(2, 1, 5);
+(7, 21, 18),
+(8, 21, 19);
 
 -- --------------------------------------------------------
 
@@ -293,13 +258,6 @@ CREATE TABLE `rental_payment` (
   `date_paid` datetime DEFAULT NULL,
   `rent_month` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rental_payment`
---
-
-INSERT INTO `rental_payment` (`rentp_id`, `contract_id`, `total_amount`, `amount_paid`, `balance`, `date_paid`, `rent_month`) VALUES
-(1, 1, 1750, 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -321,15 +279,16 @@ CREATE TABLE `stalls` (
 --
 
 INSERT INTO `stalls` (`stall_id`, `floor_no`, `block_no`, `block_dimension`, `stall_price`, `price_date_effectivity`) VALUES
-(4, '1', '1A', '50x50', 650, '2019-01-23 00:00:00'),
-(5, '1', '1B', '100x100', 1000, '2019-01-28 00:00:00'),
-(6, '2', '2A', '100x100', 1000, '2019-01-21 00:00:00'),
-(7, '2', '2B', '300x450', 4500, '2019-01-21 00:00:00'),
-(8, '2', '2C', '500x500', 6000, '2019-01-21 00:00:00'),
-(9, '2', '2D', '650x500', 6500, '2019-01-21 00:00:00'),
-(10, '3', '3A', '500x500', 2750.95, '2019-01-21 00:00:00'),
-(11, '3', '3B', '500x500', 2750.95, '2019-01-21 00:00:00'),
-(12, '4', '4A', '500x500', 2540.85, '2019-01-22 00:00:00');
+(13, '1', '1A', '350x350', 1000.5, '2019-01-21 00:00:00'),
+(14, '1', '1B', '450x450', 1250.75, '2019-01-21 00:00:00'),
+(15, '1', '1C', '450x450', 1250.75, '2019-01-21 00:00:00'),
+(16, '1', '1D', '350x350', 1000.5, '2019-01-21 00:00:00'),
+(17, '1', '1E', '500x500', 2500.75, '2019-01-21 00:00:00'),
+(18, '2', '2A', '350x350', 1150.75, '2019-01-22 00:00:00'),
+(19, '2', '2B', '350x350', 1150.75, '2019-01-22 00:00:00'),
+(20, '2', '2C', '450x450', 1850.95, '2019-01-22 00:00:00'),
+(21, '2', '2D', '500x500', 2000.25, '2019-01-22 00:00:00'),
+(22, '2', '2E', '500x500', 2000.25, '2019-01-22 00:00:00');
 
 --
 -- Triggers `stalls`
@@ -361,15 +320,6 @@ CREATE TABLE `stall_pricehistory` (
   `date_end` datetime DEFAULT NULL,
   `date_effectivity` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `stall_pricehistory`
---
-
-INSERT INTO `stall_pricehistory` (`priceh_id`, `stall_id`, `stall_price`, `date_end`, `date_effectivity`) VALUES
-(27, 4, 950, '2019-01-04 00:00:00', '2019-01-04 00:00:00'),
-(28, 4, 650, '2019-01-23 00:00:00', '2019-01-04 00:00:00'),
-(29, 4, 650, '2019-01-23 00:00:00', '2019-01-23 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -461,7 +411,8 @@ ALTER TABLE `rental_payment`
 -- Indexes for table `stalls`
 --
 ALTER TABLE `stalls`
-  ADD PRIMARY KEY (`stall_id`);
+  ADD PRIMARY KEY (`stall_id`),
+  ADD UNIQUE KEY `unique_block` (`block_no`);
 
 --
 -- Indexes for table `stall_pricehistory`
@@ -485,49 +436,49 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applied_stall`
 --
 ALTER TABLE `applied_stall`
-  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `applied_stall_details`
 --
 ALTER TABLE `applied_stall_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `business_classification`
 --
 ALTER TABLE `business_classification`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `contract`
 --
 ALTER TABLE `contract`
-  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `occupied_stalls`
 --
 ALTER TABLE `occupied_stalls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `renewal`
 --
 ALTER TABLE `renewal`
-  MODIFY `renewal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `renewal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `renewal_details`
 --
 ALTER TABLE `renewal_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `rental_payment`
@@ -539,7 +490,7 @@ ALTER TABLE `rental_payment`
 -- AUTO_INCREMENT for table `stalls`
 --
 ALTER TABLE `stalls`
-  MODIFY `stall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `stall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `stall_pricehistory`
@@ -561,56 +512,56 @@ ALTER TABLE `users`
 -- Constraints for table `applied_stall`
 --
 ALTER TABLE `applied_stall`
-  ADD CONSTRAINT `fk_app_category_id` FOREIGN KEY (`category_id`) REFERENCES `business_classification` (`category_id`),
-  ADD CONSTRAINT `fk_app_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`);
+  ADD CONSTRAINT `fk_app_category_id` FOREIGN KEY (`category_id`) REFERENCES `business_classification` (`category_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_app_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `applied_stall_details`
 --
 ALTER TABLE `applied_stall_details`
-  ADD CONSTRAINT `fk_appd_app_id` FOREIGN KEY (`app_id`) REFERENCES `applied_stall` (`app_id`),
-  ADD CONSTRAINT `fk_appd_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`);
+  ADD CONSTRAINT `fk_appd_app_id` FOREIGN KEY (`app_id`) REFERENCES `applied_stall` (`app_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_appd_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `contract`
 --
 ALTER TABLE `contract`
-  ADD CONSTRAINT `fk_cont_app_id` FOREIGN KEY (`app_id`) REFERENCES `applied_stall` (`app_id`),
-  ADD CONSTRAINT `fk_cont_category_id` FOREIGN KEY (`category_id`) REFERENCES `business_classification` (`category_id`),
-  ADD CONSTRAINT `fk_cont_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`);
+  ADD CONSTRAINT `fk_cont_app_id` FOREIGN KEY (`app_id`) REFERENCES `applied_stall` (`app_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_cont_category_id` FOREIGN KEY (`category_id`) REFERENCES `business_classification` (`category_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_cont_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `occupied_stalls`
 --
 ALTER TABLE `occupied_stalls`
-  ADD CONSTRAINT `fk_occ_contract_id` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`contract_id`),
-  ADD CONSTRAINT `fk_occ_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`);
+  ADD CONSTRAINT `fk_occ_contract_id` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`contract_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_occ_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `renewal`
 --
 ALTER TABLE `renewal`
-  ADD CONSTRAINT `fk_renewal_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`),
-  ADD CONSTRAINT `fk_renewal_contract_id` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`contract_id`);
+  ADD CONSTRAINT `fk_renewal_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_renewal_contract_id` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`contract_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `renewal_details`
 --
 ALTER TABLE `renewal_details`
-  ADD CONSTRAINT `fk_rend_renewal_id` FOREIGN KEY (`renewal_id`) REFERENCES `renewal` (`renewal_id`),
-  ADD CONSTRAINT `fk_rend_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`);
+  ADD CONSTRAINT `fk_rend_renewal_id` FOREIGN KEY (`renewal_id`) REFERENCES `renewal` (`renewal_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_rend_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `rental_payment`
 --
 ALTER TABLE `rental_payment`
-  ADD CONSTRAINT `fk_rent_contract_id` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`contract_id`);
+  ADD CONSTRAINT `fk_rent_contract_id` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`contract_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `stall_pricehistory`
 --
 ALTER TABLE `stall_pricehistory`
-  ADD CONSTRAINT `fk_priceh_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`);
+  ADD CONSTRAINT `fk_priceh_stall_id` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

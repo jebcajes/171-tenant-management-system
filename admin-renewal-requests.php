@@ -70,6 +70,7 @@
                     if(mysqli_num_rows($result_renewal) > 0 ){
                         while($row_renewal = mysqli_fetch_assoc($result_renewal)){
                             echo "<tr align='center'>";
+                                $remark = $row_renewal['renewal_status'];
                                 $renewal_id = $row_renewal['renewal_id'];
                                 echo "<td>" . $row_renewal['renewal_id'] . "</td>";
                                 echo "<td>" . $row_renewal['contract_id'] . "</td>";
@@ -83,12 +84,21 @@
                                 if($row_renewal['renewal_status'] == 'Approved'){
                                     echo "<td style='color: green; font-weight: 800; font-style: italic;'>" . $row_renewal['renewal_status'] . "</td>";
                                 }else{
-                                    echo "<td style='color: orange; font-weight: 800; font-style: italic;'>" . $row_renewal['renewal_status'] . "</td>";
+                                    echo "<td style='color: gray; font-weight: 800; font-style: italic;'>" . $row_renewal['renewal_status'] . "</td>";
                                 }
-                                echo "<td>";
-                                    echo "<a href='admin-view-renewal-details.php?renewal_id=$renewal_id' class='btn btn-primary btn-sm' style='font-size: 11px; margin: 1px;'>View</a>";
-                                    echo "<a href='api/admin-approve-renewal.php?renewal_id=$renewal_id&renewal_term=$renewal_term&contract_id=$contract_id' class='btn btn-success btn-sm' style='font-size: 11px; margin: 1px;'>Approve</a>";
-                                echo "</td>";
+
+                                if($remark == 'Approved'){
+                                    echo "<td>";
+                                        echo "<a href='admin-view-renewal-details.php?renewal_id=$renewal_id' class='btn btn-primary btn-sm' style='font-size: 11px; margin: 1px;'>View</a>";
+                                        echo "<a href='api/admin-approve-renewal.php?renewal_id=$renewal_id&renewal_term=$renewal_term&contract_id=$contract_id' class='btn btn-success btn-sm disabled' style='font-size: 11px; margin: 1px;'>Approve</a>";
+                                    echo "</td>";
+                                }elseif($remark == 'Unapproved'){
+                                    echo "<td>";
+                                        echo "<a href='admin-view-renewal-details.php?renewal_id=$renewal_id' class='btn btn-primary btn-sm' style='font-size: 11px; margin: 1px;'>View</a>";
+                                        echo "<a href='api/admin-approve-renewal.php?renewal_id=$renewal_id&renewal_term=$renewal_term&contract_id=$contract_id' class='btn btn-success btn-sm' style='font-size: 11px; margin: 1px;'>Approve</a>";
+                                    echo "</td>";
+                                }
+                                
                             echo "</tr>";
                         }
                     }else{

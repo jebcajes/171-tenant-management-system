@@ -48,14 +48,15 @@
         <a href='admin-renewal-requests.php' class='btn btn-danger btn-sm float-right' style='margin: 1px;'>Back</a><br /><br>
         <div class="row">
             <div class="col-md-8">
+                <h4>Contract</h4>
                 <table class="table table-bordered table-striped table-sm">
-                    <tr align="center">
-                        <th>Contract ID</th>
+                    <thead align="center">
+                        <th>#</th>
                         <th>Client</th>
                         <th>Date Applied</th>
                         <th>Term</th>
                         <th>Remark</th>
-                    </tr>
+                    </thead>
                 <?php
                     require_once "api/config.php";
 
@@ -82,26 +83,27 @@
                                 if($row_renewal['renewal_status'] == 'Approved'){
                                     echo "<td style='color: green; font-style: italic; font-weight: 800;'>" . $row_renewal['renewal_status'] . "</td>";
                                 }elseif($row_renewal['renewal_status'] == 'Unapproved'){
-                                    echo "<td style='color: orange; font-style: italic; font-weight: 800;'>" . $row_renewal['renewal_status'] . "</td>";
+                                    echo "<td style='color: gray; font-style: italic; font-weight: 800;'>" . $row_renewal['renewal_status'] . "</td>";
                                 }elseif($row_renewal['renewal_status'] == 'Disapproved'){
                                     echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_renewal['renewal_status'] . "</td>";
                                 }
                             echo "</tr>";
                         }
                     }else{
-                        echo "<td colspan='7' align='center'>No records found.</td>";
+                        echo "<td colspan='7' style='font-style: italic;' align='center'>No records found.</td>";
                     }
                 ?>
                 </table>
             </div>
             <div class="col-md-4">
+                <h4>Stalls</h4>
                 <table class="table table-sm table-bordered table-striped">
-                    <tr align="center">
-                        <th>Stall ID</th>
+                    <thead align="center">
+                        <th>#</th>
                         <th>Floor</th>
                         <th>Block</th>
                         <th>Block Dimension</th>
-                    </tr>
+                    </thead>
                     <?php
                         $sql_renewal_details = "SELECT * FROM renewal_details rd INNER JOIN stalls s ON rd.stall_id = s.stall_id";
                         $result_renewal_details = mysqli_query($link, $sql_renewal_details);
@@ -114,6 +116,10 @@
                                     echo "<td>" . $row_renewal_details['block_dimension'] . "</td>";
                                 echo "</tr>";
                             }
+                        }else{
+                            echo '<tr>';
+                                echo '<td colspan="4" style="font-style: italic;" align="center">No records found.</td>';
+                            echo '</tr>';
                         }
                     ?>
                 </table>

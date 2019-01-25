@@ -75,6 +75,7 @@
                                 $remark = $row_contract['remark'];
                                 $start_date = $row_contract['start_date'];
                                 $end_date = $row_contract['end_date'];
+                                $term = $row_contract['contract_term'];
 
                                 echo "<tr>";
                                     echo "<td align='right'>Client:</td><td align='center'>" . $row_contract['fname'] . " " . $row_contract['lname'] . "</td>";
@@ -91,8 +92,11 @@
                                     echo "<td align='right'>Date Approved:</td><td align='center'>" . $new_date_approved . "</td>"; 
                                 echo "</tr>";
                                 echo "<tr>";
-                                    if($row_contract['contract_term'] == 'Pending'){
+                                    if($term == 'Pending'){
                                         echo "<td align='right'>Term:</td><td align='center' style='color: orange; font-weight: 800; font-style: italic;'>" . $row_contract['contract_term'] . "</td>"; 
+                                    }elseif($remark == 'Lapsed' || $remark == 'Cancelled'){
+                                        echo '<td align="right">Term:</td>';
+                                        echo '<td style="color:gray; font-style: italic; font-weight: 800;" align="center">N/A</td>';
                                     }else{
                                         echo "<td align='right'>Term:</td><td align='center'>" . $row_contract['contract_term'] . "</td>"; 
                                     }
