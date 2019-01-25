@@ -152,7 +152,6 @@
 
                             $result_applied_stall_details = (mysqli_query($link, $sql_applied_stall_details));
                             if(mysqli_num_rows($result_applied_stall_details) > 0){
-                                $status_for_button = 1;
                                 while($row_applied_stall_details = mysqli_fetch_assoc($result_applied_stall_details)){
                                     echo "<tr align='center'>";
                                         echo "<td><small>" . $row_applied_stall_details['stall_id'] . "</small></td>";
@@ -172,12 +171,15 @@
                         ?>
                     </table>
                     <?php
-                        if(($status_for_button) == 1){
-                            echo "<input type='submit' name='approved' value='Approve' class='btn btn-primary btn-sm float-right' style='margin: 5px;'>";
-                            echo "<input type='submit' name='disapproved' value='Disapprove' class='btn btn-danger btn-sm float-right' style='margin: 5px;'>";
-                        }else{
-                            echo "<input type='submit' name='approved' value='Approve' class='btn btn-primary btn-sm float-right' style='margin: 5px;' disabled>";
-                            echo "<input type='submit' name='disapproved' value='Disapprove' class='btn btn-danger btn-sm float-right' style='margin: 5px;' disabled>";
+                        if($application_status == 'Approved'){
+                            echo "<input type='submit' name='approved' value='Approve Stall(s)' class='btn btn-primary btn-sm float-right disabled' style='margin: 5px;'>";
+                            echo "<input type='submit' name='disapproved' value='Disapprove Stall(s)' class='btn btn-danger btn-sm float-right disabled' style='margin: 5px;'>";
+                        }elseif($application_status == 'Disapproved'){
+                            echo "<input type='submit' name='approved' value='Approve Stall(s)' class='btn btn-primary btn-sm float-right' style='margin: 5px;'>";
+                            echo "<input type='submit' name='disapproved' value='Disapprove Stall(s)' class='btn btn-danger btn-sm float-right' style='margin: 5px;'>";
+                        }elseif($application_status == 'Unapproved'){
+                            echo "<input type='submit' name='approved' value='Approve Stall(s)' class='btn btn-primary btn-sm float-right' style='margin: 5px;'>";
+                            echo "<input type='submit' name='disapproved' value='Disapprove Stall(s)' class='btn btn-danger btn-sm float-right' style='margin: 5px;'>";
                         }
                     ?>
                 </form>

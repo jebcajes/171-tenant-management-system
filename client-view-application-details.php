@@ -84,7 +84,7 @@
                                                 if($row_applied_stall['application_status'] == 'Approved'){
                                                     echo "<td style='color: green; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
                                                 }elseif($row_applied_stall['application_status'] == 'Unapproved'){
-                                                    echo "<td style='color: orange; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
+                                                    echo "<td style='color: gray; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
                                                 }elseif($row_applied_stall['application_status'] == 'Disapproved'){
                                                     echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_applied_stall['application_status'] . "</td>";
                                                 }
@@ -127,7 +127,7 @@
                                     if($row_applied_stall['stall_application_status'] == 'Approved'){
                                         echo "<td style='color: green; font-style: italic; font-weight: 800;'>" . $row_applied_stall['stall_application_status'] . "</td>";
                                     }elseif($row_applied_stall['stall_application_status'] == 'Unapproved'){
-                                        echo "<td style='color: orange; font-style: italic; font-weight: 800;'>" . $row_applied_stall['stall_application_status'] . "</td>";
+                                        echo "<td style='color: gray; font-style: italic; font-weight: 800;'>" . $row_applied_stall['stall_application_status'] . "</td>";
                                     }elseif($row_applied_stall['stall_application_status'] == 'Disapproved'){
                                         echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_applied_stall['stall_application_status'] . "</td>";
                                     }

@@ -2,9 +2,8 @@
     require_once "config.php";
 
     $contract_id = $_GET['contract_id'];
-    $contract_term = $_POST['contract_term'];
 
-    $sql_confirm = "UPDATE contract SET remark = 'Confirmed', contract_term = '$contract_term' WHERE contract_id = $contract_id";
+    $sql_confirm = "UPDATE contract SET remark = 'Confirmed' WHERE contract_id = $contract_id";
     if(mysqli_query($link, $sql_confirm)){
         echo "Contract confirmed successfully! <br />";
 

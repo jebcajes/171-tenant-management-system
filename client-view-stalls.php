@@ -62,7 +62,7 @@
                                 c.client_id AS 'client_id', c.category_id AS 'category_id', c.business_name AS 'business_name',
                                 c.start_date AS 'start_date', c.end_date AS 'end_date', c.date_approved AS 'date_approved',
                                 c.remark AS 'remark', bc.category_name AS 'category_name', c.contract_term AS 'contract_term',
-                                cl.fname AS 'fname', cl.lname AS 'lname'
+                                cl.fname AS 'fname', cl.lname AS 'lname', c.remark AS 'remark'
                                 FROM contract c
                                 INNER JOIN business_classification bc ON c.category_id = bc.category_id 
                                 INNER JOIN client cl ON c.client_id = cl.client_id
@@ -116,6 +116,19 @@
                                                 echo '<td align="right">Term:</td>';
                                                 echo '<td>' . $row_contract['contract_term'] . '</td>';
                                             echo '</tr>';
+                                            echo '<tr>';
+                                                echo '<td align="right">Remark:</td>';
+                                                $remark = $row_contract['remark'];
+                                                if($remark == 'Confirmed'){
+                                                    echo '<td style="color: green; font-style: italic; font-weight: 800;">Confirmed</td>';
+                                                }elseif($remark == 'Pending'){
+                                                    echo '<td style="color: orange; font-style: italic; font-weight: 800;">Pending</td>';
+                                                }elseif($remark == 'Cancelled'){
+                                                    echo '<td style="color: red; font-style: italic; font-weight: 800;">Cancelled</td>';
+                                                }elseif($remark == 'Lapsed'){
+                                                    echo '<td style="color: red; font-style: italic; font-weight: 800;">Lapsed</td>';
+                                                }
+                                            echo '</tr>';
                                         echo '</tbody>';
                                     }
                                 }
@@ -123,15 +136,14 @@
                     </table>
                 </div>
                 <div class="col-8">
-                    <h4>Occupied Stall Spaces</h4><br>
-                        <table class="table table-bordered table-striped table-sm">
+                    <h4>Occupied Stall Spaces</h4>
+                        <table class="table table-bordered table-striped table-hover table-sm">
                             <tr align="center" style="font-size: 14px;">
                                 <th>#</th>
                                 <th>Floor</th>
                                 <th>Block</th>
                                 <th>Block Dimension</th>
                                 <th>Price</th>
-                                <th>Remark</th>
                             </tr>
                             <?php 
                                 $sql_stalls = "SELECT s.floor_no AS 'floor_no', s.block_no AS 'block_no', s.block_dimension AS 'block_dimension', 
@@ -149,36 +161,57 @@
                                             echo "<td>" . $row_stalls['block_no'] . "</td>";
                                             echo "<td>" . $row_stalls['block_dimension'] . "</td>";
                                             echo "<td>Php " . number_format($row_stalls['stall_price'],2) . "</td>";
-                                            echo '<td>';
                                         echo "</tr>";
                                     }
                                 }else{
-                                    $sql_stalls = "SELECT s.floor_no AS 'floor_no', s.block_no AS 'block_no', s.block_dimension AS 'block_dimension', 
-                                    os.stall_id AS 'stall_id', s.stall_price AS 'stall_price' 
-                                    FROM applied_stall_details os
-                                    INNER JOIN stalls s ON os.stall_id = s.stall_id
-                                    WHERE app_id = $app_id";
-        
-                                    $result_stalls = mysqli_query($link,$sql_stalls);
-                                    if (mysqli_num_rows($result_stalls) > 0) {
-                                        while($row_stalls = mysqli_fetch_assoc($result_stalls)) {
-                                            echo "<tr align='center'>";
-                                                echo "<td>" . $row_stalls['stall_id'] . "</td>";
-                                                echo "<td>" . $row_stalls['floor_no'] . "</td>";
-                                                echo "<td>" . $row_stalls['block_no'] . "</td>";
-                                                echo "<td>" . $row_stalls['block_dimension'] . "</td>";
-                                                echo "<td>Php " . number_format($row_stalls['stall_price'],2) . "</td>";
-                                                echo '<td>';
-                                            echo "</tr>";
-                                        }
-                                    }
+                                    echo '<tr align="center">';
+                                        echo '<td colspan="5" style="font-style: italic">No records found.</td>';
+                                    echo '</tr>';
                                 }
-                                
-                                //  else{
-                                //     echo "<tr align='center'>";
-                                //         echo "<td colspan='6' style='font-style: italic;'>No records found.</td>";
-                                //     echo "</tr>";
-                                //  }
+                            ?>
+                        </table>
+                    <h4>Approved & Disapproved Stall Spaces</h4><br>
+                        <table class="table table-bordered table-striped table-hover table-sm">
+                            <tr align="center" style="font-size: 14px;">
+                                <th>#</th>
+                                <th>Floor</th>
+                                <th>Block</th>
+                                <th>Block Dimension</th>
+                                <th>Price</th>
+                                <th>Remark</th>
+                            </tr>
+                            <?php 
+                                $sql_stalls = "SELECT s.floor_no AS 'floor_no', s.block_no AS 'block_no', s.block_dimension AS 'block_dimension', 
+                                os.stall_id AS 'stall_id', s.stall_price AS 'stall_price', os.stall_application_status AS 'remark' 
+                                FROM applied_stall_details os
+                                INNER JOIN stalls s ON os.stall_id = s.stall_id
+                                WHERE app_id = $app_id";
+    
+                                $result_stalls = mysqli_query($link,$sql_stalls);
+                                if (mysqli_num_rows($result_stalls) > 0) {
+                                    while($row_stalls = mysqli_fetch_assoc($result_stalls)) {
+                                        echo "<tr align='center'>";
+                                            echo "<td>" . $row_stalls['stall_id'] . "</td>";
+                                            echo "<td>" . $row_stalls['floor_no'] . "</td>";
+                                            echo "<td>" . $row_stalls['block_no'] . "</td>";
+                                            echo "<td>" . $row_stalls['block_dimension'] . "</td>";
+                                            echo "<td>Php " . number_format($row_stalls['stall_price'],2) . "</td>";
+                                            $stall_remark = $row_stalls['remark'];
+                                            if($stall_remark == 'Approved'){
+                                                echo '<td style="color: green; font-style: italic; font-weight: 800;">' . $stall_remark . '</td>';
+                                            }elseif($stall_remark == 'Unapproved'){
+                                                echo '<td style="color: gray; font-style: italic; font-weight: 800;">' . $stall_remark . '</td>';
+                                            }elseif($stall_remark == 'Disapproved'){
+                                                echo '<td style="color: red; font-style: italic; font-weight: 800;">' . $stall_remark . '</td>';
+                                            }
+                                        echo "</tr>";
+                                    }
+                                }else{
+                                    echo '<tr align="center">';
+                                        echo '<td colspan="6" style="font-style: italic">No records found.</td>';
+                                    echo '</tr>'; 
+                                }
+                                mysqli_close($link);
                             ?>
                         </table>
                 </div>
