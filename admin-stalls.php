@@ -105,6 +105,10 @@
                                     // <a href='admin-remove-stall.php?stall_id=$stall_id' class='btn btn-sm btn-danger' style='font-size: 11px; margin: 1px;'>Remove</a>
                                 echo "</tr>";
                             }
+                        }else{
+                            echo '<tr>';
+                                echo '<td colspan="7" style="font-style: italic;" align="center">No records found.</td>';
+                            echo '</tr>';
                         }
                     ?>
                 </table>

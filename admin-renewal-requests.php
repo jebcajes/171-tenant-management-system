@@ -92,7 +92,9 @@
                             echo "</tr>";
                         }
                     }else{
-                        echo "<td colspan='7' align='center'>No records found.</td>";
+                        echo '<tr>';
+                            echo '<td colspan="7" style="font-style: italic;" align="center">No records found.</td>';
+                        echo '</tr>';
                     }
                 ?>
             </table>

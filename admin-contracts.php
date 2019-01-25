@@ -108,17 +108,17 @@
                                             echo "<td>" . $new_start_date . "</td>";
                                             echo "<td>" . $new_end_date . "</td>";
                                         }elseif($row_contracts['remark'] == 'Lapsed'){
-                                            echo "<td style='color: red; font-weight: 800; font-style: italic;'>Lapsed</td>";
-                                            echo "<td style='color: red; font-weight: 800; font-style: italic;'>Lapsed</td>";
+                                            echo "<td style='color: gray; font-weight: 800; font-style: italic;'>N/A</td>";
+                                            echo "<td style='color: gray; font-weight: 800; font-style: italic;'>N/A</td>";
                                         }elseif($row_contracts['remark'] == 'Pending'){
-                                            echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
-                                            echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
+                                            echo "<td style='color: gray; font-weight: 800; font-style: italic;'>N/A</td>";
+                                            echo "<td style='color: gray; font-weight: 800; font-style: italic;'>N/A</td>";
                                         }elseif($row_contracts['remark'] == 'Cancelled'){
-                                            echo "<td style='color: red; font-weight: 800; font-style: italic;'>Cancelled</td>";
-                                            echo "<td style='color: red; font-weight: 800; font-style: italic;'>Cancelled</td>";
+                                            echo "<td style='color: gray; font-weight: 800; font-style: italic;'>N/A</td>";
+                                            echo "<td style='color: gray; font-weight: 800; font-style: italic;'>N/A</td>";
                                         }elseif($row_contracts['remark'] == 'Confirmed'){
-                                            echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
-                                            echo "<td style='color: orange; font-weight: 800; font-style: italic;'>Pending</td>";
+                                            echo "<td style='color: gray; font-weight: 800; font-style: italic;'>N/A</td>";
+                                            echo "<td style='color: gray; font-weight: 800; font-style: italic;'>N/A</td>";
                                         }
                                         
 
@@ -164,6 +164,10 @@
                                     echo "</td>";
                                 echo "</tr>";
                             }
+                        }else{
+                            echo '<tr>';
+                                echo '<td colspan="10" style="font-style: italic;" align="center">No records found.</td>';
+                            echo '</tr>';
                         }
                     ?>
                 </table>

@@ -51,95 +51,136 @@
             <br /><br />
             <div class="row">
                 <div class="col-4">
-                    <h4>Occupied Stall Spaces</h4><br>
-                    <table class="table table-bordered table-striped table-sm">
-                        <tr align="center" style="font-size: 14px;">
-                            <td><strong>#</strong></td>
-                            <td><strong>Floor</strong></td>
-                            <td><strong>Block</strong></td>
-                            <td><strong>Block Dimensions</strong></td>
-                            <td><strong>Stall Price</strong></td>
-                        </tr>
-                        <?php 
-                            require_once "api/config.php";
-                            $contract_id = $_GET['contract_id'];
-
-                            $sql_stalls = "SELECT s.floor_no AS 'floor_no', s.block_no AS 'block_no', s.block_dimension AS 'block_dimension', 
-                            os.stall_id AS 'stall_id', s.stall_price AS 'stall_price' 
-                            FROM occupied_stalls os
-                            INNER JOIN stalls s ON os.stall_id = s.stall_id
-                            WHERE contract_id = $contract_id";
-
-                            $result_stalls = mysqli_query($link,$sql_stalls);
-                            if (mysqli_num_rows($result_stalls) > 0) {
-                                while($row_stalls = mysqli_fetch_assoc($result_stalls)) {
-                                    echo "<tr align='center'>";
-                                        echo "<td>" . $row_stalls['stall_id'] . "</td>";
-                                        echo "<td>" . $row_stalls['floor_no'] . "</td>";
-                                        echo "<td>" . $row_stalls['block_no'] . "</td>";
-                                         echo "<td>" . $row_stalls['block_dimension'] . "</td>";
-                                        echo "<td>Php " . number_format($row_stalls['stall_price'],2) . "</td>";
-                                    echo "</tr>";
-                                }
-                             }else{
-                                echo "<tr align='center'>";
-                                    echo "<td colspan='5' style='font-style: italic;'>No records found.</td>";
-                                echo "</tr>";
-                             }
-                        ?>
-                    </table>
-                </div>
-                <div class="col-8">
-                    <h4>Contract Information</h4><br>
-                    <table class="table table-bordered table-striped table-sm">
-                        <tr align="center">
-                                <td><strong>#</strong></td>
-                                <td><strong>Business Name</strong></td>
-                                <td><strong>Category</strong></td>
-                                <td><strong>Start Date</strong></td>
-                                <td><strong>End Date</strong></td>
-                                <td><strong>Term</strong></td>
-                                <td><strong>Remark</strong></td>
-                            </tr>
+                    <table class="table table-bordered table-sm">
                             <?php
+                                require_once "api/config.php";
+                                $contract_id = $_GET['contract_id'];
+                                $app_id = $_GET['app_id'];
+
                                 $client_id = "";				
                                 $sql_contract = "SELECT c.contract_id AS 'contract_id', c.app_id AS 'app_id',
                                 c.client_id AS 'client_id', c.category_id AS 'category_id', c.business_name AS 'business_name',
                                 c.start_date AS 'start_date', c.end_date AS 'end_date', c.date_approved AS 'date_approved',
-                                c.remark AS 'remark', bc.category_name AS 'category_name', c.contract_term AS 'contract_term'
+                                c.remark AS 'remark', bc.category_name AS 'category_name', c.contract_term AS 'contract_term',
+                                cl.fname AS 'fname', cl.lname AS 'lname'
                                 FROM contract c
                                 INNER JOIN business_classification bc ON c.category_id = bc.category_id 
+                                INNER JOIN client cl ON c.client_id = cl.client_id
                                 WHERE contract_id = $contract_id";
                                 $result_contract = mysqli_query($link,$sql_contract);
                                 if (mysqli_num_rows($result_contract) > 0) {
                                     while($row_contract = mysqli_fetch_assoc($result_contract)) {
-                                        echo "<tr align='center'>";
-                                            $client_id = $row_contract['client_id'];
-                                            $contract_id = $row_contract['contract_id'];
-                                            echo "<td>" . $contract_id . "</td>";
-                                            echo "<td>" . $row_contract['business_name'] . "</td>";
-                                            echo "<td>" . $row_contract['category_name'] . "</td>";
-                                            $old_start_date = strtotime($row_contract['start_date']);
-                                            $new_start_date = date('Y-m-d', $old_start_date); 
-                                            echo "<td>" . $new_start_date . "</td>";
-                                            $old_end_date = strtotime($row_contract['end_date']);
-                                            $new_end_date = date('Y-m-d', $old_end_date); 
-                                            echo "<td>" . $new_end_date . "</td>";
-                                            echo "<td>" . $row_contract['contract_term'] . "</td>"; 
-                                            if($row_contract['remark'] == 'Confirmed'){
-                                                echo "<td style='color: green; font-style: italic; font-weight: 800;'>" . $row_contract['remark'] . "</td>";
-                                            }elseif($row_contract['remark'] == 'Cancelled'){
-                                                echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_contract['remark'] . "</td>";
-                                            }elseif($row_contract['remark'] == 'Lapsed'){
-                                                echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_contract['remark'] . "</td>";
-                                            }elseif($row_contract['remark'] == 'Pending'){
-                                                echo "<td style='color: orange; font-style: italic; font-weight: 800;'>" . $row_contract['remark'] . "</td>";
-                                            }
-                                        echo "</tr>";
+                                        echo '<tr align="center">';
+                                            echo '<th colspan="2">Information</th>';
+                                        echo '</tr>';
+                                        echo '<tbody>';
+                                            echo '<tr>';
+                                                echo '<td align="right">Contract ID:</td>';
+                                                echo '<td>' . $row_contract['contract_id'] . '</td>';
+                                            echo '</tr>';
+                                            echo '<tr>';
+                                                echo '<td align="right">Owner:</td>';
+                                                echo '<td>' . $row_contract['fname'] . ' ' . $row_contract['lname'] . '</td>';
+                                            echo '</tr>';
+                                            echo '<tr>';
+                                                echo '<td align="right">Business Name:</td>';
+                                                echo '<td>' . $row_contract['business_name'] . '</td>';
+                                            echo '</tr>';
+                                            echo '<tr>';
+                                                echo '<td align="right">Category:</td>';
+                                                echo '<td>' . $row_contract['category_name'] . '</td>';
+                                            echo '</tr>';
+                                            echo '<tr>';
+                                                echo '<td align="right">Start Date:</td>';
+                                                $start_date = $row_contract['start_date'];
+                                                if($start_date){
+                                                    $old_start_date = strtotime($start_date);
+                                                    $new_start_date = date('Y-m-d', $old_start_date);
+                                                    echo '<td>' . $new_start_date . '</td>';
+                                                }else{
+                                                    echo '<td style="color: gray; font-style: italic; font-weight: 800">N/A</td>';
+                                                }
+                                            echo '</tr>';
+                                            echo '<tr>';
+                                                echo '<td align="right">End Date:</td>';
+                                                $end_date = $row_contract['end_date'];
+                                                if($end_date){
+                                                    $old_end_date = strtotime($end_date);
+                                                    $new_end_date = date('Y-m-d', $old_end_date);
+                                                    echo '<td>' . $new_end_date . '</td>';
+                                                }else{
+                                                    echo '<td style="color: gray; font-style: italic; font-weight: 800">N/A</td>';
+                                                }
+                                            echo '</tr>';
+                                            echo '<tr>';
+                                                echo '<td align="right">Term:</td>';
+                                                echo '<td>' . $row_contract['contract_term'] . '</td>';
+                                            echo '</tr>';
+                                        echo '</tbody>';
                                     }
                                 }
                             ?>
                     </table>
+                </div>
+                <div class="col-8">
+                    <h4>Occupied Stall Spaces</h4><br>
+                        <table class="table table-bordered table-striped table-sm">
+                            <tr align="center" style="font-size: 14px;">
+                                <th>#</th>
+                                <th>Floor</th>
+                                <th>Block</th>
+                                <th>Block Dimension</th>
+                                <th>Price</th>
+                                <th>Remark</th>
+                            </tr>
+                            <?php 
+                                $sql_stalls = "SELECT s.floor_no AS 'floor_no', s.block_no AS 'block_no', s.block_dimension AS 'block_dimension', 
+                                os.stall_id AS 'stall_id', s.stall_price AS 'stall_price' 
+                                FROM occupied_stalls os
+                                INNER JOIN stalls s ON os.stall_id = s.stall_id
+                                WHERE contract_id = $contract_id";
+
+                                $result_stalls = mysqli_query($link,$sql_stalls);
+                                if (mysqli_num_rows($result_stalls) > 0) {
+                                    while($row_stalls = mysqli_fetch_assoc($result_stalls)) {
+                                        echo "<tr align='center'>";
+                                            echo "<td>" . $row_stalls['stall_id'] . "</td>";
+                                            echo "<td>" . $row_stalls['floor_no'] . "</td>";
+                                            echo "<td>" . $row_stalls['block_no'] . "</td>";
+                                            echo "<td>" . $row_stalls['block_dimension'] . "</td>";
+                                            echo "<td>Php " . number_format($row_stalls['stall_price'],2) . "</td>";
+                                            echo '<td>';
+                                        echo "</tr>";
+                                    }
+                                }else{
+                                    $sql_stalls = "SELECT s.floor_no AS 'floor_no', s.block_no AS 'block_no', s.block_dimension AS 'block_dimension', 
+                                    os.stall_id AS 'stall_id', s.stall_price AS 'stall_price' 
+                                    FROM applied_stall_details os
+                                    INNER JOIN stalls s ON os.stall_id = s.stall_id
+                                    WHERE app_id = $app_id";
+        
+                                    $result_stalls = mysqli_query($link,$sql_stalls);
+                                    if (mysqli_num_rows($result_stalls) > 0) {
+                                        while($row_stalls = mysqli_fetch_assoc($result_stalls)) {
+                                            echo "<tr align='center'>";
+                                                echo "<td>" . $row_stalls['stall_id'] . "</td>";
+                                                echo "<td>" . $row_stalls['floor_no'] . "</td>";
+                                                echo "<td>" . $row_stalls['block_no'] . "</td>";
+                                                echo "<td>" . $row_stalls['block_dimension'] . "</td>";
+                                                echo "<td>Php " . number_format($row_stalls['stall_price'],2) . "</td>";
+                                                echo '<td>';
+                                            echo "</tr>";
+                                        }
+                                    }
+                                }
+                                
+                                //  else{
+                                //     echo "<tr align='center'>";
+                                //         echo "<td colspan='6' style='font-style: italic;'>No records found.</td>";
+                                //     echo "</tr>";
+                                //  }
+                            ?>
+                        </table>
                 </div>
             </div>
         </div>

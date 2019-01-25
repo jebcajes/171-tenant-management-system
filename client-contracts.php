@@ -71,6 +71,7 @@
                     while($row_contract = mysqli_fetch_assoc($result_contract)) {
                         echo "<tr align='center'>";
                             $contract_id = $row_contract['contract_id'];
+                            $app_id = $row_contract['app_id'];
                         echo "<form action='api/client-confirm-contract.php?contract_id=$contract_id' method='POST'>";
                             $contract_term = $row_contract['contract_term'];
                             echo "<td>" . $contract_id . "</td>";
@@ -82,26 +83,26 @@
                             $old_end_date = strtotime($row_contract['end_date']);
                             $new_end_date = date('Y-m-d', $old_end_date); 
                             echo "<td>" . $new_end_date . "</td>";
+                            echo "<td>" . $row_contract['contract_term'] . "</td>";
 
-                            if($row_contract['remark'] == 'Pending'){
-                                // echo "<td style='color: orange; font-style: italic; font-weight: 800;'>" . $row_contract['contract_term'] . "</td>";
-                                echo "<td>";
-                                    echo "<select type='text' name='contract_term' class='form-control form-control-sm' required>";
-                                        echo "<optgroup label='Terms'>";
-                                            echo "<option>1 year</option>";
-                                            echo "<option>2 years</option>";
-                                            echo "<option>3 years</option>";
-                                            echo "<option>4 years</option>";
-                                        echo "</optgroup>";
-                                    echo "</select>";
-                                echo "</td>";
-                            }elseif($row_contract['remark'] == 'Cancelled'){
-                                echo "<td>";
-                                    echo "<input type='text' name='contract_term' value='$contract_term' class='form-control form-control-sm' disabled>";
-                                echo "</td>";
-                            }else{
-                                echo "<td>" . $row_contract['contract_term'] . "</td>";
-                            }
+                            // if($row_contract['remark'] == 'Pending'){
+                            //     echo "<td>";
+                            //         echo "<select type='text' name='contract_term' class='form-control form-control-sm' required>";
+                            //             echo "<optgroup label='Terms'>";
+                            //                 echo "<option>1 year</option>";
+                            //                 echo "<option>2 years</option>";
+                            //                 echo "<option>3 years</option>";
+                            //                 echo "<option>4 years</option>";
+                            //             echo "</optgroup>";
+                            //         echo "</select>";
+                            //     echo "</td>";
+                            // }elseif($row_contract['remark'] == 'Cancelled'){
+                            //     echo "<td>";
+                            //         echo "<input type='text' name='contract_term' value='$contract_term' class='form-control form-control-sm' disabled>";
+                            //     echo "</td>";
+                            // }else{
+                            //     echo "<td>" . $row_contract['contract_term'] . "</td>";
+                            // }
 
                             if($row_contract['remark'] == 'Confirmed'){
                                 echo "<td style='color: green; font-weight: 800; font-style: italic;'>" . $row_contract['remark'] . "</td>"; 
@@ -115,25 +116,25 @@
 
                             if($row_contract['remark'] == 'Pending'){
                                 echo "<td>
-                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-primary'>View</a>
+                                    <a href='client-view-stalls.php?contract_id=$contract_id&app_id=$app_id' class='btn btn-sm btn-primary'>View</a>
                                     <input type='submit' value='Confirm' class='btn btn-sm btn-success'>
                                     <a href='api/client-cancel-contract.php?contract_id=$contract_id' class='btn btn-sm btn-danger'>Cancel</a>
                                 </td>";
                             }elseif($row_contract['remark'] == 'Cancelled'){
                                 echo "<td>
-                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-primary'>View</a>
+                                    <a href='client-view-stalls.php?contract_id=$contract_id&app_id=$app_id' class='btn btn-sm btn-primary'>View</a>
                                     <input type='submit' value='Confirm' class='btn btn-sm btn-success' disabled>
                                     <a href='api/client-cancel-contract.php?contract_id=$contract_id' class='btn btn-sm btn-danger disabled'>Cancel</a>
                                 </td>";
                             }elseif($row_contract['remark'] == 'Lapsed'){
                                 echo "<td>
-                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-primary'>View</a>
+                                    <a href='client-view-stalls.php?contract_id=$contract_id&app_id=$app_id' class='btn btn-sm btn-primary'>View</a>
                                     <input type='submit' value='Confirm' class='btn btn-sm btn-success' disabled>
                                     <a href='api/client-cancel-contract.php?contract_id=$contract_id' class='btn btn-sm btn-danger disabled'>Cancel</a>
                                 </td>";
                             }else{
                                 echo "<td>
-                                    <a href='client-view-stalls.php?contract_id=$contract_id' class='btn btn-sm btn-primary'>View</a>
+                                    <a href='client-view-stalls.php?contract_id=$contract_id&app_id=$app_id' class='btn btn-sm btn-primary'>View</a>
                                     <input type='submit' value='Confirm' class='btn btn-sm btn-success' disabled>
                                     <a href='api/client-cancel-contract.php?contract_id=$contract_id' class='btn btn-sm btn-danger'>Cancel</a>
                                 </td>";
