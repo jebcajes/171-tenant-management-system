@@ -5,7 +5,7 @@
     $end_date = $_POST['end_date'];
     $contract_id = $_GET['contract_id'];
 
-    $remark = $app_id = "";
+    $total_amount = $remark = $app_id = "";
 
     // To select the current remark of a contract record
     $sql_contract_remark = "SELECT * FROM contract WHERE contract_id = $contract_id";
@@ -35,6 +35,14 @@
                         $sql_occupy_stall_1 = "UPDATE occupied_stalls SET contract_id = $contract_id 
                         WHERE stall_id = $stall_id_1 AND contract_id IS NULL";
                         mysqli_query($link, $sql_occupy_stall_1);
+
+                        $sql_total_amount_1 = "SELECT * FROM stalls WHERE stall_id = $stall_id_1";
+                        $result_total_amount_1 = mysqli_query($link, $sql_total_amount_1);
+                        if(mysqli_num_rows($result_total_amount_1) > 0 ){
+                            while($row_total_amount_1 = mysqli_fetch_assoc($result_total_amount_1)){
+                                $total_amount = $total_amount + $row_total_amount_1['stall_price'];
+                            }
+                        }
                     }
             }else{
                 echo "It failed. Error Message: " . mysqli_error($link) . "<br />";
@@ -55,6 +63,14 @@
                         $sql_occupy_stall_2 = "UPDATE occupied_stalls SET contract_id = $contract_id 
                         WHERE stall_id = $stall_id_2 AND contract_id IS NULL";
                         mysqli_query($link, $sql_occupy_stall_2);
+
+                        $sql_total_amount_2 = "SELECT * FROM stalls WHERE stall_id = $stall_id_2";
+                        $result_total_amount_2 = mysqli_query($link, $sql_total_amount_2);
+                        if(mysqli_num_rows($result_total_amount_2) > 0 ){
+                            while($row_total_amount_2 = mysqli_fetch_assoc($result_total_amount_2)){
+                                $total_amount = $total_amount + $row_total_amount_2['stall_price'];
+                            }
+                        }
                     }
             }else{
                 echo "It failed. Error Message: " . mysqli_error($link) . "<br />";
@@ -74,6 +90,14 @@
                         $sql_occupy_stall_3 = "UPDATE occupied_stalls SET contract_id = $contract_id 
                         WHERE stall_id = $stall_id_3 AND contract_id IS NULL";
                         mysqli_query($link, $sql_occupy_stall_3);
+
+                        $sql_total_amount_3 = "SELECT * FROM stalls WHERE stall_id = $stall_id_3";
+                        $result_total_amount_3 = mysqli_query($link, $sql_total_amount_3);
+                        if(mysqli_num_rows($result_total_amount_3) > 0 ){
+                            while($row_total_amount_3 = mysqli_fetch_assoc($result_total_amount_3)){
+                                $total_amount = $total_amount + $row_total_amount_3['stall_price'];
+                            }
+                        }
                     }
             }else{
                 echo "It failed. Error Message: " . mysqli_error($link) . "<br />";
@@ -93,6 +117,14 @@
                         $sql_occupy_stall_4 = "UPDATE occupied_stalls SET contract_id = $contract_id 
                         WHERE stall_id = $stall_id_4 AND contract_id IS NULL";
                         mysqli_query($link, $sql_occupy_stall_4);
+
+                        $sql_total_amount_4 = "SELECT * FROM stalls WHERE stall_id = $stall_id_4";
+                        $result_total_amount_4 = mysqli_query($link, $sql_total_amount_4);
+                        if(mysqli_num_rows($result_total_amount_4) > 0 ){
+                            while($row_total_amount_4 = mysqli_fetch_assoc($result_total_amount_4)){
+                                $total_amount = $total_amount + $row_total_amount_4['stall_price'];
+                            }
+                        }
                     }
             }else{
                 echo "It failed. Error Message: " . mysqli_error($link) . "<br />";
@@ -112,10 +144,21 @@
                         $sql_occupy_stall_5 = "UPDATE occupied_stalls SET contract_id = $contract_id 
                         WHERE stall_id = $stall_id_5 AND contract_id IS NULL";
                         mysqli_query($link, $sql_occupy_stall_5);
+
+                        $sql_total_amount_5 = "SELECT * FROM stalls WHERE stall_id = $stall_id_5";
+                        $result_total_amount_5 = mysqli_query($link, $sql_total_amount_5);
+                        if(mysqli_num_rows($result_total_amount_5) > 0 ){
+                            while($row_total_amount_5 = mysqli_fetch_assoc($result_total_amount_5)){
+                                $total_amount = $total_amount + $row_total_amount_5['stall_price'];
+                            }
+                        }
                     }
             }else{
                 echo "It failed. Error Message: " . mysqli_error($link) . "<br />";
             }
+
+        $sql_payment = "INSERT INTO rental_payment (contract_id, total_amount) VALUES ($contract_id, $total_amount)";
+        mysqli_query($link, $sql_payment);
 
         // Notification if it was successful
         echo "Date has been set successfully! <br />";
