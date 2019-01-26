@@ -16,8 +16,22 @@
         }
     }else{
         echo 'Rent Month is empty. Please select a month.<br />';
-        header("Refresh: 1; url=../admin-view-contract-details.php?contract_id=$contract_id");
+        echo "<a href='../admin-view-contract-details.php?contract_id=$contract_id'>Go back</a>";
     }
 
-    
+    if(!empty($_POST['amount_paid'])){
+        $amount_paid = $_POST['amount_paid'];
+        $timezone = date_default_timezone_get();
+
+        $sql_pay = "UPDATE rental_payment SET amount_paid = amount_paid + $amount_paid, 
+        balance = balance - $amount_paid, date_paid = NOW() WHERE rentp_id = $rentp_id";
+        if(mysqli_query($link, $sql_pay)){
+            echo "yay";
+        }else{
+            echo "nay";
+        }
+
+    }
+
+    // header("Refresh: 1; url=../admin-view-contract-details.php?contract_id=$contract_id");
 

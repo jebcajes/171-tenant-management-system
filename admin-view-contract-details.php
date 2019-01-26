@@ -207,6 +207,7 @@
                                         $date_paid = $row_payment['date_paid'];
                                         $rentp_id = $row_payment['rentp_id'];
                                         $null = "";
+                                        $balance = $row_payment['balance'];
                                         echo '<tr align="center">';
                                             echo '<form action="api/admin-set-month-payment.php?contract_id='.$contract_id.'" method="POST">';
                                                 echo '<td>' . $row_payment['rentp_id'] . '</td>';
@@ -246,14 +247,21 @@
 
                                                 if(empty($rent_month)){
                                                     echo '<td>
-                                                    <input type="submit" value="Set" class="btn btn-info btn-sm">
-                                                    <a href="api/admin-rent-payment.php?rentp_id="'.$rentp_id.'" class="btn btn-success btn-sm disabled">Pay</a>
+                                                    <input type="submit" value="Set" class="btn btn-info btn-sm" style="margin: 2px;">
+                                                    <a href="api/admin-rent-payment.php?rentp_id="'.$rentp_id.'" class="btn btn-success btn-sm disabled" style="margin: 2px;">Pay</a>
                                                     </td>';
                                                 }else{
-                                                    echo '<td>
-                                                    <a href="#" class="btn btn-info btn-sm disabled">Set</a>
-                                                    <a href="admin-view-contract-details-pay.php?contract_id='.$contract_id.'&rentp_id='.$rentp_id.'" class="btn btn-success btn-sm">Pay</a>
-                                                    </td>';
+                                                    echo '<td>';
+                                                    echo '<a href="#" class="btn btn-info btn-sm disabled" style="margin: 2px;">Set</a>';
+                                                    
+                                                    if($balance == 0){
+                                                        echo '<a href="admin-view-contract-details-pay.php?contract_id='.$contract_id.'&rentp_id='.$rentp_id.'" class="btn btn-success btn-sm disabled" style="margin: 2px;">Pay</a>';
+                                                    }else{
+                                                        echo '<a href="admin-view-contract-details-pay.php?contract_id='.$contract_id.'&rentp_id='.$rentp_id.'" class="btn btn-success btn-sm " style="margin: 2px;">Pay</a>';
+                                                    }
+                                                    
+                                                    
+                                                    echo '</td>';
                                                 }
                                             echo '</form>';
                                         echo '</tr>';

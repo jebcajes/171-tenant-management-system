@@ -207,32 +207,12 @@
                                         $date_paid = $row_payment['date_paid'];
                                         $rentp_id = $row_payment['rentp_id'];
                                         $null = "";
+                                        $balance = $row_payment['balance'];
                                         echo '<tr align="center">';
                                             echo '<form action="api/admin-set-month-payment.php?contract_id='.$contract_id.'" method="POST">';
                                                 echo '<td>' . $row_payment['rentp_id'] . '</td>';
                                                 echo '<input type="hidden" name="rentp_id" value="'.$rentp_id.'">';
-                                                if(empty($rent_month)){
-                                                    echo '<td>
-                                                        <select type="text" name="rent_month" class="form-control form-control-sm" required>
-                                                            <optgroup label="Select Month">
-                                                                <option>January</option>
-                                                                <option>February</option>
-                                                                <option>March</option>
-                                                                <option>April</option>
-                                                                <option>May</option>
-                                                                <option>June</option>
-                                                                <option>July</option>
-                                                                <option>August</option>
-                                                                <option>September</option>
-                                                                <option>October</option>
-                                                                <option>November</option>
-                                                                <option>December</option>
-                                                            </optgroup>
-                                                        </select>
-                                                    </td>';
-                                                }else{
-                                                    echo '<td>' . $rent_month . '</td>';
-                                                }
+                                                echo '<td>' . $rent_month . '</td>';
                                                 echo '<td>Php ' . number_format($row_payment['total_amount'],2) . '</td>';
                                                 echo '<td>Php ' . number_format($row_payment['balance'],2) . '</td>';
                                                 if($row_payment['rentp_id'] == $_GET['rentp_id']){
@@ -255,15 +235,18 @@
                                                     <a href="api/admin-rent-payment.php?rentp_id="'.$rentp_id.'" class="btn btn-success btn-sm disabled">Pay</a>
                                                     </td>';
                                                 }else{
-                                                    echo '<td>
-                                                    <a href="#" class="btn btn-info btn-sm disabled">Set</a>
-                                                    <a href="admin-view-contract-details-pay.php?contract_id='.$contract_id.'&rentp_id='.$rentp_id.'" class="btn btn-success btn-sm">Pay</a>
-                                                    
-                                                    ';
                                                     if($row_payment['rentp_id'] == $_GET['rentp_id']){
-                                                        echo '<a href="admin-view-contract-details.php?contract_id='.$contract_id.'" class="btn btn-danger btn-sm">Cancel</a>';
+                                                        echo '<td>';
+                                                            echo '<input type="submit" value="Confirm" class="btn btn-success btn-sm" style="margin: 2px;">';
+                                                            echo '<a href="admin-view-contract-details.php?contract_id='.$contract_id.'" class="btn btn-danger btn-sm" style="margin: 2px;">Cancel</a>';
+                                                        echo '</td>';
+                                                    }else{
+                                                        echo '<td>
+                                                        <input type="submit" value="Set" class="btn btn-info btn-sm disabled">
+                                                        <a href="admin-view-contract-details-pay.php?contract_id='.$contract_id.'&rentp_id='.$rentp_id.'" class="btn btn-success btn-sm">Pay</a>
+                                                        </td>';
                                                     }
-                                                    echo '</td>';
+                                                    
                                                 }
                                             echo '</form>';
                                         echo '</tr>';
