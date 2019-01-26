@@ -110,20 +110,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                         echo "<td style='color: gray; font-weight: 800; font-style: italic;'>" . $status . "</td>";
                                     }
                                     echo "<td>";
-                                    if($status == 'Approved'){
-                                        echo "<a href='admin-view-applied-stall.php?app_id=$app_id' class='btn btn-primary btn-sm' style='margin: 1px; font-size: 13px;'>View</a>
-                                        <a href='api/api-admin-approve-applied-stall.php?app_id=$app_id' class='btn btn-success btn-sm disabled' style='margin: 1px; font-size: 13px;' >Approve</a>
-                                        <a href='api/api-admin-disapprove-applied-stall.php?app_id=$app_id' class='btn btn-danger btn-sm disabled' style='margin: 1px; font-size: 13px;'>Disapprove</a>";
-                                    }elseif($status == 'Disapproved'){
-                                        echo "<a href='admin-view-applied-stall.php?app_id=$app_id' class='btn btn-primary btn-sm' style='margin: 1px; font-size: 13px;'>View</a>
-                                        <a href='api/api-admin-approve-applied-stall.php?app_id=$app_id' class='btn btn-success btn-sm disabled' style='margin: 1px; font-size: 13px;' >Approve</a>
-                                        <a href='api/api-admin-disapprove-applied-stall.php?app_id=$app_id' class='btn btn-danger btn-sm disabled' style='margin: 1px; font-size: 13px;'>Disapprove</a>";
-                                    }else{
-                                        echo "<a href='admin-view-applied-stall.php?app_id=$app_id' class='btn btn-primary btn-sm' style='margin: 1px; font-size: 13px;'>View</a>
-                                        <a href='api/api-admin-approve-applied-stall.php?app_id=$app_id' class='btn btn-success btn-sm' style='margin: 1px; font-size: 13px;' >Approve</a>
-                                        <a href='api/api-admin-disapprove-applied-stall.php?app_id=$app_id' class='btn btn-danger btn-sm' style='margin: 1px; font-size: 13px;'>Disapprove</a>";
-                                    }
-                                    
+                                        echo "<a href='admin-view-applied-stall.php?app_id=$app_id' class='btn btn-primary btn-sm' style='margin: 1px; font-size: 13px;'>View</a>";
                                     echo "</td>";
                                 echo "</tr>";
                             }
