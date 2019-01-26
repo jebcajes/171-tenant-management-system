@@ -162,6 +162,7 @@
                         <th>Floor</th>
                         <th>Block</th>
                         <th>Block Dimensions</th>
+                        <th>Stall Price</th>
                     </thead>
                     <?php 
                         $sql_occupied_stalls = "SELECT * FROM occupied_stalls os INNER JOIN stalls s ON os.stall_id = s.stall_id WHERE contract_id = $contract_id";
@@ -174,6 +175,7 @@
                                     echo "<td>" . $row_occupied_stalls['floor_no'] . "</td>";
                                     echo "<td>" . $row_occupied_stalls['block_no'] . "</td>";
                                     echo "<td>" . $row_occupied_stalls['block_dimension'] . "</td>";
+                                    echo '<td>' . number_format($row_occupied_stalls['stall_price'],2) . '</td>';
                                 echo "</tr>";
                             }
                         }else{
@@ -205,7 +207,7 @@
                                         $rentp_id = $row_payment['rentp_id'];
                                         $null = "";
                                         echo '<tr align="center">';
-                                            echo '<form action="api/admin-set-month-payment.php" method="POST">';
+                                            echo '<form action="api/admin-set-month-payment.php?contract_id='.$contract_id.'" method="POST">';
                                                 echo '<td>' . $row_payment['rentp_id'] . '</td>';
                                                 echo '<input type="hidden" name="rentp_id" value="'.$rentp_id.'">';
                                                 if(empty($rent_month)){
