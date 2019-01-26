@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2019 at 01:34 PM
+-- Generation Time: Jan 26, 2019 at 01:17 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -46,7 +46,8 @@ CREATE TABLE `applied_stall` (
 INSERT INTO `applied_stall` (`app_id`, `client_id`, `category_id`, `business_name`, `date_applied`, `date_approved`, `application_status`, `applied_term`) VALUES
 (21, 29, 18, 'Calisthenics Philippines', '2019-01-25 19:12:22', NULL, 'Approved', '4 years'),
 (22, 29, 8, 'Oxygen', '2019-01-25 19:23:21', NULL, 'Disapproved', '2 years'),
-(23, 29, 8, 'Bench', '2019-01-25 19:48:45', NULL, 'Approved', '2 years');
+(23, 29, 8, 'Bench', '2019-01-25 19:48:45', NULL, 'Approved', '2 years'),
+(24, 30, 10, 'iStore', '2019-01-26 19:11:06', NULL, 'Approved', '4 years');
 
 --
 -- Triggers `applied_stall`
@@ -86,7 +87,9 @@ INSERT INTO `applied_stall_details` (`id`, `app_id`, `stall_id`, `stall_applicat
 (32, 22, 14, 'Disapproved'),
 (33, 22, 17, 'Disapproved'),
 (34, 23, 18, 'Approved'),
-(35, 23, 19, 'Approved');
+(35, 23, 19, 'Approved'),
+(36, 24, 14, 'Approved'),
+(37, 24, 17, 'Approved');
 
 -- --------------------------------------------------------
 
@@ -143,7 +146,8 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`client_id`, `fname`, `lname`, `email`, `address`, `contact`) VALUES
-(29, 'Carlo Miguel', 'Dy', 'carlomigueldy@gmail.com', 'Maigo', '09167764350');
+(29, 'Carlo Miguel', 'Dy', 'carlomigueldy@gmail.com', 'Maigo', '09167764350'),
+(30, 'Nove', 'Lactuan', 'nove.lactuan@gmail.com', 'Tubod', '09252248799');
 
 -- --------------------------------------------------------
 
@@ -171,7 +175,8 @@ CREATE TABLE `contract` (
 
 INSERT INTO `contract` (`contract_id`, `app_id`, `client_id`, `category_id`, `business_name`, `start_date`, `end_date`, `date_approved`, `remark`, `contract_term`, `renewal_status`) VALUES
 (18, 21, 29, 18, 'Calisthenics Philippines', '2019-01-25 00:00:00', '2019-01-28 00:00:00', '2019-01-25 19:13:49', 'Confirmed', '4 years', 'Pending'),
-(20, 23, 29, 8, 'Bench', '2019-01-25 00:00:00', '2019-01-26 00:00:00', '2019-01-25 19:49:22', 'Confirmed', '4 years', 'Pending');
+(20, 23, 29, 8, 'Bench', '2019-01-25 00:00:00', '2019-01-26 00:00:00', '2019-01-25 19:49:22', 'Confirmed', '4 years', 'Pending'),
+(21, 24, 30, 10, 'iStore', '2019-01-26 00:00:00', '2019-01-31 00:00:00', '2019-01-26 19:11:16', 'Confirmed', '4 years', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -191,10 +196,10 @@ CREATE TABLE `occupied_stalls` (
 
 INSERT INTO `occupied_stalls` (`id`, `contract_id`, `stall_id`) VALUES
 (10, 18, 13),
-(11, NULL, 14),
+(11, 21, 14),
 (12, 18, 15),
 (13, 18, 16),
-(14, NULL, 17),
+(14, 21, 17),
 (15, 20, 18),
 (16, 20, 19),
 (17, NULL, 20),
@@ -259,6 +264,18 @@ CREATE TABLE `rental_payment` (
   `rent_month` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `rental_payment`
+--
+
+INSERT INTO `rental_payment` (`rentp_id`, `contract_id`, `total_amount`, `amount_paid`, `balance`, `date_paid`, `rent_month`) VALUES
+(2, 21, 3751.5, 3751.5, 0, '2019-01-26 00:00:00', 'January'),
+(4, 21, 3751.5, 3751.5, 0, '2019-01-26 19:56:04', 'February'),
+(5, 21, 3751.5, 3250, 501.5, '2019-01-26 20:01:30', 'March'),
+(6, 21, 3751.5, 0, 3751.5, NULL, 'April'),
+(7, 21, 4251.7, 0, 4251.7, NULL, 'May'),
+(8, 21, 4251.7, 0, 4251.7, NULL, 'June');
+
 -- --------------------------------------------------------
 
 --
@@ -280,7 +297,7 @@ CREATE TABLE `stalls` (
 
 INSERT INTO `stalls` (`stall_id`, `floor_no`, `block_no`, `block_dimension`, `stall_price`, `price_date_effectivity`) VALUES
 (13, '1', '1A', '350x350', 1000.5, '2019-01-21 00:00:00'),
-(14, '1', '1B', '450x450', 1250.75, '2019-01-21 00:00:00'),
+(14, '1', '1B', '450x450', 1750.95, '2019-01-21 00:00:00'),
 (15, '1', '1C', '450x450', 1250.75, '2019-01-21 00:00:00'),
 (16, '1', '1D', '350x350', 1000.5, '2019-01-21 00:00:00'),
 (17, '1', '1E', '500x500', 2500.75, '2019-01-21 00:00:00'),
@@ -321,6 +338,13 @@ CREATE TABLE `stall_pricehistory` (
   `date_effectivity` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `stall_pricehistory`
+--
+
+INSERT INTO `stall_pricehistory` (`priceh_id`, `stall_id`, `stall_price`, `date_end`, `date_effectivity`) VALUES
+(30, 14, 1250.75, '2019-01-21 00:00:00', '2019-01-21 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -333,6 +357,13 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES
+(1, 'admin', '$2y$10$jHkDiN56hsnaiahFqS2kueUOCglf1LUaX.WcrQVQ3kvribfNaIXKW', '2019-01-26 20:09:03');
 
 --
 -- Indexes for dumped tables
@@ -436,13 +467,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applied_stall`
 --
 ALTER TABLE `applied_stall`
-  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `applied_stall_details`
 --
 ALTER TABLE `applied_stall_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `business_classification`
@@ -454,13 +485,13 @@ ALTER TABLE `business_classification`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `contract`
 --
 ALTER TABLE `contract`
-  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `occupied_stalls`
@@ -484,7 +515,7 @@ ALTER TABLE `renewal_details`
 -- AUTO_INCREMENT for table `rental_payment`
 --
 ALTER TABLE `rental_payment`
-  MODIFY `rentp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `rentp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `stalls`
@@ -496,13 +527,13 @@ ALTER TABLE `stalls`
 -- AUTO_INCREMENT for table `stall_pricehistory`
 --
 ALTER TABLE `stall_pricehistory`
-  MODIFY `priceh_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `priceh_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
