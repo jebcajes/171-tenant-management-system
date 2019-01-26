@@ -1,3 +1,14 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,9 +42,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="admin-renewal-requests.php">Renewal Requests</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="admin-rental-requests.php">Rental Payments</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="admin-stalls.php">Stalls</a>
