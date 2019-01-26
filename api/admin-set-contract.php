@@ -157,7 +157,7 @@
                 echo "It failed. Error Message: " . mysqli_error($link) . "<br />";
             }
 
-        $sql_payment = "INSERT INTO rental_payment (contract_id, total_amount) VALUES ($contract_id, $total_amount)";
+        $sql_payment = "INSERT INTO rental_payment (contract_id, total_amount, balance) VALUES ($contract_id, $total_amount, $total_amount)";
         mysqli_query($link, $sql_payment);
 
         // Notification if it was successful

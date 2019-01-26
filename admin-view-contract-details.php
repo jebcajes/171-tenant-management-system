@@ -49,7 +49,7 @@
         <br />
         <h1>Contract Details</h1><br />
         <div class="row">
-            <div class="col">
+            <div class="col-md-4">
                 <h4>Information</h4>
                 <table class="table table-bordered table-sm">
                     <thead align="center">
@@ -182,6 +182,87 @@
                             echo "</tr>";
                         }
                     ?>
+                </table>
+                <h4>Rental Payment Information</h4>
+                <table class="table table-sm table-bordered table-striped">
+                        <thead align="center">
+                            <th>#</th>
+                            <th>Rent Month</th>
+                            <th>Payment per Month</th>
+                            <th>Balance</th>
+                            <th>Amount Paid</th>
+                            <th>Date Paid</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $sql_payment = "SELECT * FROM rental_payment WHERE contract_id = $contract_id";
+                                $result_payment = mysqli_query($link, $sql_payment);
+                                if(mysqli_num_rows($result_payment) > 0 ){
+                                    while($row_payment = mysqli_fetch_assoc($result_payment)){
+                                        $rent_month = $row_payment['rent_month'];
+                                        $date_paid = $row_payment['date_paid'];
+                                        $rentp_id = $row_payment['rentp_id'];
+                                        $null = "";
+                                        echo '<tr align="center">';
+                                            echo '<form action="api/admin-set-month-payment.php" method="POST">';
+                                                echo '<td>' . $row_payment['rentp_id'] . '</td>';
+                                                echo '<input type="hidden" name="rentp_id" value="'.$rentp_id.'">';
+                                                if(empty($rent_month)){
+                                                    echo '<td>
+                                                        <select type="text" name="rent_month" class="form-control form-control-sm" required>
+                                                            <optgroup label="Select Month">
+                                                                <option>January</option>
+                                                                <option>February</option>
+                                                                <option>March</option>
+                                                                <option>April</option>
+                                                                <option>May</option>
+                                                                <option>June</option>
+                                                                <option>July</option>
+                                                                <option>August</option>
+                                                                <option>September</option>
+                                                                <option>October</option>
+                                                                <option>November</option>
+                                                                <option>December</option>
+                                                            </optgroup>
+                                                        </select>
+                                                    </td>';
+                                                }else{
+                                                    echo '<td>' . $rent_month . '</td>';
+                                                }
+                                                echo '<td>Php ' . number_format($row_payment['total_amount'],2) . '</td>';
+                                                echo '<td>Php ' . number_format($row_payment['balance'],2) . '</td>';
+                                                echo '<td>Php ' . number_format($row_payment['amount_paid'],2) . '</td>';
+                                                if(empty($date_paid)){
+                                                    echo '<td style="color: gray; font-style: italic; font-weight: 800">N/A</td>';
+                                                }else{
+                                                    $old_date_paid = strtotime($row_payment['date_paid']);
+                                                    $new_date_paid = date('Y-m-d', $old_date_paid);
+                                                    echo '<td>' . $new_date_paid . '</td>';
+                                                }
+
+                                                if(empty($rent_month)){
+                                                    echo '<td>
+                                                    <input type="submit" value="Set" class="btn btn-info btn-sm">
+                                                    <a href="api/admin-rent-payment.php?rentp_id="'.$rentp_id.'" class="btn btn-success btn-sm disabled">Pay</a>
+                                                    </td>';
+                                                }else{
+                                                    echo '<td>
+                                                    <a href="#" class="btn btn-info btn-sm disabled">Set</a>
+                                                    <a href="api/admin-rent-payment.php?rentp_id="'.$rentp_id.'" class="btn btn-success btn-sm">Pay</a>
+                                                    </td>';
+                                                }
+                                            echo '</form>';
+                                        echo '</tr>';
+                                    }
+                                }else{
+                                    echo '<tr align="center">';
+                                        echo '<td colspan="7" style="font-style: italic;">No records found.</td>';
+                                    echo '</tr>';
+                                }
+                            ?>
+                        </tbody>
+                
                 </table>
             </div>
         </div>
