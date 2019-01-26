@@ -14,9 +14,6 @@
         }else{
             echo "Error, can't update. ERROR MSG (" . mysqli_error($link) . ") <br />";
         }
-    }else{
-        echo 'Rent Month is empty. Please select a month.<br />';
-        echo "<a href='../admin-view-contract-details.php?contract_id=$contract_id'>Go back</a>";
     }
 
     if(!empty($_POST['amount_paid'])){
@@ -26,12 +23,9 @@
         $sql_pay = "UPDATE rental_payment SET amount_paid = amount_paid + $amount_paid, 
         balance = balance - $amount_paid, date_paid = NOW() WHERE rentp_id = $rentp_id";
         if(mysqli_query($link, $sql_pay)){
-            echo "yay";
-        }else{
-            echo "nay";
+            echo "Payment successful! <br />";
+            header("Refresh: 1; url=../admin-view-contract-details.php?contract_id=$contract_id");
         }
-
     }
 
-    // header("Refresh: 1; url=../admin-view-contract-details.php?contract_id=$contract_id");
 

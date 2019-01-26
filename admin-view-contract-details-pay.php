@@ -241,10 +241,15 @@
                                                             echo '<a href="admin-view-contract-details.php?contract_id='.$contract_id.'" class="btn btn-danger btn-sm" style="margin: 2px;">Cancel</a>';
                                                         echo '</td>';
                                                     }else{
-                                                        echo '<td>
-                                                        <input type="submit" value="Set" class="btn btn-info btn-sm disabled">
-                                                        <a href="admin-view-contract-details-pay.php?contract_id='.$contract_id.'&rentp_id='.$rentp_id.'" class="btn btn-success btn-sm">Pay</a>
-                                                        </td>';
+                                                        echo '<td>';
+                                                            echo '<input type="submit" value="Set" class="btn btn-info btn-sm disabled" style="margin: 2px;">';
+                                                            if($balance <= 0){
+                                                                echo '<a href="admin-view-contract-details-pay.php?contract_id='.$contract_id.'&rentp_id='.$rentp_id.'" class="btn btn-success btn-sm disabled" style="margin: 2px;">Pay</a>';
+                                                            }else{
+                                                                echo '<a href="admin-view-contract-details-pay.php?contract_id='.$contract_id.'&rentp_id='.$rentp_id.'" class="btn btn-success btn-sm" style="margin: 2px;">Pay</a>';
+                                                            }
+                                                            
+                                                        echo '</td>';
                                                     }
                                                     
                                                 }
