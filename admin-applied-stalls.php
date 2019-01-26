@@ -30,7 +30,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         </a>
         <div class="container">
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav float-left">
                     <li class="nav-item ">
                         <a class="nav-link" href="index.php">Home</a>
                     </li>
@@ -45,6 +45,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="admin-stalls.php">Stalls</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav float-right">
+                    <li class="nav-item">
+                        <a href="api/logout.php" class="nav-link">Logout</a>
                     </li>
                 </ul>
             </div>

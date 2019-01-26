@@ -45,6 +45,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                         <a class="nav-link" href="admin-stalls.php">Stalls</a>
                     </li>
                 </ul>
+                
             </div>
         </div>
     </nav>

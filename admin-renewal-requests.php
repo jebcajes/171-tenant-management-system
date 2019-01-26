@@ -45,6 +45,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                         <a class="nav-link" href="admin-stalls.php">Stalls</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav float-right">
+                    <li class="nav-item">
+                        <a href="api/logout.php" class="nav-link">Logout</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
