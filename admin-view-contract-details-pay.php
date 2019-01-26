@@ -235,7 +235,12 @@
                                                 }
                                                 echo '<td>Php ' . number_format($row_payment['total_amount'],2) . '</td>';
                                                 echo '<td>Php ' . number_format($row_payment['balance'],2) . '</td>';
-                                                echo '<td>Php ' . number_format($row_payment['amount_paid'],2) . '</td>';
+                                                if($row_payment['rentp_id'] == $_GET['rentp_id']){
+                                                    echo '<td><input type="number" step="0.01" name="amount_paid" class="form-control form-control-sm" required></td>';
+                                                }else{
+                                                    echo '<td>Php ' . number_format($row_payment['amount_paid'],2) . '</td>';
+                                                }
+                                                
                                                 if(empty($date_paid)){
                                                     echo '<td style="color: gray; font-style: italic; font-weight: 800">N/A</td>';
                                                 }else{
@@ -253,7 +258,12 @@
                                                     echo '<td>
                                                     <a href="#" class="btn btn-info btn-sm disabled">Set</a>
                                                     <a href="admin-view-contract-details-pay.php?contract_id='.$contract_id.'&rentp_id='.$rentp_id.'" class="btn btn-success btn-sm">Pay</a>
-                                                    </td>';
+                                                    
+                                                    ';
+                                                    if($row_payment['rentp_id'] == $_GET['rentp_id']){
+                                                        echo '<a href="admin-view-contract-details.php?contract_id='.$contract_id.'" class="btn btn-danger btn-sm">Cancel</a>';
+                                                    }
+                                                    echo '</td>';
                                                 }
                                             echo '</form>';
                                         echo '</tr>';
