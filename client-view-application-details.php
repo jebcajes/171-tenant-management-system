@@ -106,6 +106,7 @@
                         <th>Block</th>
                         <th>Block Dimensions</th>
                         <th>Remark</th>
+                        <th>Action</th>
                     </thead>
                 <?php
                         require_once "api/config.php";
@@ -120,6 +121,8 @@
                         if(mysqli_num_rows($result_applied_stall) > 0 ){
                             while($row_applied_stall = mysqli_fetch_assoc($result_applied_stall)){
                                 echo "<tr align='center'>";
+                                    $stall_id = $row_applied_stall['stall_id'];
+                                    $status = $row_applied_stall['stall_application_status'];
                                     echo "<td>" . $row_applied_stall['stall_id'] . "</td>";
                                     echo "<td>" . $row_applied_stall['floor_no'] . "</td>";
                                     echo "<td>" . $row_applied_stall['block_no'] . "</td>";
@@ -130,8 +133,11 @@
                                         echo "<td style='color: gray; font-style: italic; font-weight: 800;'>" . $row_applied_stall['stall_application_status'] . "</td>";
                                     }elseif($row_applied_stall['stall_application_status'] == 'Disapproved'){
                                         echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_applied_stall['stall_application_status'] . "</td>";
+                                    }elseif(($row_applied_stall['stall_application_status']) == 'Cancelled'){
+                                        echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_applied_stall['stall_application_status'] . "</td>";
                                     }
-                                        
+
+                                     
                                 echo "</tr>";
                             }
                         }
