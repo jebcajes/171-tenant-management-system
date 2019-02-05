@@ -99,6 +99,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                     echo "<td style='color: gray; font-style: italic; font-weight: 800;'>" . $row_renewal['renewal_status'] . "</td>";
                                 }elseif($row_renewal['renewal_status'] == 'Disapproved'){
                                     echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_renewal['renewal_status'] . "</td>";
+                                }elseif($row_renewal['renewal_status'] == 'Cancelled'){
+                                    echo "<td style='color: red; font-style: italic; font-weight: 800;'>" . $row_renewal['renewal_status'] . "</td>";
                                 }
                             echo "</tr>";
                         }

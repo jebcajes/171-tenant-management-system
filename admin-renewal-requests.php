@@ -96,6 +96,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                 $renewal_term = $row_renewal['renewal_term'];
                                 if($row_renewal['renewal_status'] == 'Approved'){
                                     echo "<td style='color: green; font-weight: 800; font-style: italic;'>" . $row_renewal['renewal_status'] . "</td>";
+                                }elseif($row_renewal['renewal_status'] == 'Cancelled'){
+                                    echo "<td style='color: red; font-weight: 800; font-style: italic;'>" . $row_renewal['renewal_status'] . "</td>";
                                 }else{
                                     echo "<td style='color: gray; font-weight: 800; font-style: italic;'>" . $row_renewal['renewal_status'] . "</td>";
                                 }
@@ -109,6 +111,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                     echo "<td>";
                                         echo "<a href='admin-view-renewal-details.php?renewal_id=$renewal_id' class='btn btn-primary btn-sm' style='font-size: 11px; margin: 1px;'>View</a>";
                                         echo "<a href='api/admin-approve-renewal.php?renewal_id=$renewal_id&renewal_term=$renewal_term&contract_id=$contract_id' class='btn btn-success btn-sm' style='font-size: 11px; margin: 1px;'>Approve</a>";
+                                    echo "</td>";
+                                }elseif($remark == 'Cancelled'){
+                                    echo "<td>";
+                                        echo "<a href='admin-view-renewal-details.php?renewal_id=$renewal_id' class='btn btn-primary btn-sm' style='font-size: 11px; margin: 1px;'>View</a>";
+                                        echo "<a href='api/admin-approve-renewal.php?renewal_id=$renewal_id&renewal_term=$renewal_term&contract_id=$contract_id' class='btn btn-success btn-sm disabled' style='font-size: 11px; margin: 1px;'>Approve</a>";
                                     echo "</td>";
                                 }
                                 

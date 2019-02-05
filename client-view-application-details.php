@@ -106,7 +106,6 @@
                         <th>Block</th>
                         <th>Block Dimensions</th>
                         <th>Remark</th>
-                        <th>Action</th>
                     </thead>
                 <?php
                         require_once "api/config.php";

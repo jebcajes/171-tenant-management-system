@@ -105,9 +105,10 @@
                                   
                                 echo "<td>" . $row_contract['renewal_status'] . "</td>";  
                                 if($row_contract['renewal_status'] == 'Sent'){
-                                    echo "<td><input type='submit' value='Request for Renewal' class='btn btn-danger btn-sm' disabled /></td>";
+                                    echo "<td><input type='submit' value='Request' class='btn btn-primary btn-sm' style='font-size: 10px; margin: 1px;' disabled />
+                                    <a href='api/client-cancel-renewal.php?client_id=$client_id&contract_id=$contract_id' class='btn btn-sm btn-danger' style='font-size: 10px; margin: 1px;'>Cancel</a></td>";
                                 }else{
-                                    echo "<td><input type='submit' value='Request for Renewal' class='btn btn-danger btn-sm' /></td>";
+                                    echo "<td><input type='submit' value='Request' class='btn btn-primary btn-sm style='font-size: 10px; margin: 1px;'' /></td>";
                                 }        
                                 
                             echo "</tr>";
