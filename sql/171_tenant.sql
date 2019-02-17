@@ -221,7 +221,9 @@ CREATE TABLE `renewal` (
   `contract_id` int(11) NOT NULL,
   `date_applied_renewal` datetime DEFAULT CURRENT_TIMESTAMP,
   `renewal_status` varchar(32) DEFAULT 'Unapproved',
-  `renewal_term` varchar(32) NOT NULL
+  `renewal_term` varchar(32) NOT NULL,
+  `start_date` datetime,
+  `end_date` datetime
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

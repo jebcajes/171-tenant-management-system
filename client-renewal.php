@@ -75,10 +75,10 @@
                                 echo "<td>" . $row_contract['category_name'] . "</td>";
                                 $old_start_date = strtotime($row_contract['start_date']);
                                 $new_start_date = date('Y-m-d', $old_start_date); 
-                                echo "<td>" . $new_start_date . "</td>";
+                                echo "<td>" . "<input type='date' name='start_date' value='$new_start_date' class='form-control form-control-sm'>" . "</td>";
                                 $old_end_date = strtotime($row_contract['end_date']);
                                 $new_end_date = date('Y-m-d', $old_end_date); 
-                                echo "<td>" . $new_end_date . "</td>"; 
+                                echo "<td>" . "<input type='date' name='end_date' value='$new_end_date' class='form-control form-control-sm'>" . "</td>"; 
                                 if($row_contract['renewal_status'] == 'Sent'){
                                     $sql_renewal_term = "SELECT renewal_term FROM renewal WHERE contract_id = $contract_id";
                                     $result_renewal_term = mysqli_query($link,$sql_renewal_term);
