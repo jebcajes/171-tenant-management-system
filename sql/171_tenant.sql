@@ -36,7 +36,9 @@ CREATE TABLE `applied_stall` (
   `date_applied` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_approved` datetime DEFAULT NULL,
   `application_status` varchar(32) DEFAULT 'Unapproved',
-  `applied_term` varchar(32) NOT NULL
+  `applied_term` varchar(32) NOT NULL,
+  `start_date` datetime,
+  `end_date` datetime
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -55,7 +57,7 @@ INSERT INTO `applied_stall` (`app_id`, `client_id`, `category_id`, `business_nam
 DELIMITER $$
 CREATE TRIGGER `application_automation` AFTER UPDATE ON `applied_stall` FOR EACH ROW BEGIN
  IF (new.application_status = 'Approved') THEN
-	INSERT INTO contract (client_id, app_id, category_id, business_name, contract_term) VALUES (new.client_id, new.app_id, new.category_id, new.business_name, new.applied_term);
+	INSERT INTO contract (client_id, app_id, category_id, business_name, contract_term, start_date, end_date) VALUES (new.client_id, new.app_id, new.category_id, new.business_name, new.applied_term, new.start_date, new.end_date);
  END IF;
 END
 $$
