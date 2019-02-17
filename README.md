@@ -6,6 +6,6 @@ carloxd
 
 Jeb Cajes
 Nove Lactuan
-Hani Boy xd
+Hani Boy 
 Gilvin Zalsos
-Wildcard xd
+Wildcard
