@@ -211,10 +211,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     </table>
                     <?php
                         if($application_status == 'Approved'){
-                            echo "<input type='submit' name='disapproved' value='Disapprove Stall(s)' class='btn btn-danger btn-sm float-right disabled' style='margin: 5px;'>";
-                            echo "<input type='submit' name='approved' value='Approve Stall(s)' class='btn btn-primary btn-sm float-right disabled' style='margin: 5px;'>";
-                            echo "<a href='api/api-admin-disapprove-applied-stall.php?app_id=$app_id' class='btn btn-danger btn-sm float-right disabled' style='margin: 5px;'>Disapprove App</a>";
-                            echo "<a href='api/api-admin-approve-applied-stall.php?app_id=$app_id' class='btn btn-success btn-sm float-right disabled' style='margin: 5px;' >Approve App</a>";
+                            // echo "<a href='api/api-admin-disapprove-applied-stall.php?app_id=$app_id' class='btn btn-danger btn-sm float-right disabled' style='margin: 5px;'>Disapprove App</a>";
+                            echo "<a href='api/api-admin-approve-applied-stall.php?app_id=$app_id' class='btn btn-success btn-sm float-right disabled' style='margin: 5px;' >Confirmed</a>";
                         }elseif($application_status == 'Disapproved'){
                             echo "<input type='submit' name='disapproved' value='Disapprove Stall(s)' class='btn btn-danger btn-sm float-right disabled' style='margin: 5px;'>";
                             echo "<input type='submit' name='approved' value='Approve Stall(s)' class='btn btn-primary btn-sm float-right disabled' style='margin: 5px;'>";
@@ -223,8 +221,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                         }elseif($application_status == 'Unapproved'){
                             echo "<input type='submit' name='disapproved' value='Disapprove Stall(s)' class='btn btn-danger btn-sm float-right' style='margin: 5px;'>";
                             echo "<input type='submit' name='approved' value='Approve Stall(s)' class='btn btn-primary btn-sm float-right' style='margin: 5px;'>";
-                            echo "<a href='api/api-admin-disapprove-applied-stall.php?app_id=$app_id' class='btn btn-danger btn-sm float-right' style='margin: 5px;'>Disapprove App</a>";
-                            echo "<a href='api/api-admin-approve-applied-stall.php?app_id=$app_id' class='btn btn-success btn-sm float-right' style='margin: 5px;' >Approve App</a>";
+                            echo "<a href='api/api-admin-approve-applied-stall.php?app_id=$app_id' class='btn btn-success btn-sm float-right' style='margin: 5px;' >Confirm</a>";
                         }
                     ?>
                 </form>

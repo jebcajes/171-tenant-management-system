@@ -75,6 +75,10 @@
                             <option>4 years</option>
                         </optgroup>
                     </select>
+                    <label>Start Date</label>
+                    <input type="date" class="form-control" name="start_date" required>
+                    <label>End Date</label>
+                    <input type="date" class="form-control" name="end_date" required>
                 </div>
 
                 <br />
