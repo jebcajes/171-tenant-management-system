@@ -66,6 +66,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     <th>Client</th>
                     <th>Date Applied for Renewal</th>
                     <th>Renewal Term</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
                     <th>Remark</th>
                     <th>Action</th>
                 </thead>
@@ -74,7 +76,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                     $sql_renewal = "SELECT r.renewal_id AS 'renewal_id', cl.fname AS 'fname', cl.lname AS 'lname',
                     r.contract_id AS 'contract_id', r.date_applied_renewal AS 'date_applied_renewal', r.renewal_status AS 'renewal_status',
-                    r.renewal_term AS 'renewal_term'
+                    r.renewal_term AS 'renewal_term', r.start_date AS 'start_date', r.end_date AS 'end_date'
                     FROM renewal r
                     INNER JOIN client cl ON r.client_id = cl.client_id
                     ";
@@ -93,6 +95,16 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                 $new_date = date('Y-m-d', $old_date);
                                 echo "<td>" . $new_date . "</td>";
                                 echo "<td>" . $row_renewal['renewal_term'] . "</td>";
+
+                                $old_start_date = strtotime($row_renewal['start_date']);
+                                $new_start_date = date('Y-m-d', $old_start_date);
+                                echo "<td>" . $new_start_date . "</td>";
+                                $old_end_date = strtotime($row_renewal['end_date']);
+                                $new_end_date = date('Y-m-d', $old_end_date);
+                                echo "<td>" . $new_end_date . "</td>";
+
+
+
                                 $renewal_term = $row_renewal['renewal_term'];
                                 if($row_renewal['renewal_status'] == 'Approved'){
                                     echo "<td style='color: green; font-weight: 800; font-style: italic;'>" . $row_renewal['renewal_status'] . "</td>";
@@ -110,7 +122,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                 }elseif($remark == 'Unapproved'){
                                     echo "<td>";
                                         echo "<a href='admin-view-renewal-details.php?renewal_id=$renewal_id' class='btn btn-primary btn-sm' style='font-size: 11px; margin: 1px;'>View</a>";
-                                        echo "<a href='api/admin-approve-renewal.php?renewal_id=$renewal_id&renewal_term=$renewal_term&contract_id=$contract_id' class='btn btn-success btn-sm' style='font-size: 11px; margin: 1px;'>Approve</a>";
+                                        echo "<a href='api/admin-approve-renewal.php?renewal_id=$renewal_id&renewal_term=$renewal_term&contract_id=$contract_id&start_date=$new_start_date&end_date=$new_end_date' class='btn btn-success btn-sm' style='font-size: 11px; margin: 1px;'>Approve</a>";
                                     echo "</td>";
                                 }elseif($remark == 'Cancelled'){
                                     echo "<td>";

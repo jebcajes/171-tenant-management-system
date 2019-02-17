@@ -17,6 +17,8 @@
 
     // Setting the start and end date
     if($remark == 'Confirmed'){
+        $sql_verified = "UPDATE contract SET verified = 'True' WHERE contract_id = $contract_id";
+        mysqli_query($link, $sql_verified);
 
             // Automation to occupy only Approved stall; 1
             $sql_applied_stall_1 = "SELECT * FROM applied_stall_details WHERE app_id = $app_id LIMIT 0,1";
