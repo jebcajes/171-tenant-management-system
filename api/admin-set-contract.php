@@ -1,8 +1,6 @@
 <?php
     require_once "config.php";
 
-    $start_date = $_POST['start_date'];
-    $end_date = $_POST['end_date'];
     $contract_id = $_GET['contract_id'];
 
     $total_amount = $remark = $app_id = "";
@@ -18,8 +16,7 @@
     }
 
     // Setting the start and end date
-    $sql_set_date = "UPDATE contract SET start_date = '$start_date', end_date = '$end_date' WHERE contract_id = $contract_id";
-    if(mysqli_query($link, $sql_set_date)){
+    if($remark == 'Confirmed'){
 
             // Automation to occupy only Approved stall; 1
             $sql_applied_stall_1 = "SELECT * FROM applied_stall_details WHERE app_id = $app_id LIMIT 0,1";

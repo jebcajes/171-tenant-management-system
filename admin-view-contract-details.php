@@ -71,11 +71,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     <?php 
                         require_once "api/config.php";
                         $contract_id = $_GET['contract_id'];
-                        $remark = $start_date = $end_date = "";
+                        $remark = $start_date = $end_date = $verified = "";
 
                         $sql_contract = "SELECT cl.fname AS 'fname', cl.lname AS 'lname', c.business_name AS 'business_name',
                         bc.category_name AS 'category_name', c.contract_term AS 'contract_term', c.start_date AS 'start_date',
-                        c.end_date AS 'end_date', c.date_approved AS 'date_approved', c.remark AS 'remark'
+                        c.end_date AS 'end_date', c.date_approved AS 'date_approved', c.remark AS 'remark', c.verified AS 'verified'
                         FROM contract c
                         INNER JOIN client cl ON c.client_id = cl.client_id
                         INNER JOIN business_classification bc ON c.category_id = bc.category_id
@@ -89,6 +89,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                 $start_date = $row_contract['start_date'];
                                 $end_date = $row_contract['end_date'];
                                 $term = $row_contract['contract_term'];
+                                $verified = $row_contract['verified'];
 
                                 echo "<tr>";
                                     echo "<td align='right'>Client:</td><td align='center'>" . $row_contract['fname'] . " " . $row_contract['lname'] . "</td>";
@@ -148,23 +149,22 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     ?>
                 </table>
                 <?php 
-                    if(!empty($start_date) && !empty($end_date)){
+                    if($verified == 'False'){
                         if($remark == 'Confirmed'){
-                            echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right disabled'>Set Start & End Date</a>";
-                        }elseif($remark == 'Cancelled'){
-                            echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right disabled'>Set Start & End Date</a>";
-                        }
-                    }elseif(empty($start_date) && empty($end_date)){
-                        if($remark == 'Confirmed'){
-                            echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right'>Set Start & End Date</a>";
-                        }elseif($remark == 'Cancelled'){
-                            echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right disabled'>Set Start & End Date</a>";
-                        }elseif($remark == 'Pending'){
-                            echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right disabled'>Set Start & End Date</a>";
-                        }elseif($remark == 'Lapsed'){
-                            echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right'>Set Start & End Date</a>";
+                            echo "<a href='api/admin-set-contract.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right'>Verify</a>";
                         }
                     }
+                    // elseif(empty($start_date) && empty($end_date)){
+                    //     if($remark == 'Confirmed'){
+                    //         echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right'>Set Start & End Date</a>";
+                    //     }elseif($remark == 'Cancelled'){
+                    //         echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right disabled'>Set Start & End Date</a>";
+                    //     }elseif($remark == 'Pending'){
+                    //         echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right disabled'>Set Start & End Date</a>";
+                    //     }elseif($remark == 'Lapsed'){
+                    //         echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right'>Set Start & End Date</a>";
+                    //     }
+                    // }
                 ?>
             </div>
             <div class="col">

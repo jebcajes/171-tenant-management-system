@@ -130,23 +130,6 @@
                                                     echo '<td style="color: red; font-style: italic; font-weight: 800;">Lapsed</td>';
                                                 }
                                             echo '</tr>';
-                                            echo '<tr>';
-                                                echo '<td align="right">Action:</td>';
-                                                if($remark == 'Pending'){
-                                                    echo "<td><a href='api/client-confirm-contract-ii.php?contract_id=$contract_id&app_id=$app_id&client_id=$client_id' class='btn btn-sm btn-success' style='font-size: 12px;'>Confirm</a>
-                                                    <a href='api/client-cancel-contract-ii.php?contract_id=$contract_id&app_id=$app_id&client_id=$client_id' class='btn btn-sm btn-danger' style='font-size: 12px;'>Cancel</a></td>";
-                                                }elseif($remark == 'Confirmed'){
-                                                    echo "<td><a href='api/client-confirm-contract-ii.php?contract_id=$contract_id&app_id=$app_id&client_id=$client_id' class='btn btn-sm btn-success disabled' style='font-size: 12px;'>Confirm</a>
-                                                    <a href='api/client-cancel-contract-ii.php?contract_id=$contract_id&app_id=$app_id&client_id=$client_id' class='btn btn-sm btn-danger disabled' style='font-size: 12px;'>Cancel</a></td>";
-                                                }elseif($remark == 'Lapsed'){
-                                                    echo "<td><a href='api/client-confirm-contract-ii.php?contract_id=$contract_id&app_id=$app_id&client_id=$client_id' class='btn btn-sm btn-success disabled' style='font-size: 12px;'>Confirm</a>
-                                                    <a href='api/client-cancel-contract-ii.php?contract_id=$contract_id&app_id=$app_id&client_id=$client_id' class='btn btn-sm btn-danger disabled' style='font-size: 12px;'>Cancel</a></td>";
-                                                }elseif($remark == 'Cancelled'){
-                                                    echo "<td><a href='api/client-confirm-contract-ii.php?contract_id=$contract_id&app_id=$app_id&client_id=$client_id' class='btn btn-sm btn-success disabled' style='font-size: 12px;'>Confirm</a>
-                                                    <a href='api/client-cancel-contract-ii.php?contract_id=$contract_id&app_id=$app_id&client_id=$client_id' class='btn btn-sm btn-danger disabled' style='font-size: 12px;'>Cancel</a></td>";
-                                                }
-                                                
-                                            echo '</tr>';
                                         echo '</tbody>';
                                     }
                                 }
@@ -197,11 +180,6 @@
                                 <th>Block Dimension</th>
                                 <th>Price</th>
                                 <th>Remark</th>
-                                <?php 
-                                    if($remark == 'Pending'){
-                                        echo '<th>Action</th>';
-                                    }
-                                ?>
                                 
                             </thead>
                             <?php 
@@ -232,15 +210,6 @@
                                             }elseif($stall_remark == 'Cancelled'){
                                                 echo '<td style="color: red; font-style: italic; font-weight: 800;">' . $stall_remark . '</td>';
                                             }
-
-                                            if($remark == 'Pending'){
-                                                if($stall_remark == 'Cancelled'){
-                                                    echo "<td><a href='api/client-undo-stall.php?stall_id=$stall_id&app_id=$app_id&client_id=$client_id&contract_id=$contract_id' class='btn btn-primary btn-sm' style='font-size: 10px;'>Undo</a></td>";
-                                                }else{
-                                                    echo "<td><a href='api/client-cancel-stall.php?stall_id=$stall_id&app_id=$app_id&client_id=$client_id&contract_id=$contract_id' class='btn btn-danger btn-sm' style='font-size: 10px;'>Cancel</a></td>";
-                                                } 
-                                            }
-                                            
                                         echo "</tr>";
                                     }
                                 }else{
