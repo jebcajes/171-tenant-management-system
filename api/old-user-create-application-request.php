@@ -15,24 +15,24 @@
         $sql_appstall = "INSERT INTO applied_stall (client_id, business_name, category_id, applied_term, start_date, end_date)
          VALUES ($client_id, '$business_name', $category_id, '$applied_term', '$start_date', '$end_date')";
         if(mysqli_query($link,$sql_appstall)){
-            $new_appstall_id = mysqli_insert_id($link);
-
-            echo "<br>" . $business_name;
-            echo "<br>" . $category_id;
+            $app_id = mysqli_insert_id($link);
         }else{
-            echo "Data not inserted.<br>";
+            echo "Data not inserted.<br>" . mysqli_error($link);
         }
-    }
+    }else
 
     // Stall Application Details, Multiple stalls insert
     $stall_id = $_POST['stall_id'];
-    if(!empty($stall_id)){
-        foreach((array) $stall_id as $sid){
-            echo "StallsID array:" . $sid . "<br>";
+    if(!empty($_POST['stall_id'])){
+        foreach((array) $_POST['stall_id'] as $sid){
+            // echo "StallsID array:" . $sid . "<br>";
             $sql_selected_stalls = "INSERT INTO applied_stall_details (app_id, stall_id) 
-            VALUES ($new_appstall_id, $sid)";
+            VALUES ($app_id, $sid)";
             mysqli_query($link,$sql_selected_stalls);
         }
+    }else{
+        echo "Empty array...<br>" . mysqli_error($link);
+        
     }
 
     header("location: ../old-user.php?client_id=$client_id");

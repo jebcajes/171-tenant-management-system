@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2019 at 01:17 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.0
+-- Generation Time: Feb 20, 2019 at 05:02 PM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -37,31 +37,26 @@ CREATE TABLE `applied_stall` (
   `date_approved` datetime DEFAULT NULL,
   `application_status` varchar(32) DEFAULT 'Unapproved',
   `applied_term` varchar(32) NOT NULL,
-  `start_date` datetime,
-  `end_date` datetime
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `applied_stall`
 --
 
-INSERT INTO `applied_stall` (`app_id`, `client_id`, `category_id`, `business_name`, `date_applied`, `date_approved`, `application_status`, `applied_term`) VALUES
-(21, 29, 18, 'Calisthenics Philippines', '2019-01-25 19:12:22', NULL, 'Approved', '4 years'),
-(22, 29, 8, 'Oxygen', '2019-01-25 19:23:21', NULL, 'Disapproved', '2 years'),
-(23, 29, 8, 'Bench', '2019-01-25 19:48:45', NULL, 'Approved', '2 years'),
-(24, 30, 10, 'iStore', '2019-01-26 19:11:06', NULL, 'Approved', '4 years');
-
---
--- Triggers `applied_stall`
---
-DELIMITER $$
-CREATE TRIGGER `application_automation` AFTER UPDATE ON `applied_stall` FOR EACH ROW BEGIN
- IF (new.application_status = 'Approved') THEN
-	INSERT INTO contract (client_id, app_id, category_id, business_name, contract_term, start_date, end_date, remark) VALUES (new.client_id, new.app_id, new.category_id, new.business_name, new.applied_term, new.start_date, new.end_date, 'Confirmed');
- END IF;
-END
-$$
-DELIMITER ;
+INSERT INTO `applied_stall` (`app_id`, `client_id`, `category_id`, `business_name`, `date_applied`, `date_approved`, `application_status`, `applied_term`, `start_date`, `end_date`) VALUES
+(21, 29, 18, 'Calisthenics Philippines', '2019-01-25 19:12:22', NULL, 'Approved', '4 years', NULL, NULL),
+(22, 29, 8, 'Oxygen', '2019-01-25 19:23:21', NULL, 'Disapproved', '2 years', NULL, NULL),
+(23, 29, 8, 'Bench', '2019-01-25 19:48:45', NULL, 'Approved', '2 years', NULL, NULL),
+(24, 30, 10, 'iStore', '2019-01-26 19:11:06', NULL, 'Approved', '4 years', NULL, NULL),
+(25, 31, 9, 'DOTA 2', '2019-02-20 21:12:22', NULL, 'Approved', '3 years', '2019-02-20 00:00:00', '2019-02-28 00:00:00'),
+(45, 31, 13, 'Artours Bistro', '2019-02-20 22:19:45', NULL, 'Approved', '3 years', '2019-02-21 00:00:00', '2019-02-28 00:00:00'),
+(46, 31, 18, 'Calisthenics Philippines', '2019-02-20 22:45:56', NULL, 'Approved', '3 years', '2019-02-20 00:00:00', '2019-02-23 00:00:00'),
+(47, 31, 19, 'Ana', '2019-02-20 22:48:12', NULL, 'Approved', '1 year', '2019-02-21 00:00:00', '2019-02-28 00:00:00'),
+(48, 31, 13, 'Babaevs Pizza', '2019-02-20 22:52:19', NULL, 'Approved', '4 years', '2019-02-21 00:00:00', '2019-02-28 00:00:00'),
+(49, 31, 20, 'Hehe', '2019-02-20 23:13:12', NULL, 'Approved', '2 years', '2019-02-21 00:00:00', '2019-02-27 00:00:00'),
+(50, 31, 20, 'DOTA 2', '2019-02-20 23:16:02', NULL, 'Approved', '1 year', '2019-02-21 00:00:00', '2019-02-28 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -91,7 +86,18 @@ INSERT INTO `applied_stall_details` (`id`, `app_id`, `stall_id`, `stall_applicat
 (34, 23, 18, 'Approved'),
 (35, 23, 19, 'Approved'),
 (36, 24, 14, 'Approved'),
-(37, 24, 17, 'Approved');
+(37, 24, 17, 'Approved'),
+(38, 25, 20, 'Approved'),
+(41, 45, 20, 'Approved'),
+(42, 46, 21, 'Approved'),
+(43, 46, 22, 'Approved'),
+(44, 47, 23, 'Approved'),
+(45, 47, 24, 'Approved'),
+(46, 48, 25, 'Approved'),
+(47, 48, 26, 'Approved'),
+(48, 49, 27, 'Approved'),
+(49, 50, 28, 'Approved'),
+(50, 50, 29, 'Approved');
 
 -- --------------------------------------------------------
 
@@ -149,7 +155,8 @@ CREATE TABLE `client` (
 
 INSERT INTO `client` (`client_id`, `fname`, `lname`, `email`, `address`, `contact`) VALUES
 (29, 'Carlo Miguel', 'Dy', 'carlomigueldy@gmail.com', 'Maigo', '09167764350'),
-(30, 'Nove', 'Lactuan', 'nove.lactuan@gmail.com', 'Tubod', '09252248799');
+(30, 'Nove', 'Lactuan', 'nove.lactuan@gmail.com', 'Tubod', '09252248799'),
+(31, 'Artour', 'Babaev', 'artour.babaev@gmail.com', 'Canada', '09252248799');
 
 -- --------------------------------------------------------
 
@@ -169,17 +176,24 @@ CREATE TABLE `contract` (
   `remark` varchar(32) DEFAULT 'Pending',
   `contract_term` varchar(32) NOT NULL DEFAULT 'Pending',
   `renewal_status` varchar(32) NOT NULL DEFAULT 'Pending',
-  `verified` varchar(32) DEFAULT 'False' 
+  `verified` varchar(32) DEFAULT 'False'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contract`
 --
 
-INSERT INTO `contract` (`contract_id`, `app_id`, `client_id`, `category_id`, `business_name`, `start_date`, `end_date`, `date_approved`, `remark`, `contract_term`, `renewal_status`) VALUES
-(18, 21, 29, 18, 'Calisthenics Philippines', '2019-01-25 00:00:00', '2019-01-28 00:00:00', '2019-01-25 19:13:49', 'Confirmed', '4 years', 'Pending'),
-(20, 23, 29, 8, 'Bench', '2019-01-25 00:00:00', '2019-01-26 00:00:00', '2019-01-25 19:49:22', 'Confirmed', '4 years', 'Pending'),
-(21, 24, 30, 10, 'iStore', '2019-01-26 00:00:00', '2019-01-31 00:00:00', '2019-01-26 19:11:16', 'Confirmed', '4 years', 'Pending');
+INSERT INTO `contract` (`contract_id`, `app_id`, `client_id`, `category_id`, `business_name`, `start_date`, `end_date`, `date_approved`, `remark`, `contract_term`, `renewal_status`, `verified`) VALUES
+(18, 21, 29, 18, 'Calisthenics Philippines', '2019-01-25 00:00:00', '2019-01-28 00:00:00', '2019-01-25 19:13:49', 'Confirmed', '4 years', 'Pending', 'True'),
+(20, 23, 29, 8, 'Bench', '2019-01-25 00:00:00', '2019-01-26 00:00:00', '2019-01-25 19:49:22', 'Confirmed', '4 years', 'Pending', 'True'),
+(21, 24, 30, 10, 'iStore', '2019-01-26 00:00:00', '2019-01-31 00:00:00', '2019-01-26 19:11:16', 'Confirmed', '4 years', 'Pending', 'True'),
+(28, 25, 31, 9, 'DOTA 2', '2019-02-20 00:00:00', '2019-02-28 00:00:00', '2019-02-20 21:18:33', 'Confirmed', '3 years', 'Pending', 'True'),
+(29, 45, 31, 13, 'Artours Bistro', '2019-02-21 00:00:00', '2019-02-28 00:00:00', '2019-02-20 22:20:11', 'Confirmed', '3 years', 'Pending', 'True'),
+(30, 46, 31, 18, 'Calisthenics Philippines', '2019-02-20 00:00:00', '2019-02-23 00:00:00', '2019-02-20 22:46:10', 'Confirmed', '3 years', 'Pending', 'True'),
+(31, 47, 31, 19, 'Ana', '2019-02-21 00:00:00', '2019-02-28 00:00:00', '2019-02-20 22:48:25', 'Confirmed', '1 year', 'Pending', 'True'),
+(32, 48, 31, 13, 'Babaevs Pizza', '2019-02-21 00:00:00', '2019-02-28 00:00:00', '2019-02-20 22:52:29', 'Confirmed', '4 years', 'Pending', 'True'),
+(33, 49, 31, 20, 'Hehe', '2019-02-21 00:00:00', '2019-02-27 00:00:00', '2019-02-20 23:13:22', 'Confirmed', '2 years', 'Pending', 'True'),
+(34, 50, 31, 20, 'DOTA 2', '2019-02-21 00:00:00', '2019-02-28 00:00:00', '2019-02-20 23:16:13', 'Confirmed', '1 year', 'Pending', 'True');
 
 -- --------------------------------------------------------
 
@@ -205,9 +219,16 @@ INSERT INTO `occupied_stalls` (`id`, `contract_id`, `stall_id`) VALUES
 (14, 21, 17),
 (15, 20, 18),
 (16, 20, 19),
-(17, NULL, 20),
-(18, NULL, 21),
-(19, NULL, 22);
+(17, 29, 20),
+(18, 30, 21),
+(19, 30, 22),
+(20, 31, 23),
+(21, 31, 24),
+(22, 32, 25),
+(23, 32, 26),
+(24, 33, 27),
+(25, 34, 28),
+(26, 34, 29);
 
 -- --------------------------------------------------------
 
@@ -222,16 +243,16 @@ CREATE TABLE `renewal` (
   `date_applied_renewal` datetime DEFAULT CURRENT_TIMESTAMP,
   `renewal_status` varchar(32) DEFAULT 'Unapproved',
   `renewal_term` varchar(32) NOT NULL,
-  `start_date` datetime,
-  `end_date` datetime
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `renewal`
 --
 
-INSERT INTO `renewal` (`renewal_id`, `client_id`, `contract_id`, `date_applied_renewal`, `renewal_status`, `renewal_term`) VALUES
-(21, 29, 20, '2019-01-25 20:22:26', 'Approved', '4 years');
+INSERT INTO `renewal` (`renewal_id`, `client_id`, `contract_id`, `date_applied_renewal`, `renewal_status`, `renewal_term`, `start_date`, `end_date`) VALUES
+(21, 29, 20, '2019-01-25 20:22:26', 'Approved', '4 years', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -276,10 +297,65 @@ CREATE TABLE `rental_payment` (
 INSERT INTO `rental_payment` (`rentp_id`, `contract_id`, `total_amount`, `amount_paid`, `balance`, `date_paid`, `rent_month`) VALUES
 (2, 21, 3751.5, 3751.5, 0, '2019-01-26 00:00:00', 'January'),
 (4, 21, 3751.5, 3751.5, 0, '2019-01-26 19:56:04', 'February'),
-(5, 21, 3751.5, 3250, 501.5, '2019-01-26 20:01:30', 'March'),
-(6, 21, 3751.5, 0, 3751.5, NULL, 'April'),
+(5, 21, 3751.5, 3751.5, 0, '2019-02-20 20:59:34', 'March'),
+(6, 21, 3751.5, 4248.5, -497, '2019-02-20 21:00:07', 'April'),
 (7, 21, 4251.7, 0, 4251.7, NULL, 'May'),
-(8, 21, 4251.7, 0, 4251.7, NULL, 'June');
+(8, 21, 4251.7, 0, 4251.7, NULL, 'June'),
+(9, 18, 3251.75, 0, 3251.75, NULL, NULL),
+(10, 20, 2301.5, 2300, 1.5, '2019-02-20 21:00:55', 'January'),
+(11, 20, 2301.5, 0, 2301.5, NULL, 'February'),
+(12, 29, 1850.95, 0, 1850.95, NULL, 'January'),
+(13, 30, 0, 0, 0, NULL, NULL),
+(14, 31, 1500.85, 0, 0, NULL, NULL),
+(15, 32, 4451.3, 0, 0, NULL, 'January'),
+(16, 32, 4451.3, 0, 4451.3, NULL, 'February'),
+(17, 33, 2000.5, 2000.5, 0, '2019-02-20 23:14:58', 'January'),
+(18, 34, 3501.1, 3501.1, 0, '2019-02-20 23:16:52', 'January'),
+(19, 34, 3501.1, 0, 3501.1, NULL, 'February'),
+(20, 34, 3501.1, 3501.1, 0, '2019-02-20 23:21:03', 'March'),
+(21, 34, 3501.1, 3501.1, 0, '2019-02-20 23:40:16', 'April'),
+(22, 34, 3501.1, 3501.1, 0, '2019-02-21 00:01:56', 'May');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rental_payment_details`
+--
+
+CREATE TABLE `rental_payment_details` (
+  `id` int(11) NOT NULL,
+  `rentp_id` int(11) DEFAULT NULL,
+  `stall_id` int(11) DEFAULT NULL,
+  `paid` varchar(10) NOT NULL DEFAULT 'False'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rental_payment_details`
+--
+
+INSERT INTO `rental_payment_details` (`id`, `rentp_id`, `stall_id`, `paid`) VALUES
+(1, 15, 25, 'False'),
+(2, 15, 26, 'False'),
+(3, 17, 27, 'False'),
+(4, 18, 28, 'False'),
+(5, 18, 29, 'True'),
+(6, 20, 28, 'False'),
+(7, 20, 29, 'True'),
+(8, 21, 28, 'True'),
+(9, 21, 29, 'True'),
+(10, 22, 28, 'True'),
+(11, 22, 29, 'True');
+
+--
+-- Triggers `rental_payment_details`
+--
+DELIMITER $$
+CREATE TRIGGER `payment_total_amount` AFTER INSERT ON `rental_payment_details` FOR EACH ROW BEGIN 
+	UPDATE rental_payment SET total_amount = total_amount + (SELECT stall_price FROM stalls WHERE stall_id = new.stall_id), balance = balance + (SELECT stall_price FROM stalls WHERE stall_id = new.stall_id) WHERE rentp_id = new.rentp_id; 
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -310,7 +386,14 @@ INSERT INTO `stalls` (`stall_id`, `floor_no`, `block_no`, `block_dimension`, `st
 (19, '2', '2B', '350x350', 1150.75, '2019-01-22 00:00:00'),
 (20, '2', '2C', '450x450', 1850.95, '2019-01-22 00:00:00'),
 (21, '2', '2D', '500x500', 2000.25, '2019-01-22 00:00:00'),
-(22, '2', '2E', '500x500', 2000.25, '2019-01-22 00:00:00');
+(22, '2', '2E', '500x500', 2000.25, '2019-01-22 00:00:00'),
+(23, '3', '3A', '500x500', 1500.85, '2019-02-21 00:00:00'),
+(24, '3', '3B', '600x600', 2000.65, '2019-02-21 00:00:00'),
+(25, '3', '3C', '500x500', 2000.65, '2019-02-21 00:00:00'),
+(26, '3', '3D', '500x500', 2450.65, '2019-02-21 00:00:00'),
+(27, '3', '3F', '500x500', 2000.5, NULL),
+(28, '4', '4A', '500x500', 2000.5, NULL),
+(29, '4', '4B', '500x500', 1500.6, NULL);
 
 --
 -- Triggers `stalls`
@@ -444,6 +527,14 @@ ALTER TABLE `rental_payment`
   ADD KEY `fk_rent_contract_id` (`contract_id`);
 
 --
+-- Indexes for table `rental_payment_details`
+--
+ALTER TABLE `rental_payment_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_rentp` (`rentp_id`),
+  ADD KEY `fk_stall` (`stall_id`);
+
+--
 -- Indexes for table `stalls`
 --
 ALTER TABLE `stalls`
@@ -472,13 +563,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applied_stall`
 --
 ALTER TABLE `applied_stall`
-  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `applied_stall_details`
 --
 ALTER TABLE `applied_stall_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `business_classification`
@@ -490,19 +581,19 @@ ALTER TABLE `business_classification`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `contract`
 --
 ALTER TABLE `contract`
-  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `occupied_stalls`
 --
 ALTER TABLE `occupied_stalls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `renewal`
@@ -520,13 +611,19 @@ ALTER TABLE `renewal_details`
 -- AUTO_INCREMENT for table `rental_payment`
 --
 ALTER TABLE `rental_payment`
-  MODIFY `rentp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `rentp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `rental_payment_details`
+--
+ALTER TABLE `rental_payment_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `stalls`
 --
 ALTER TABLE `stalls`
-  MODIFY `stall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `stall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `stall_pricehistory`
@@ -592,6 +689,13 @@ ALTER TABLE `renewal_details`
 --
 ALTER TABLE `rental_payment`
   ADD CONSTRAINT `fk_rent_contract_id` FOREIGN KEY (`contract_id`) REFERENCES `contract` (`contract_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `rental_payment_details`
+--
+ALTER TABLE `rental_payment_details`
+  ADD CONSTRAINT `fk_rentp` FOREIGN KEY (`rentp_id`) REFERENCES `rental_payment` (`rentp_id`),
+  ADD CONSTRAINT `fk_stall` FOREIGN KEY (`stall_id`) REFERENCES `stalls` (`stall_id`);
 
 --
 -- Constraints for table `stall_pricehistory`

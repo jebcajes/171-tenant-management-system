@@ -61,8 +61,31 @@
 
     }
     
-    $sql_new_payment = "INSERT INTO rental_payment (contract_id, total_amount, balance) VALUES ($contract_id, $total_amount, $total_amount)";
+    $sql_new_payment = "INSERT INTO rental_payment (contract_id) VALUES ($contract_id)";
     if(mysqli_query($link, $sql_new_payment)){
+        $rentp_id = mysqli_insert_id($link);
+                        
+                        if(!empty($stall_id_1)){
+                            $sql_rent_details_1 = "INSERT INTO rental_payment_details (rentp_id, stall_id) VALUES ($rentp_id, $stall_id_1)";
+                            mysqli_query($link, $sql_rent_details_1);
+                        }
+                        if(!empty($stall_id_2)){
+                            $sql_rent_details_2 = "INSERT INTO rental_payment_details (rentp_id, stall_id) VALUES ($rentp_id, $stall_id_2)";
+                            mysqli_query($link, $sql_rent_details_2);
+                        }
+                        if(!empty($stall_id_3)){
+                            $sql_rent_details_3 = "INSERT INTO rental_payment_details (rentp_id, stall_id) VALUES ($rentp_id, $stall_id_3)";
+                            mysqli_query($link, $sql_rent_details_3);
+                        }
+                        if(!empty($stall_id_4)){
+                            $sql_rent_details_4 = "INSERT INTO rental_payment_details (rentp_id, stall_id) VALUES ($rentp_id, $stall_id_4)";
+                            mysqli_query($link, $sql_rent_details_4);
+                        }
+                        if(!empty($stall_id_5)){
+                            $sql_rent_details_5 = "INSERT INTO rental_payment_details (rentp_id, stall_id) VALUES ($rentp_id, $stall_id_5)";
+                            mysqli_query($link, $sql_rent_details_5);
+                        }
+
         header("Refresh: 1; url= ../admin-view-contract-details.php?contract_id=$contract_id");
     }else{
         echo "Nay";

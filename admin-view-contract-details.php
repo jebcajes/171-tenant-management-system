@@ -184,6 +184,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                         if(mysqli_num_rows($result_occupied_stalls) > 0){
                             while($row_occupied_stalls = mysqli_fetch_assoc($result_occupied_stalls)){
                                 echo "<tr align='center'>";
+                                $stall_id = $row_occupied_stalls['stall_id'];
                                     echo "<td>" . $row_occupied_stalls['stall_id'] . "</td>";
                                     echo "<td>" . $row_occupied_stalls['floor_no'] . "</td>";
                                     echo "<td>" . $row_occupied_stalls['block_no'] . "</td>";
@@ -265,12 +266,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                                     </td>';
                                                 }else{
                                                     echo '<td>';
-                                                    echo '<a href="#" class="btn btn-info btn-sm disabled" style="margin: 2px;">Set</a>';
+                                                    // echo '<a href="#" class="btn btn-info btn-sm disabled" style="margin: 2px;">Set</a>';
                                                     
                                                     if($balance == 0){
                                                         echo '<a href="admin-view-contract-details-pay.php?contract_id='.$contract_id.'&rentp_id='.$rentp_id.'" class="btn btn-success btn-sm disabled" style="margin: 2px;">Pay</a>';
                                                     }else{
-                                                        echo '<a href="admin-view-contract-details-pay.php?contract_id='.$contract_id.'&rentp_id='.$rentp_id.'" class="btn btn-success btn-sm " style="margin: 2px;">Pay</a>';
+                                                        echo '<a href="admin-view-contract-details-pay.php?contract_id='.$contract_id.'&rentp_id='.$rentp_id.'&stall_id='.$stall_id.'" class="btn btn-success btn-sm " style="margin: 2px;">Pay</a>';
                                                     }
                                                     
                                                     

@@ -104,28 +104,30 @@
                         if (mysqli_num_rows($result_stalls) > 0) {
                             while($row_stalls = mysqli_fetch_assoc($result_stalls)) {
                                 echo "<tr align='center'>";
+                                $stall_id = $row_stalls['stall_id'];
                                     echo "<td>" . $row_stalls['stall_id'] . "</td>";
                                     echo "<td>" . $row_stalls['floor_no'] . "</td>";
                                     echo "<td>" . $row_stalls['block_no'] . "</td>";
                                     echo "<td>" . $row_stalls['block_dimension'] . "</td>";
                                     echo "<td>Php " . number_format($row_stalls['stall_price'],2) . "</td>";
-                                    echo "<td><input type='checkbox' name='stall_id[]' value=".$row_stalls['stall_id']."></td>";                        
+                                    echo "<td><input type='checkbox' name='stall_id[]' value='$stall_id'></td>";                        
                                 echo "</tr>";
                             }
                             echo '</table>';
-                            echo '<input type="submit" value="Submit" class="btn btn-success btn-sm float-right">';
                         }else{
                             echo '<tr>';
                                 echo '<td colspan="6" style="font-style: italic;" align="center">No available Stall Spaces at the moment.</td>';
                             echo '</tr>';
                             echo '</table>';
+                        }
+
+                        if(mysqli_num_rows($result_stalls)){
+                            echo '<input type="submit" value="Submit" class="btn btn-success btn-sm float-right">';
+                        }else{
                             echo '<a href="#" class="btn btn-success btn-sm disabled float-right">Submit</a>';
                         }
                         ?>
-                    
-                    
                 </div>
-                
             </div>
         </form>
         <!-- Form Conent -->

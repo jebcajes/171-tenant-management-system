@@ -147,7 +147,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                         }
                     ?>
                 </table>
-                <?php 
+                <!-- <?php 
                     if(!empty($start_date) && !empty($end_date)){
                         if($remark == 'Confirmed'){
                             echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right disabled'>Set Start & End Date</a>";
@@ -165,7 +165,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                             echo "<a href='admin-view-contract-details-set.php?contract_id=$contract_id' class='btn btn-primary btn-sm float-right'>Set Start & End Date</a>";
                         }
                     }
-                ?>
+                ?> -->
             </div>
             <div class="col">
                 <h4>Occupied Stall Spaces</h4>
@@ -229,7 +229,28 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                                 echo '<td>Php ' . number_format($row_payment['total_amount'],2) . '</td>';
                                                 echo '<td>Php ' . number_format($row_payment['balance'],2) . '</td>';
                                                 if($row_payment['rentp_id'] == $_GET['rentp_id']){
-                                                    echo '<td><input type="number" step="0.01" name="amount_paid" class="form-control form-control-sm" required></td>';
+                                                    echo '<td>';
+                                                        echo '<select name="stall_id" class="form-control form-control-sm" required>';
+                                                            $sql_price = "SELECT rpd.rentp_id AS 'rentp_id', s.block_no AS 'block_no',
+                                                            s.stall_price AS 'stall_price', rpd.stall_id AS 'stall_id' 
+                                                            FROM rental_payment_details rpd
+                                                            INNER JOIN stalls s ON rpd.stall_id = s.stall_id
+                                                            WHERE rpd.rentp_id = $rentp_id AND paid = 'False'";
+                                                            $result_price = mysqli_query($link, $sql_price);
+                                                            $stall_id = "";
+                                                            if(mysqli_num_rows($result_price) > 0 ){
+                                                                echo "<optgroup label='Blocks'>";
+                                                                while($row_price = mysqli_fetch_assoc($result_price)){
+                                                                    $stall_id = $row_price['stall_id'];
+                                                                    $stall_price = $row_price['stall_price'];
+                                                                        echo "<option value='$stall_id'>";
+                                                                            echo 'Block ' . $row_price['block_no'];
+                                                                        echo "</option>";
+                                                                }
+                                                                echo "</optgroup>";
+                                                            }
+                                                        echo '</select>';
+                                                    echo '</td>';
                                                 }else{
                                                     echo '<td>Php ' . number_format($row_payment['amount_paid'],2) . '</td>';
                                                 }
@@ -255,7 +276,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                                         echo '</td>';
                                                     }else{
                                                         echo '<td>';
-                                                            echo '<input type="submit" value="Set" class="btn btn-info btn-sm disabled" style="margin: 2px;">';
+                                                            // echo '<input type="submit" value="Set" class="btn btn-info btn-sm disabled" style="margin: 2px;">';
                                                             if($balance <= 0){
                                                                 echo '<a href="admin-view-contract-details-pay.php?contract_id='.$contract_id.'&rentp_id='.$rentp_id.'" class="btn btn-success btn-sm disabled" style="margin: 2px;">Pay</a>';
                                                             }else{
