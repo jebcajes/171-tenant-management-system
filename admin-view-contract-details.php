@@ -176,6 +176,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                         <th>Block</th>
                         <th>Block Dimensions</th>
                         <th>Stall Price</th>
+                        <th>Action</th>
                     </thead>
                     <?php 
                         $sql_occupied_stalls = "SELECT * FROM occupied_stalls os INNER JOIN stalls s ON os.stall_id = s.stall_id WHERE contract_id = $contract_id";
@@ -189,7 +190,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                     echo "<td>" . $row_occupied_stalls['floor_no'] . "</td>";
                                     echo "<td>" . $row_occupied_stalls['block_no'] . "</td>";
                                     echo "<td>" . $row_occupied_stalls['block_dimension'] . "</td>";
-                                    echo '<td>' . number_format($row_occupied_stalls['stall_price'],2) . '</td>';
+                                    echo '<td>Php ' . number_format($row_occupied_stalls['stall_price'],2) . '</td>';
+                                    echo "<td>";
+                                        echo "<a href='admin-pay-stall.php?contract_id=$contract_id' class='btn btn-sm btn-primary'>Pay</a>";
+                                    echo "</td>";
                                 echo "</tr>";
                             }
                         }else{
@@ -199,7 +203,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                         }
                     ?>
                 </table>
-                <h4 class="float-left">Rental Payment Information</h4>
+
+                <!-- <h4 class="float-left">Rental Payment Information</h4>
                 <a href="api/admin-new-payment.php?contract_id=<?php echo $_GET['contract_id'];?>" class="btn btn-secondary btn-sm float-right" class="">Add</a>
                 <table class="table table-sm table-bordered table-striped">
                         <thead align="center">
@@ -288,7 +293,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                             ?>
                         </tbody>
                 
-                </table>
+                </table> -->
             </div>
         </div>
     </div>
