@@ -51,12 +51,24 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                
-            </div>
-            <div class="col">
             <br>
-                <table class="table table-bordered">
-                    <thead>
+            <?php 
+                require_once "api/config.php";
+                $contract_id = $_GET['contract_id'];
+                $rentp_id = "";
+                $stall_id = $_GET['stall_id'];
+                $sql_select_rentp = "SELECT * FROM rental_payment WHERE contract_id = $contract_id";
+                            $result_sql_select_rentp = mysqli_query($link, $sql_select_rentp);
+                            if(mysqli_num_rows($result_sql_select_rentp) > 0){
+                                while($row_sql_select_rentp = mysqli_fetch_assoc($result_sql_select_rentp)){
+                                    $rentp_id = $row_sql_select_rentp['rentp_id'];
+                                }
+                            }
+            ?>
+                <h4 class="float-left">Stall Payment</h4>
+                <a href="api/add-stall-month.php?contract_id=<?php echo $contract_id;?>&rentp_id=<?php echo $rentp_id;?>&stall_id=<?php echo $stall_id;?>" class="float-right btn btn-sm btn-success">Add</a>
+                <table class="table table-bordered table-sm">
+                    <thead align='center'>
                         <th>Month</th>
                         <th>Balance</th>
                         <th>Amount Paid</th>
@@ -65,24 +77,40 @@
                     </thead>
                     <tbody>
                         <?php 
-                            require_once "api/config.php";
-                            $contract_id = $_GET['contract_id'];
-                            
-                            $sql_rental = "SELECT * FROM rental_payment WHERE contract_id = $contract_id";
+
+                            $sql_select_rentp = "SELECT * FROM rental_payment WHERE contract_id = $contract_id";
+                            $result_sql_select_rentp = mysqli_query($link, $sql_select_rentp);
+                            if(mysqli_num_rows($result_sql_select_rentp) > 0){
+                                while($row_sql_select_rentp = mysqli_fetch_assoc($result_sql_select_rentp)){
+                                    $rentp_id = $row_sql_select_rentp['rentp_id'];
+                                }
+                            }
+
+                            $sql_rental = "SELECT * FROM rental_payment_details WHERE rentp_id = $rentp_id AND stall_id = $stall_id";
                             
                             $result_sql_rental = mysqli_query($link, $sql_rental);
                             if(mysqli_num_rows($result_sql_rental) > 0 ){
                                 while($row_sql_rental = mysqli_fetch_assoc($result_sql_rental)){
-                                    echo "<tr>";
+                                    echo "<tr align='center'>";
                                         $rent_month = $row_sql_rental['rent_month'];
                                         $date_paid = $row_sql_rental['date_paid'];
+                                        $balance = $row_sql_rental['balance'];
                                         $old_date_paid = strtotime($date_paid);
                                         $new_date_paid = date('Y-m-d', $old_date_paid);
+                                        $amount_paid = $row_sql_rental['amount_paid'];
+                                        $rentp_id = $row_sql_rental['rentp_id'];
+                                        $id = $row_sql_rental['id'];
+                                        
 
                                         if($rent_month){
-
+                                            echo "<td>" . $rent_month . "</td>";
+                                            echo "<td>Php " . number_format($balance,2) . "</td>";
+                                            echo "<td>Php " . number_format($amount_paid,2) . "</td>";
+                                            echo "<td>" . $new_date_paid . "</td>";
+                                            echo "<td><a href='#' class='btn btn-primary btn-sm'>Pay</a></td>";
                                         }else{
-                                            echo "<td><select type='text' class='form-control form-control-sm'>
+                                            echo "<form method='POST' action='api/admin-pay-stall-set-month.php?contract_id=$contract_id&stall_id=$stall_id'>";
+                                            echo "<td><select type='text' name='rent_month' class='form-control form-control-sm'>
                                                 <option>January</option>
                                                 <option>February</option>
                                                 <option>March</option>
@@ -96,8 +124,19 @@
                                                 <option>November</option>
                                                 <option>December</option>
                                             </select></td>";
+                                            echo "<td>Php " . number_format($balance,2) . "</td>";
+                                            echo "<td>Php " . number_format($amount_paid,2) . "</td>";
+                                            if($date_paid == NULL){
+                                                echo "<td style='font-style: italic; color: gray; font-weight: 600;'>N/A</td>";
+                                            }else{
+                                                echo "<td>" . $new_date_paid . "</td>";
+                                            }
+                                            echo "<td><input type='submit' class='btn btn-success btn-sm' value='Set'></td>";
+
+                                            echo "<input type='hidden' name='rentp_id' value='$rentp_id'>";
+                                            echo "<input type='hidden' name='id' value='$id'>";
+                                            echo "</form>";
                                         }
-                                        echo "<td>" . "</td>";
                                     echo "</tr>";
                                 }
                             }

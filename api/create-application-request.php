@@ -15,7 +15,7 @@
         if(mysqli_query($link,$sql_client)){
             $new_client_id = mysqli_insert_id($link);
         }else{
-            echo "Data not inserted for table client.<br>";
+            echo "Data not inserted for table client.<br>" . mysqli_error($link);
         }
     }
 

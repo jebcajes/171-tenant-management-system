@@ -192,7 +192,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                                     echo "<td>" . $row_occupied_stalls['block_dimension'] . "</td>";
                                     echo '<td>Php ' . number_format($row_occupied_stalls['stall_price'],2) . '</td>';
                                     echo "<td>";
-                                        echo "<a href='admin-pay-stall.php?contract_id=$contract_id' class='btn btn-sm btn-primary'>Pay</a>";
+                                        echo "<a href='admin-pay-stall.php?contract_id=$contract_id&stall_id=$stall_id' class='btn btn-sm btn-primary' target='_blank'>Pay</a>";
                                     echo "</td>";
                                 echo "</tr>";
                             }

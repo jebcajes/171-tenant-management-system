@@ -131,7 +131,7 @@
                             }
                         }else{
                             echo '<tr>';
-                                echo '<td colspan="5" style="font-style: italic;" align="center">There are no available Stall Spaces at the moment.</td>';
+                                echo '<td colspan="6" style="font-style: italic;" align="center">There are no available Stall Spaces at the moment.</td>';
                             echo '</tr>';
                         }
                         ?>
