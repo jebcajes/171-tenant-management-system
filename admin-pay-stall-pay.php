@@ -66,8 +66,8 @@
                             }
             ?>
                 <h4 class="float-left">Stall Payment</h4>
-                <a href="api/add-stall-month.php?contract_id=<?php echo $contract_id;?>&rentp_id=<?php echo $rentp_id;?>&stall_id=<?php echo $stall_id;?>" class="float-right btn btn-sm btn-success" style="margin:3px;">Add</a>
-                <a href="admin-view-contract-details.php?contract_id=<?php echo $contract_id;?>" class="btn btn-sm btn-danger float-right" style="margin:3px;">Back</a>
+                <a href="api/add-stall-month.php?contract_id=<?php echo $contract_id;?>&rentp_id=<?php echo $rentp_id;?>&stall_id=<?php echo $stall_id;?>" class="float-right btn btn-sm btn-success">Add</a>
+                <a href="admin-view-contract-details.php?contract_id=<?php echo $contract_id;?>" class="btn btn-sm btn-danger float-right">Back</a>
                 <table class="table table-bordered table-sm">
                     <thead align='center'>
                         <th>Month</th>
@@ -78,6 +78,9 @@
                     </thead>
                     <tbody>
                         <?php 
+                            $id_pay = $_GET['id'];
+                            $stall_id_pay = $_GET['stall_id'];
+                            $contract_id_pay = $_GET['contract_id'];
 
                             $sql_select_rentp = "SELECT * FROM rental_payment WHERE contract_id = $contract_id";
                             $result_sql_select_rentp = mysqli_query($link, $sql_select_rentp);
@@ -104,7 +107,27 @@
                                         
 
                                         if($rent_month){
-                                            echo "<td>" . $rent_month . "</td>";
+                                            if($id_pay == $row_sql_rental['id']){
+                                                echo "<form action='api/admin-pay-stall-pay.php' method='POST'>";
+                                                    echo "<td>" . $rent_month . "</td>";
+                                                    echo "<td>Php " . number_format($balance,2) . "</td>";
+                                                    echo "<td><input type='number' step='0.01' max='$balance' name='amount_paid' class='form-control form-control-sm' required></td>";
+                                                    if(empty($amount_paid)){
+                                                        echo "<td style='font-style: italic; color: gray; font-weight: 800;'>N/A</td>";
+                                                    }else{
+                                                        echo "<td>" . $new_date_paid . "</td>";
+                                                    }
+                                                    echo "<td>
+                                                    
+                                                    <a href='admin-pay-stall.php?contract_id=$contract_id_pay&stall_id=$stall_id_pay' class='btn btn-sm btn-outline-danger' style='margin: 3px;'>Cancel</a>
+                                                    <input type='submit' value='Pay' class='btn btn-sm btn-success'>
+                                                    </td>";
+                                                    echo "<input type='hidden' name='contract_id' value='$contract_id_pay'>";
+                                                    echo "<input type='hidden' name='stall_id' value='$stall_id_pay'>";
+                                                    echo "<input type='hidden' name='id' value='$id_pay'>";
+                                                echo "</form>";
+                                            }else{
+                                                echo "<td>" . $rent_month . "</td>";
                                             echo "<td>Php " . number_format($balance,2) . "</td>";
                                             echo "<td>Php " . number_format($amount_paid,2) . "</td>";
                                             if(empty($amount_paid)){
@@ -112,11 +135,7 @@
                                             }else{
                                                 echo "<td>" . $new_date_paid . "</td>";
                                             }
-                                            
-                                            if($balance == 0){
-                                                echo "<td>Paid</td>";
-                                            }else{
-                                                echo "<td><a href='admin-pay-stall-pay.php?contract_id=$contract_id&stall_id=$stall_id&id=$id' class='btn btn-primary btn-sm'>Pay</a></td>";
+                                            echo "<td><a href='admin-pay-stall-pay.php?contract_id=$contract_id&stall_id=$stall_id&id=$id' class='btn btn-primary btn-sm'>Pay</a></td>";
                                             }
                                         }else{
                                             echo "<form method='POST' action='api/admin-pay-stall-set-month.php?contract_id=$contract_id&stall_id=$stall_id'>";
@@ -136,8 +155,8 @@
                                             </select></td>";
                                             echo "<td>Php " . number_format($balance,2) . "</td>";
                                             echo "<td>Php " . number_format($amount_paid,2) . "</td>";
-                                            if(empty($amount_paid)){
-                                                echo "<td style='font-style: italic; color: gray; font-weight: 800;'>N/A</td>";
+                                            if($date_paid == NULL){
+                                                echo "<td style='font-style: italic; color: gray; font-weight: 600;'>N/A</td>";
                                             }else{
                                                 echo "<td>" . $new_date_paid . "</td>";
                                             }

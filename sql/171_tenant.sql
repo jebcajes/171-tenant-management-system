@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2019 at 05:02 PM
+-- Generation Time: Apr 03, 2019 at 08:19 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -56,7 +56,12 @@ INSERT INTO `applied_stall` (`app_id`, `client_id`, `category_id`, `business_nam
 (47, 31, 19, 'Ana', '2019-02-20 22:48:12', NULL, 'Approved', '1 year', '2019-02-21 00:00:00', '2019-02-28 00:00:00'),
 (48, 31, 13, 'Babaevs Pizza', '2019-02-20 22:52:19', NULL, 'Approved', '4 years', '2019-02-21 00:00:00', '2019-02-28 00:00:00'),
 (49, 31, 20, 'Hehe', '2019-02-20 23:13:12', NULL, 'Approved', '2 years', '2019-02-21 00:00:00', '2019-02-27 00:00:00'),
-(50, 31, 20, 'DOTA 2', '2019-02-20 23:16:02', NULL, 'Approved', '1 year', '2019-02-21 00:00:00', '2019-02-28 00:00:00');
+(50, 31, 20, 'DOTA 2', '2019-02-20 23:16:02', NULL, 'Approved', '1 year', '2019-02-21 00:00:00', '2019-02-28 00:00:00'),
+(51, 32, 18, 'Avenegers Tower', '2019-03-31 09:45:56', NULL, 'Approved', '4 years', '2019-03-31 00:00:00', '2019-06-30 00:00:00'),
+(52, 33, 9, 'World of Warcraft Merch', '2019-03-31 10:04:09', NULL, 'Approved', '4 years', '2019-03-31 00:00:00', '2019-05-31 00:00:00'),
+(53, 34, 14, 'Empire State of Mind', '2019-04-03 12:49:51', NULL, 'Approved', '4 years', '2019-04-03 00:00:00', '2019-04-05 00:00:00'),
+(54, 35, 6, 'Rap Store', '2019-04-03 13:00:44', NULL, 'Approved', '4 years', '2019-04-03 00:00:00', '2019-04-30 00:00:00'),
+(55, 36, 11, 'Music Store', '2019-04-03 13:17:01', NULL, 'Approved', '4 years', '2019-04-03 00:00:00', '2019-04-30 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -97,7 +102,15 @@ INSERT INTO `applied_stall_details` (`id`, `app_id`, `stall_id`, `stall_applicat
 (47, 48, 26, 'Approved'),
 (48, 49, 27, 'Approved'),
 (49, 50, 28, 'Approved'),
-(50, 50, 29, 'Approved');
+(50, 50, 29, 'Approved'),
+(51, 51, 30, 'Approved'),
+(52, 52, 31, 'Approved'),
+(53, 52, 32, 'Approved'),
+(54, 53, 33, 'Approved'),
+(55, 53, 34, 'Approved'),
+(56, 54, 35, 'Approved'),
+(57, 55, 36, 'Approved'),
+(58, 55, 37, 'Approved');
 
 -- --------------------------------------------------------
 
@@ -156,7 +169,12 @@ CREATE TABLE `client` (
 INSERT INTO `client` (`client_id`, `fname`, `lname`, `email`, `address`, `contact`) VALUES
 (29, 'Carlo Miguel', 'Dy', 'carlomigueldy@gmail.com', 'Maigo', '09167764350'),
 (30, 'Nove', 'Lactuan', 'nove.lactuan@gmail.com', 'Tubod', '09252248799'),
-(31, 'Artour', 'Babaev', 'artour.babaev@gmail.com', 'Canada', '09252248799');
+(31, 'Artour', 'Babaev', 'artour.babaev@gmail.com', 'Canada', '09252248799'),
+(32, 'Tom', 'Holland', 'tom.holland@gmail.com', 'Queens', '09167764338'),
+(33, 'Tommy', 'Jenkins', 'leeroy.jenkins@gmail.com', 'Jenkins', '09124451234'),
+(34, 'Alicia', 'Keys', 'alicia.keys@gmail.com', 'New York', '09224487741'),
+(35, 'Emi', 'Nem', 'emi.nem@gmail.com', 'California', '09874561887'),
+(36, 'Hal', 'Sey', 'hal.sey@gmail.com', 'Amsterdam', '09125548741');
 
 -- --------------------------------------------------------
 
@@ -193,7 +211,12 @@ INSERT INTO `contract` (`contract_id`, `app_id`, `client_id`, `category_id`, `bu
 (31, 47, 31, 19, 'Ana', '2019-02-21 00:00:00', '2019-02-28 00:00:00', '2019-02-20 22:48:25', 'Confirmed', '1 year', 'Pending', 'True'),
 (32, 48, 31, 13, 'Babaevs Pizza', '2019-02-21 00:00:00', '2019-02-28 00:00:00', '2019-02-20 22:52:29', 'Confirmed', '4 years', 'Pending', 'True'),
 (33, 49, 31, 20, 'Hehe', '2019-02-21 00:00:00', '2019-02-27 00:00:00', '2019-02-20 23:13:22', 'Confirmed', '2 years', 'Pending', 'True'),
-(34, 50, 31, 20, 'DOTA 2', '2019-02-21 00:00:00', '2019-02-28 00:00:00', '2019-02-20 23:16:13', 'Confirmed', '1 year', 'Pending', 'True');
+(34, 50, 31, 20, 'DOTA 2', '2019-02-21 00:00:00', '2019-02-28 00:00:00', '2019-02-20 23:16:13', 'Confirmed', '1 year', 'Pending', 'True'),
+(35, 51, 32, 18, 'Avenegers Tower', '2019-03-31 00:00:00', '2019-06-30 00:00:00', '2019-03-31 09:46:19', 'Confirmed', '4 years', 'Pending', 'True'),
+(36, 52, 33, 9, 'World of Warcraft Merch', '2019-03-31 00:00:00', '2019-05-31 00:00:00', '2019-03-31 10:04:27', 'Confirmed', '4 years', 'Pending', 'True'),
+(37, 53, 34, 14, 'Empire State of Mind', '2019-04-03 00:00:00', '2019-04-05 00:00:00', '2019-04-03 12:50:38', 'Confirmed', '4 years', 'Pending', 'True'),
+(38, 54, 35, 6, 'Rap Store', '2019-04-03 00:00:00', '2019-04-30 00:00:00', '2019-04-03 13:00:59', 'Confirmed', '4 years', 'Pending', 'True'),
+(39, 55, 36, 11, 'Music Store', '2019-04-03 00:00:00', '2019-04-30 00:00:00', '2019-04-03 13:17:14', 'Confirmed', '4 years', 'Pending', 'True');
 
 -- --------------------------------------------------------
 
@@ -228,7 +251,15 @@ INSERT INTO `occupied_stalls` (`id`, `contract_id`, `stall_id`) VALUES
 (23, 32, 26),
 (24, 33, 27),
 (25, 34, 28),
-(26, 34, 29);
+(26, 34, 29),
+(27, 35, 30),
+(28, 36, 31),
+(29, 36, 32),
+(30, 37, 33),
+(31, 37, 34),
+(32, 38, 35),
+(33, 39, 36),
+(34, 39, 37);
 
 -- --------------------------------------------------------
 
@@ -301,9 +332,9 @@ INSERT INTO `rental_payment` (`rentp_id`, `contract_id`, `total_amount`, `amount
 (6, 21, 3751.5, 4248.5, -497, '2019-02-20 21:00:07', 'April'),
 (7, 21, 4251.7, 0, 4251.7, NULL, 'May'),
 (8, 21, 4251.7, 0, 4251.7, NULL, 'June'),
-(9, 18, 3251.75, 0, 3251.75, NULL, NULL),
+(9, 18, 4252.25, 0, 4252.25, NULL, NULL),
 (10, 20, 2301.5, 2300, 1.5, '2019-02-20 21:00:55', 'January'),
-(11, 20, 2301.5, 0, 2301.5, NULL, 'February'),
+(11, 20, 3452.25, 0, 3452.25, NULL, 'February'),
 (12, 29, 1850.95, 0, 1850.95, NULL, 'January'),
 (13, 30, 0, 0, 0, NULL, NULL),
 (14, 31, 1500.85, 0, 0, NULL, NULL),
@@ -314,7 +345,12 @@ INSERT INTO `rental_payment` (`rentp_id`, `contract_id`, `total_amount`, `amount
 (19, 34, 3501.1, 0, 3501.1, NULL, 'February'),
 (20, 34, 3501.1, 3501.1, 0, '2019-02-20 23:21:03', 'March'),
 (21, 34, 3501.1, 3501.1, 0, '2019-02-20 23:40:16', 'April'),
-(22, 34, 3501.1, 3501.1, 0, '2019-02-21 00:01:56', 'May');
+(22, 34, 3501.1, 3501.1, 0, '2019-02-21 00:01:56', 'May'),
+(23, 35, 2500.92, 0, 2500.92, NULL, NULL),
+(24, 36, 20004, 0, 20004, NULL, NULL),
+(25, 37, 7501.950000000001, 0, 7501.950000000001, NULL, NULL),
+(26, 38, 2500.25, 0, 2500.25, NULL, NULL),
+(27, 39, 34011.4, 0, 34011.4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -326,25 +362,56 @@ CREATE TABLE `rental_payment_details` (
   `id` int(11) NOT NULL,
   `rentp_id` int(11) DEFAULT NULL,
   `stall_id` int(11) DEFAULT NULL,
-  `paid` varchar(10) NOT NULL DEFAULT 'False'
+  `paid` varchar(10) NOT NULL DEFAULT 'False',
+  `balance` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `amount_paid` double NOT NULL DEFAULT '0',
+  `date_paid` datetime DEFAULT NULL,
+  `rent_month` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `rental_payment_details`
 --
 
-INSERT INTO `rental_payment_details` (`id`, `rentp_id`, `stall_id`, `paid`) VALUES
-(1, 15, 25, 'False'),
-(2, 15, 26, 'False'),
-(3, 17, 27, 'False'),
-(4, 18, 28, 'False'),
-(5, 18, 29, 'True'),
-(6, 20, 28, 'False'),
-(7, 20, 29, 'True'),
-(8, 21, 28, 'True'),
-(9, 21, 29, 'True'),
-(10, 22, 28, 'True'),
-(11, 22, 29, 'True');
+INSERT INTO `rental_payment_details` (`id`, `rentp_id`, `stall_id`, `paid`, `balance`, `amount_paid`, `date_paid`, `rent_month`) VALUES
+(1, 15, 25, 'False', '0.00', 0, '2019-03-31 10:08:44', ''),
+(2, 15, 26, 'False', '0.00', 0, '2019-03-31 10:08:44', ''),
+(3, 17, 27, 'False', '0.00', 0, '2019-03-31 10:08:44', ''),
+(4, 18, 28, 'False', '0.00', 0, '2019-03-31 10:08:44', ''),
+(5, 18, 29, 'True', '0.00', 0, '2019-03-31 10:08:44', ''),
+(6, 20, 28, 'False', '0.00', 0, '2019-03-31 10:08:44', ''),
+(7, 20, 29, 'True', '0.00', 0, '2019-03-31 10:08:44', ''),
+(8, 21, 28, 'True', '0.00', 0, '2019-03-31 10:08:44', ''),
+(9, 21, 29, 'True', '0.00', 0, '2019-03-31 10:08:44', ''),
+(10, 22, 28, 'True', '0.00', 0, '2019-03-31 10:08:44', ''),
+(11, 22, 29, 'True', '0.00', 0, '2019-03-31 10:08:44', ''),
+(12, 23, 30, 'False', '0.00', 0, '2019-03-31 10:08:44', ''),
+(13, 24, 31, 'False', '0.00', 0, '2019-03-31 10:08:44', 'January'),
+(14, 24, 32, 'False', '0.00', 0, '2019-03-31 10:08:44', ''),
+(15, 24, 31, 'False', '0.00', 0, NULL, 'January'),
+(16, 24, 31, 'False', '0.00', 0, NULL, 'July'),
+(17, 24, 31, 'False', '0.00', 0, NULL, 'May'),
+(18, 24, 32, 'False', '0.00', 0, NULL, NULL),
+(19, 24, 32, 'False', '0.00', 0, NULL, NULL),
+(20, 24, 32, 'False', '0.00', 0, NULL, NULL),
+(21, 11, 18, 'False', '0.00', 0, NULL, NULL),
+(22, 25, 33, 'False', '0.00', 0, NULL, NULL),
+(23, 25, 34, 'False', '0.00', 0, NULL, NULL),
+(24, 25, 33, 'False', '2501.00', 0, NULL, NULL),
+(25, 26, 35, 'False', '0.00', 0, NULL, NULL),
+(26, 27, 36, 'False', '0.00', 3001, '2019-04-03 14:13:01', 'January'),
+(27, 27, 37, 'False', '0.00', 2750.95, '2019-04-03 14:01:33', 'January'),
+(28, 27, 36, 'False', '0.00', 3001, '2019-04-03 14:13:54', 'February'),
+(29, 27, 37, 'False', '0.00', 2750.95, '2019-04-03 13:59:03', 'February'),
+(30, 27, 37, 'False', '0.00', 2750.95, '2019-04-03 14:03:02', 'March'),
+(31, 27, 37, 'False', '0.00', 2750.95, '2019-04-03 14:05:45', 'April'),
+(32, 27, 37, 'False', '0.00', 2750.9, '2019-04-03 14:09:37', 'May'),
+(33, 27, 37, 'False', '0.00', 2751, '2019-04-03 14:11:44', 'January'),
+(34, 27, 37, 'False', '2751.00', 0, NULL, NULL),
+(35, 27, 37, 'False', '0.00', 2750.95, '2019-04-03 14:12:43', 'January'),
+(36, 27, 36, 'False', '0.00', 3000.95, '2019-04-03 14:14:09', 'March'),
+(37, 27, 36, 'False', '3000.95', 0, NULL, NULL),
+(38, 9, 13, 'False', '1000.50', 0, NULL, NULL);
 
 --
 -- Triggers `rental_payment_details`
@@ -393,7 +460,15 @@ INSERT INTO `stalls` (`stall_id`, `floor_no`, `block_no`, `block_dimension`, `st
 (26, '3', '3D', '500x500', 2450.65, '2019-02-21 00:00:00'),
 (27, '3', '3F', '500x500', 2000.5, NULL),
 (28, '4', '4A', '500x500', 2000.5, NULL),
-(29, '4', '4B', '500x500', 1500.6, NULL);
+(29, '4', '4B', '500x500', 1500.6, NULL),
+(30, '5', '5A', '850x850', 2500.92, '2019-03-31 00:00:00'),
+(31, '5', '5B', '850x850', 2500.25, '2019-03-31 00:00:00'),
+(32, '5', '5C', '850x850', 2500.75, '2019-03-31 00:00:00'),
+(33, '5', '5D', '850x850', 2500.85, '2019-04-03 00:00:00'),
+(34, '5', '5E', '850x850', 2500.25, '2019-04-03 00:00:00'),
+(35, '5', '5F', '850x850', 2500.25, '2019-04-03 00:00:00'),
+(36, '6', '6A', '850x850', 3000.95, '2019-04-03 00:00:00'),
+(37, '6', '6B', '850x850', 2750.95, '2019-04-03 00:00:00');
 
 --
 -- Triggers `stalls`
@@ -563,13 +638,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applied_stall`
 --
 ALTER TABLE `applied_stall`
-  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `applied_stall_details`
 --
 ALTER TABLE `applied_stall_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `business_classification`
@@ -581,19 +656,19 @@ ALTER TABLE `business_classification`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `contract`
 --
 ALTER TABLE `contract`
-  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `contract_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `occupied_stalls`
 --
 ALTER TABLE `occupied_stalls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `renewal`
@@ -611,19 +686,19 @@ ALTER TABLE `renewal_details`
 -- AUTO_INCREMENT for table `rental_payment`
 --
 ALTER TABLE `rental_payment`
-  MODIFY `rentp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `rentp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `rental_payment_details`
 --
 ALTER TABLE `rental_payment_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `stalls`
 --
 ALTER TABLE `stalls`
-  MODIFY `stall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `stall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `stall_pricehistory`

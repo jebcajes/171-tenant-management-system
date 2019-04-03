@@ -7,7 +7,7 @@
     $rent_month = $_POST['rent_month'];
     $id = $_POST['id'];
 
-    $sql_set = "UPDATE rental_payment_details SET rent_month = '$rent_month' 
+    $sql_set = "UPDATE rental_payment_details SET rent_month = '$rent_month', date_paid = NULL
     WHERE rentp_id = $rentp_id AND stall_id = $stall_id AND id = $id";
 
     if(mysqli_query($link, $sql_set)){

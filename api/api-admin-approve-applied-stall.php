@@ -183,23 +183,68 @@
                         $rentp_id = mysqli_insert_id($link);
                         
                         if(!empty($stall_id_1)){
-                            $sql_rent_details_1 = "INSERT INTO rental_payment_details (rentp_id, stall_id) VALUES ($rentp_id, $stall_id_1)";
+                            $balance_1 = "";
+                            $sql_balance_1 = "SELECT * FROM stalls WHERE stall_id = $stall_id_1";
+                            $result_balance_1 = mysqli_query($link, $sql_balance_1);
+                            if(mysqli_num_rows($result_balance_1) > 0 ){
+                                while($row_balance_1 = mysqli_fetch_assoc($result_balance_1)){
+                                    $balance_1 = $row_balance_1['stall_price'];
+                                }
+                            }
+
+                            $sql_rent_details_1 = "INSERT INTO rental_payment_details (rentp_id, stall_id, balance) VALUES ($rentp_id, $stall_id_1, $balance_1)";
                             mysqli_query($link, $sql_rent_details_1);
                         }
                         if(!empty($stall_id_2)){
-                            $sql_rent_details_2 = "INSERT INTO rental_payment_details (rentp_id, stall_id) VALUES ($rentp_id, $stall_id_2)";
+                            $balance_2 = "";
+                            $sql_balance_2 = "SELECT * FROM stalls WHERE stall_id = $stall_id_2";
+                            $result_balance_2 = mysqli_query($link, $sql_balance_2);
+                            if(mysqli_num_rows($result_balance_2) > 0 ){
+                                while($row_balance_2 = mysqli_fetch_assoc($result_balance_2)){
+                                    $balance_2 = $row_balance_2['stall_price'];
+                                }
+                            }
+
+                            $sql_rent_details_2 = "INSERT INTO rental_payment_details (rentp_id, stall_id, balance) VALUES ($rentp_id, $stall_id_2, $balance_2)";
                             mysqli_query($link, $sql_rent_details_2);
                         }
                         if(!empty($stall_id_3)){
-                            $sql_rent_details_3 = "INSERT INTO rental_payment_details (rentp_id, stall_id) VALUES ($rentp_id, $stall_id_3)";
+                            $balance_3 = "";
+                            $sql_balance_3 = "SELECT * FROM stalls WHERE stall_id = $stall_id_3";
+                            $result_balance_3 = mysqli_query($link, $sql_balance_3);
+                            if(mysqli_num_rows($result_balance_3) > 0 ){
+                                while($row_balance_3 = mysqli_fetch_assoc($result_balance_3)){
+                                    $balance_3 = $row_balance_3['stall_price'];
+                                }
+                            }
+
+                            $sql_rent_details_3 = "INSERT INTO rental_payment_details (rentp_id, stall_id, balance) VALUES ($rentp_id, $stall_id_3, $balance_3)";
                             mysqli_query($link, $sql_rent_details_3);
                         }
                         if(!empty($stall_id_4)){
-                            $sql_rent_details_4 = "INSERT INTO rental_payment_details (rentp_id, stall_id) VALUES ($rentp_id, $stall_id_4)";
+                            $balance_4 = "";
+                            $sql_balance_4 = "SELECT * FROM stalls WHERE stall_id = $stall_id_4";
+                            $result_balance_4 = mysqli_query($link, $sql_balance_4);
+                            if(mysqli_num_rows($result_balance_4) > 0 ){
+                                while($row_balance_4 = mysqli_fetch_assoc($result_balance_4)){
+                                    $balance_4 = $row_balance_4['stall_price'];
+                                }
+                            }
+
+                            $sql_rent_details_4 = "INSERT INTO rental_payment_details (rentp_id, stall_id, balance) VALUES ($rentp_id, $stall_id_4, $balance_4)";
                             mysqli_query($link, $sql_rent_details_4);
                         }
                         if(!empty($stall_id_5)){
-                            $sql_rent_details_5 = "INSERT INTO rental_payment_details (rentp_id, stall_id) VALUES ($rentp_id, $stall_id_5)";
+                            $balance_5 = "";
+                            $sql_balance_5 = "SELECT * FROM stalls WHERE stall_id = $stall_id_5";
+                            $result_balance_5 = mysqli_query($link, $sql_balance_5);
+                            if(mysqli_num_rows($result_balance_5) > 0 ){
+                                while($row_balance_5 = mysqli_fetch_assoc($result_balance_5)){
+                                    $balance_5 = $row_balance_5['stall_price'];
+                                }
+                            }
+
+                            $sql_rent_details_5 = "INSERT INTO rental_payment_details (rentp_id, stall_id, balance) VALUES ($rentp_id, $stall_id_5, $balance_5)";
                             mysqli_query($link, $sql_rent_details_5);
                         }
                     }
